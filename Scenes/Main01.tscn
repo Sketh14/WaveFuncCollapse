@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://clbkh75hjnqub"]
+
+[ext_resource type="Script" path="res://Scripts/WaveFunctionCollapse.gd" id="1_427g2"]
+[ext_resource type="Script" path="res://Scripts/TileMapGenerator.gd" id="1_v76re"]
+[ext_resource type="Texture2D" uid="uid://ccyc8d6v8bn16" path="res://Sprites/White_block.png" id="2_xc0bi"]
+
+[node name="Main01" type="Node2D"]
+
+[node name="TileMapGenerator" type="Node" parent="." node_paths=PackedStringArray("tileHolder")]
+process_mode = 4
+script = ExtResource("1_v76re")
+texturesToUse = Array[Texture]([ExtResource("2_xc0bi")])
+gridDimension = Vector2(5, 5)
+tileHolder = NodePath("../TileHolder")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="TileHolder" type="Node" parent="."]
+
+[node name="WaveFunctionCollapse" type="Node" parent="."]
+script = ExtResource("1_427g2")
