@@ -28,5 +28,5 @@ mono_crash.*.json
 
 #Build ignores
 /[Bb]uilds/
-/[Ss]prites/
+#/[Ss]prites/
 /[Aa]udio/

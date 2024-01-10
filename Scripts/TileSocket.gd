@@ -1,4 +1,4 @@
-extends Resource
+extends Node
 
 @export var posX : int
 @export var negX : int
