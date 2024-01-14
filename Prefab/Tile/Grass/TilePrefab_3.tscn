@@ -16,3 +16,11 @@ region_rect = Rect2(128, 31, 32, 32)
 
 [node name="Socket" type="Node" parent="."]
 script = ExtResource("3_qcvs6")
+posX = 6
+negX = 8
+posY = 7
+negY = 5
+adjPosX = Array[int]([48, 52, 64, 68, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44])
+adjNegX = Array[int]([54, 58, 62, 66, 2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42])
+adjPosY = Array[int]([49, 53, 61, 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41])
+adjNegY = Array[int]([47, 59, 67, 3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43])

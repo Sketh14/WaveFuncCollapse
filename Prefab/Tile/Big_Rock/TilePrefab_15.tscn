@@ -22,3 +22,11 @@ region_rect = Rect2(32, 452, 32, 32)
 
 [node name="Socket" type="Node" parent="."]
 script = ExtResource("4_8tk1x")
+posX = 58
+negX = 60
+posY = 59
+negY = 57
+adjPosX = Array[int]([48, 52, 64, 68, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44])
+adjNegX = Array[int]([46])
+adjPosY = Array[int]([49, 53, 61, 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41])
+adjNegY = Array[int]([55])

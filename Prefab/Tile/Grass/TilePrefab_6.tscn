@@ -1,25 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://blwdqp1shbb47"]
+[gd_scene load_steps=4 format=3 uid="uid://dne3mqwrl6dsu"]
 
-[ext_resource type="Script" path="res://Scripts/TileController.gd" id="1_tcf5p"]
-[ext_resource type="Texture2D" uid="uid://cr4vmeraqpd1d" path="res://Sprites/TX Tileset Grass.png" id="2_glidq"]
-[ext_resource type="Script" path="res://Scripts/TileSocket.gd" id="3_uaa1h"]
+[ext_resource type="Script" path="res://Scripts/TileController.gd" id="1_6r7f1"]
+[ext_resource type="Texture2D" uid="uid://cr4vmeraqpd1d" path="res://Sprites/TX Tileset Grass.png" id="2_aporj"]
+[ext_resource type="Script" path="res://Scripts/TileSocket.gd" id="3_47ah3"]
 
 [node name="TilePrefab" type="Node2D" node_paths=PackedStringArray("sprite2D", "socketContainer")]
-script = ExtResource("1_tcf5p")
+script = ExtResource("1_6r7f1")
 sprite2D = NodePath("TileSprite")
 socketContainer = NodePath("Socket")
 
 [node name="TileSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_glidq")
+texture = ExtResource("2_aporj")
 region_enabled = true
-region_rect = Rect2(176, 191, 32, 32)
+region_rect = Rect2(96, 87, 32, 32)
 
 [node name="Socket" type="Node" parent="."]
-script = ExtResource("3_uaa1h")
-posX = 18
-negX = 20
-posY = 19
-negY = 17
+script = ExtResource("3_47ah3")
+posX = 14
+negX = 16
+posY = 15
+negY = 13
 adjPosX = Array[int]([48, 52, 64, 68, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44])
 adjNegX = Array[int]([54, 58, 62, 66, 2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42])
 adjPosY = Array[int]([49, 53, 61, 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41])
