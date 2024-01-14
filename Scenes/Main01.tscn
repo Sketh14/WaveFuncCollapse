@@ -93,5 +93,5 @@ visible = false
 [node name="WaveFunctionCollapse" type="Node" parent="." node_paths=PackedStringArray("tilePrefabs", "tileHolder")]
 script = ExtResource("1_427g2")
 tilePrefabs = [NodePath("../TilePrefabsContainer/Big_Rock/TilePrefab"), NodePath("../TilePrefabsContainer/Big_Rock/TilePrefab2"), NodePath("../TilePrefabsContainer/Big_Rock/TilePrefab3"), NodePath("../TilePrefabsContainer/Big_Rock/TilePrefab4"), NodePath("../TilePrefabsContainer/Grass/TilePrefab"), NodePath("../TilePrefabsContainer/Grass/TilePrefab2"), NodePath("../TilePrefabsContainer/Grass/TilePrefab3"), NodePath("../TilePrefabsContainer/Grass/TilePrefab4"), NodePath("../TilePrefabsContainer/Objects/TilePrefab"), NodePath("../TilePrefabsContainer/Objects/TilePrefab2"), NodePath("../TilePrefabsContainer/Path/TilePrefab"), NodePath("../TilePrefabsContainer/Path/TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/TilePrefab"), NodePath("../TilePrefabsContainer/Rocks/TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/TilePrefab3"), NodePath("../TilePrefabsContainer/Tomb/TilePrefab"), NodePath("../TilePrefabsContainer/Tomb/TilePrefab2")]
-gridDimension = Vector2(12, 12)
+gridDimension = Vector2i(4, 4)
 tileHolder = NodePath("../TileHolder")
