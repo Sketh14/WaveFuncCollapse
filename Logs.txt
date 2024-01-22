@@ -3,3 +3,9 @@
 --------------------------------------------------------------------------------------
 => [Do] Only taking basic rotation for now.
     (-) Taking the default rotation.
+
+--------------------------------------------------------------------------------------
+									22 JANUARY 2024
+--------------------------------------------------------------------------------------
+=> [Do] To increase the efficiency of the algorithm to figure out the socket adjaceny faster
+    (-) [Suggestion] Can sort the list in ascending/descending order. 
