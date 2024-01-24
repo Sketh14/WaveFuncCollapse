@@ -38,7 +38,6 @@ func TestingTiles():
 		print(debugPrint)
 		debugPrint = "tilesAvailable[0] : " + str(tileMap[coOrdX].tilesAvailable[0].socketContainer.posX) + "tilesAvailable[1] : " + str(tileMap[coOrdX].tilesAvailable[1].socketContainer.posX)  + "tilesAvailable[-1] : " + str(tileMap[coOrdX].tilesAvailable[-1].socketContainer.posX)
 		print(debugPrint)
-	
 
 # This is for testing purpose only.
 func GenerateTileMap():
@@ -59,14 +58,6 @@ func GenerateTileMap():
 		if (tileCountX == 0):
 			tileCountX *= -1
 #================================>	Testing  <================================
-
-func CreateTile(tileIndex) -> Node2D:
-	# print("Generating Tile in YDir")
-	# var tileToPlace = load(tilePrefabs[0])
-	var tileToPlace = tilePrefabs[tileIndex].duplicate()
-	tileToPlace.visible = true
-	tileHolder.add_child(tileToPlace)
-	return tileToPlace
 
 
 #================================> Testing Area 1 <================================
@@ -121,6 +112,14 @@ func GetNeighbours(coOrdX, coOrdY) -> Array[Node2D]:
 
 #================================> Testing Area 1 <================================
 
+func CreateTile(tileIndex) -> Node2D:
+	# print("Generating Tile in YDir")
+	# var tileToPlace = load(tilePrefabs[0])
+	var tileToPlace = tilePrefabs[tileIndex].duplicate()
+	tileToPlace.visible = true
+	tileHolder.add_child(tileToPlace)
+	return tileToPlace
+
 # We would have to first cache all the data to a local variable in the script for easy access
 func LoadTilesData():
 	var sizeX = tileMap.size()
@@ -129,7 +128,7 @@ func LoadTilesData():
 		for yVal in sizeY:
 			tilesCache.append(tileMap[xVal].tilesAvailable[yVal].socketContainer)
 
-func CheckNeighboursAdjaceny(coOrdX, coOrdY) -> bool:
+func CheckNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 
 	# Array indexes in negative can wrap around, so beware!!
 	if (coOrdX < 0 ||coOrdX >= gridDimension.x || coOrdY < 0 ||coOrdY >= gridDimension.y ):
@@ -179,36 +178,43 @@ func CheckNeighboursAdjaceny(coOrdX, coOrdY) -> bool:
 
 			#Compare socket PosX
 			# var socCache = 0
+			var tileIndex = 0
 			for valX in compAdjPosX:
 				for tileVal in tilesCache:
 					if (compAdjPosX[valX] == tileVal.posX):
 						#Found Compatible Socket
 						print("Found Compatible Socket :", tileVal.posX)
-						break
+						return tileIndex
+					tileIndex += 1
 
 			#Compare socket NegX
+			tileIndex = 0
 			for valNegX in compAdjNegX:
 				for tileVal in tilesCache:
 					if (compAdjNegX[valNegX] == tileVal.negX):
 						#Found Compatible Socket
 						print("Found Compatible Socket :", tileVal.negX)
-						break
+						return tileIndex
+					tileIndex += 1
 					
 			#Compare socket PosY
+			tileIndex = 0
 			for valPosY in compAdjPosY:
 				for tileVal in tilesCache:
 					if (compAdjPosX[valPosY] == tileVal.posY):
 						#Found Compatible Socket
 						print("Found Compatible Socket :", tileVal.posY)
-						break
+						return tileIndex
+					tileIndex += 1
 
 			#Compare socket NegY
+			tileIndex = 0
 			for valNegY in compAdjNegY:
 				for tileVal in tilesCache:
 					if (compAdjPosX[valNegY] == tileVal.negY):
 						#Found Compatible Socket
 						print("Found Compatible Socket :", tileVal.negY)
-						break
+						return tileIndex
+					tileIndex += 1
 
-
-	return false
+	return -1
