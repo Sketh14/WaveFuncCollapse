@@ -7,7 +7,7 @@ extends Node
 var tileMap : Array[SuperTileCell]
 
 #This will hold the adjacent list of the neighbous tile whose adjacency is to be checked
-var tempTile : Node
+var tempAdjList : Array[SuperTileCell]
 
 #Instead of containing the whole Tile Data, as we only need the socket data, we need to only access the scoket data
 var tilesCache : Array[Node]
@@ -20,7 +20,10 @@ func _ready():
 	LoadTilesData_2()
 	InitializeTileMap()
 	# CheckForNeighbours(0, 0, -1)
-	CheckNeighboursAdjaceny(0,0)
+
+	#Testing purpose only
+	GetNeighboursAdjaceny(0,0)
+	PrintAdjListOfIndex(1)
 	# GenerateTileMap()
 
 func InitializeTileMap():
@@ -30,6 +33,11 @@ func InitializeTileMap():
 		#Really don't want to do this here
 		for valY in gridDimension.y:
 			tileCell.tilesAvailable.append(valY)
+	
+	#For all the 4 sockets
+	for valX in 4:
+		var tempTileCell = SuperTileCell.new()
+		tempAdjList.append(tempTileCell)
 	# TestingTiles()
 	
 #================================>	Testing  <================================
@@ -122,6 +130,15 @@ func GetNeighbours(coOrdX, coOrdY) -> Array[Node2D]:
 
 	return arrToReturn
 
+#Print out the temp adjacency arrays
+func PrintAdjListOfIndex(index):
+	var debugPrint = ""
+	var i = 0
+	for listVal in tempAdjList[index].tilesAvailable:
+		debugPrint = "Index [" + str(i) + "] : " + str(listVal)
+		i += 1
+		print(debugPrint)
+
 #================================> Testing Area 1 <================================
 
 func CreateTile(tileIndex) -> Node2D:
@@ -146,8 +163,8 @@ func LoadTilesData_2():
 	for xVal in sizeX:
 		tilesCache.append(tilePrefabsList[xVal].socketContainer.socketOnly)
 
-#This function will now check for adjacency as well as remove the unrequired neighbours from the list as well
-func CheckNeighboursAdjaceny(coOrdX, coOrdY) -> int:
+#This function will fill all the 4 sockets temproray adjacency list corresponding to the CoOrdinates sent to it
+func GetNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 	# Array indexes in negative can wrap around, so beware!!
 	if (coOrdX < 0 || coOrdX >= gridDimension.x || coOrdY < 0 || coOrdY >= gridDimension.y ):
 		return 0		#Early return if out of range
@@ -176,10 +193,10 @@ func CheckNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 			#Transpose 1D array to 2D using gridDimensions
 			# RowNo. + (ColumnNo. * Columns)
 			var indexToCheck = coOrdX + (coOrdY * gridDimension.y)
-			var posXAdjList = tilesCache[indexToCheck].socketContainer.adjPosX
-			var negXAdjList = tilesCache[indexToCheck].socketContainer.adjNegX
-			var posYAdjList = tilesCache[indexToCheck].socketContainer.adjPosY
-			var negYAdjList = tilesCache[indexToCheck].socketContainer.adjNegY
+			var posXAdjList = tilePrefabsList[indexToCheck].socketContainer.adjPosX
+			var negXAdjList = tilePrefabsList[indexToCheck].socketContainer.adjNegX
+			var posYAdjList = tilePrefabsList[indexToCheck].socketContainer.adjPosY
+			var negYAdjList = tilePrefabsList[indexToCheck].socketContainer.adjNegY
 
 			# debugPrint = "Checking Adjacency Lsit | First Pos X Element [ " + str(compAdjPosX[0]) + " ] "
 			# print(debugPrint);			
@@ -199,26 +216,25 @@ func CheckNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 			#Check each tiles list for compatible neighbours with the collapsed cell
 			#Compare socket PosX | "Pos X" can only be compared to "Neg X" without rotation
 			var tileIndex = 0
-			var mapIndex = 0
 			for valPosX in posXAdjList:			#This will give element, not index
+				tileIndex = 0
 				for tileVal in tilesCache:
 					# debugPrint = "valPosX [" + str(valPosX) + "] | tileVal.PosX [" + str(tileVal.NegX) + "] | [" + str(tileIndex) + "]"
 					# print(debugPrint);
 
 					if (valPosX == tileVal.NegX):
 						#Found Compatible Socket
-						# debugPrint = "Found Compatible NegX Socket at [" + str(tileIndex) + "] : [" + str(tileVal.NegX) + "]"
-						# print(debugPrint);
+						debugPrint = "Found Compatible NegX Socket at [" + str(tileIndex) + "] : [" + str(tileVal.NegX) + "]"
+						print(debugPrint);
+						tempAdjList[0].tilesAvailable.append(tileIndex)
 						break;
-					else: 
-						tileMap[mapIndex].tilesAvailable.remove_at(tileIndex)
 					tileIndex += 1
 			# debugPrint = "No Compatible Pos X socket Found!!\n\n"
 			# print(debugPrint);
 
 			#Compare socket NegX | "Neg X" can only be compared to "Pos X" without rotation
-			tileIndex = 0
 			for valNegX in negXAdjList:
+				tileIndex = 0
 				for tileVal in tilesCache:
 					# debugPrint = "valNegX [" + str(valNegX) + "] | tileVal.PosX [" + str(tileVal.PosX) + "]"
 					# print(debugPrint);
@@ -226,42 +242,47 @@ func CheckNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 					if (valNegX == tileVal.PosX):
 						#Found Compatible Socket
 						debugPrint = "Found Compatible PosX Socket at [" + str(tileIndex) + "] : [" + str(tileVal.PosX) + "]"
-						print(debugPrint);
-						return tileIndex
+						print(debugPrint)
+						tempAdjList[1].tilesAvailable.append(tileIndex)
+						break
 					tileIndex += 1
 			# debugPrint = "No Compatible Neg X socket Found!!\n\n"
 			# print(debugPrint);
 					
 			#Compare socket PosY | "Pos Y" can only be compared to "Neg Y" without rotation
-			tileIndex = 0
 			for valPosY in posYAdjList:
+				tileIndex = 0
 				for tileVal in tilesCache:
 					# debugPrint = "valPosY [" + str(valPosY) + "] | tileVal.NegY [" + str(tileVal.NegY) + "]"
 					# print(debugPrint);
 
 					if (valPosY == tileVal.NegY):
 						#Found Compatible Socket
-						debugPrint = "Found Compatible NegY Socket at [" + str(tileIndex) + "] : [" + str(tileVal.NegY) + "]"
-						print(debugPrint);
-						return tileIndex
+						# debugPrint = "Found Compatible NegY Socket at [" + str(tileIndex) + "] : [" + str(tileVal.NegY) + "]"
+						# print(debugPrint);
+						tempAdjList[2].tilesAvailable.append(tileIndex)
+						break
 					tileIndex += 1
 			# debugPrint = "No Compatible Pos Y socket Found!!\n\n"
 			# print(debugPrint);
 
 			#Compare socket NegY | "Neg Y" can only be compared to "Pos Y" without rotation
-			tileIndex = 0
 			for valNegY in negYAdjList:
+				tileIndex = 0
 				for tileVal in tilesCache:
 					# debugPrint = "valNegY [" + str(valNegY) + "] | tileVal.PosY [" + str(tileVal.PosY) + "]"
 					# print(debugPrint);
 
 					if (valNegY == tileVal.PosY):
 						#Found Compatible Socket
-						debugPrint = "Found Compatible PosY Socket at [" + str(tileIndex) + "] : [" + str(tileVal.PosY) + "]"
-						print(debugPrint);
-						return tileIndex
+						# debugPrint = "Found Compatible PosY Socket at [" + str(tileIndex) + "] : [" + str(tileVal.PosY) + "]"
+						# print(debugPrint);
+						tempAdjList[3].tilesAvailable.append(tileIndex)
+						break
 					tileIndex += 1
 			# debugPrint = "No Compatible Neg Y socket Found!!\n\n"
 			# print(debugPrint);
 
-	return -1
+			return 1				#Successful searching for adjacency
+
+	return -1				#UnSuccessful searching for adjacency | Some error occured

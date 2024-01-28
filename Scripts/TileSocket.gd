@@ -36,3 +36,4 @@ class OnlySocket extends Node:
 	var NegX : int
 	var PosY : int
 	var NegY : int
+
