@@ -32,7 +32,7 @@ func _ready():
 #     @export var negY : Array[int]
 
 class OnlySocket extends Node:
-	@export var PosX : int
-	@export var NegX : int
-	@export var PosY : int
-	@export var NegY : int
+	var PosX : int
+	var NegX : int
+	var PosY : int
+	var NegY : int
