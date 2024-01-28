@@ -1,19 +1,23 @@
 extends Node
 
-@export var tilePrefabs : Array[Node2D]
+@export var tilePrefabsList : Array[Node2D]
 @export var gridDimension : Vector2i
 @export var tileHolder : Node
 
 var tileMap : Array[SuperTileCell]
-var tilesCache : Array[Node2D]
+
+#Instead of containing the whole Tile Data, as we only need the socket data, we need to only access the scoket data
+var tilesCache : Array[Node]
 
 class SuperTileCell:
 	var tilesAvailable : Array[Node2D]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	LoadTilesData_2()
 	InitializeTileMap()
-	CheckForNeighbours(0, 0, -1)
+	# CheckForNeighbours(0, 0, -1)
+	CheckNeighboursAdjaceny(0,0)
 	# GenerateTileMap()
 
 func InitializeTileMap():
@@ -26,7 +30,7 @@ func InitializeTileMap():
 func TestingTiles():
 	var createdTile = CreateTile(0)
 	tileMap[0].tilesAvailable.append(createdTile)
-	var createdTile2 = CreateTile(0)
+	var createdTile2 = CreateTile(1)
 	tileMap[0].tilesAvailable.append(createdTile2)
 	
 	var coOrdX = 0
@@ -36,6 +40,7 @@ func TestingTiles():
 		print(debugPrint)
 		debugPrint = "Initial Test | TileMap[" + str(coOrdX) + "," + str(coOrdY) +"] : Not null"
 		print(debugPrint)
+		#Check wrap around condition
 		debugPrint = "tilesAvailable[0] : " + str(tileMap[coOrdX].tilesAvailable[0].socketContainer.posX) + "tilesAvailable[1] : " + str(tileMap[coOrdX].tilesAvailable[1].socketContainer.posX)  + "tilesAvailable[-1] : " + str(tileMap[coOrdX].tilesAvailable[-1].socketContainer.posX)
 		print(debugPrint)
 
@@ -114,19 +119,25 @@ func GetNeighbours(coOrdX, coOrdY) -> Array[Node2D]:
 
 func CreateTile(tileIndex) -> Node2D:
 	# print("Generating Tile in YDir")
-	# var tileToPlace = load(tilePrefabs[0])
-	var tileToPlace = tilePrefabs[tileIndex].duplicate()
+	# var tileToPlace = load(tilePrefabsList[0])
+	var tileToPlace = tilePrefabsList[tileIndex].duplicate()
 	tileToPlace.visible = true
 	tileHolder.add_child(tileToPlace)
 	return tileToPlace
 
 # We would have to first cache all the data to a local variable in the script for easy access
-func LoadTilesData():
-	var sizeX = tileMap.size()
+#Below is wrong as there are no tiles added to tileMap at the beginning, need to get from TilesPrefab
+# func LoadTilesData():
+# 	var sizeX = tileMap.size()
+# 	for xVal in sizeX:
+# 		var sizeY = tileMap[sizeX].tilesAvailable.size()
+# 		for yVal in sizeY:
+# 			tilesCache.append(tileMap[xVal].tilesAvailable[yVal].socketContainer)
+
+func LoadTilesData_2():
+	var sizeX = tilePrefabsList.size()
 	for xVal in sizeX:
-		var sizeY = tileMap[sizeX].tilesAvailable.size()
-		for yVal in sizeY:
-			tilesCache.append(tileMap[xVal].tilesAvailable[yVal].socketContainer)
+		tilesCache.append(tilePrefabsList[xVal].socketContainer.socketOnly)
 
 func CheckNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 
@@ -134,16 +145,18 @@ func CheckNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 	if (coOrdX < 0 ||coOrdX >= gridDimension.x || coOrdY < 0 ||coOrdY >= gridDimension.y ):
 		return false		#Early return if out of range
 
-	# var debugPrint = "Checing For Neighbours in tile["+ str(coOrdX) + "," + str(coOrdY) +"]"
-	# print(debugPrint);
+	var debugPrint = "\n\nChecing For Neighbours in tile["+ str(coOrdX) + "," + str(coOrdY) +"]"
+	print(debugPrint);
 
+	#Check X
 	if (tileMap.size() > coOrdX && tileMap[coOrdX] != null):
-		# debugPrint = "tileMap[" + str(coOrdX) + "] : Not null"
-		# print(debugPrint);
+		debugPrint = "tileMap[" + str(coOrdX) + "] : Not null"
+		print(debugPrint);
 
+		#Check Y
 		if (tileMap[coOrdX].tilesAvailable.size() > coOrdY && tileMap[coOrdX].tilesAvailable[coOrdY] != null):
-			# debugPrint = "tileMap[" + str(coOrdX) + "," + str(coOrdY) +"] : Not null"
-			# print(debugPrint);
+			debugPrint = "tileMap[" + str(coOrdX) + "," + str(coOrdY) +"] : Not null\n\n"
+			print(debugPrint);
 			
 			#This is a valid tile at this point
 			
@@ -164,6 +177,9 @@ func CheckNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 			var compAdjPosY = tileMap[coOrdX].tilesAvailable[coOrdY].socketContainer.adjPosY
 			var compAdjNegY = tileMap[coOrdX].tilesAvailable[coOrdY].socketContainer.adjNegY
 
+			# debugPrint = "Checking Adjacency Lsit | First Pos X Element [ " + str(compAdjPosX[0]) + " ] "
+			# print(debugPrint);			
+
 			#Compare each socket with adjacency list of the current tile
 			#PosY -> NegY | NegY -> PosY | PosX -> NegX | NegX -> PosX
 
@@ -179,42 +195,53 @@ func CheckNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 			#Compare socket PosX
 			# var socCache = 0
 			var tileIndex = 0
-			for valX in compAdjPosX:
+			for valX in compAdjPosX:			#This will give element, not index
 				for tileVal in tilesCache:
-					if (compAdjPosX[valX] == tileVal.posX):
+					# debugPrint = "valX [" + str(valX) + "]"
+					# print(debugPrint);
+
+					if (valX == tileVal.posX):
 						#Found Compatible Socket
 						print("Found Compatible Socket :", tileVal.posX)
 						return tileIndex
-					tileIndex += 1
+					tileIndex += 1			
+			# debugPrint = "No Compatible Pos X socket Found!!\n\n"
+			# print(debugPrint);
 
 			#Compare socket NegX
 			tileIndex = 0
 			for valNegX in compAdjNegX:
 				for tileVal in tilesCache:
-					if (compAdjNegX[valNegX] == tileVal.negX):
+					if (valNegX == tileVal.negX):
 						#Found Compatible Socket
 						print("Found Compatible Socket :", tileVal.negX)
 						return tileIndex
 					tileIndex += 1
+			# debugPrint = "No Compatible Neg X socket Found!!\n\n"
+			# print(debugPrint);
 					
 			#Compare socket PosY
 			tileIndex = 0
 			for valPosY in compAdjPosY:
 				for tileVal in tilesCache:
-					if (compAdjPosX[valPosY] == tileVal.posY):
+					if (valPosY == tileVal.posY):
 						#Found Compatible Socket
 						print("Found Compatible Socket :", tileVal.posY)
 						return tileIndex
 					tileIndex += 1
+			# debugPrint = "No Compatible Pos Y socket Found!!\n\n"
+			# print(debugPrint);
 
 			#Compare socket NegY
 			tileIndex = 0
 			for valNegY in compAdjNegY:
 				for tileVal in tilesCache:
-					if (compAdjPosX[valNegY] == tileVal.negY):
+					if (valNegY == tileVal.negY):
 						#Found Compatible Socket
 						print("Found Compatible Socket :", tileVal.negY)
 						return tileIndex
 					tileIndex += 1
+			# debugPrint = "No Compatible Neg Y socket Found!!\n\n"
+			# print(debugPrint);
 
 	return -1
