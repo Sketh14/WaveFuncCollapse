@@ -4,6 +4,7 @@ extends Node
 @export var gridDimension : Vector2i
 @export var tileHolder : Node
 
+#We will access this map as a 1D array only with multiple rows and columns, each index depicting a tile containing superposition tiles
 var tileMap : Array[SuperTileCell]
 
 #This will hold the adjacent list of the neighbous tile whose adjacency is to be checked
@@ -13,6 +14,7 @@ var tempAdjList : Array[SuperTileCell]
 var tilesCache : Array[Node]
 
 class SuperTileCell:
+	var currentTileIndex : int
 	var tilesAvailable : Array[int]
 
 # Called when the node enters the scene tree for the first time.
@@ -22,16 +24,19 @@ func _ready():
 	# CheckForNeighbours(0, 0, -1)
 
 	#Testing purpose only
+	tileMap[0].currentTileIndex = 0				#Fill [0,0] with 0
 	GetNeighboursAdjaceny(0,0)
-	PrintAdjListOfIndex(1)
+	# PrintAdjListOfIndex(1)
+	PrintListOfTileWithIndex(4)
 	# GenerateTileMap()
 
 func InitializeTileMap():
-	for valX in gridDimension.x:
+	var totalSize = gridDimension.x * gridDimension.y
+	for valX in totalSize:
 		var tileCell = SuperTileCell.new()
 		tileMap.append(tileCell)
 		#Really don't want to do this here
-		for valY in gridDimension.y:
+		for valY in tilePrefabsList.size():
 			tileCell.tilesAvailable.append(valY)
 	
 	#For all the 4 sockets
@@ -139,6 +144,20 @@ func PrintAdjListOfIndex(index):
 		i += 1
 		print(debugPrint)
 
+func PrintListOfTileWithIndex(index):
+	var debugPrint = ""
+	var i = 0
+	for listVal in tileMap[index].tilesAvailable:
+		debugPrint = "Index [" + str(index) + "] | i[" + str(i) + "] : " + str(listVal)
+		print(debugPrint)
+
+		if (listVal > -1):
+			var socCont = tilePrefabsList[listVal].socketContainer
+			debugPrint = "Index [" + str(i) + "] | PosX : " + str(socCont.posX) + " | PosY : " + str(socCont.posY) + "| NegX : " + str(socCont.negX) + "| NegY : " + str(socCont.negY)
+			print(debugPrint)
+		i += 1
+
+
 #================================> Testing Area 1 <================================
 
 func CreateTile(tileIndex) -> Node2D:
@@ -163,6 +182,12 @@ func LoadTilesData_2():
 	for xVal in sizeX:
 		tilesCache.append(tilePrefabsList[xVal].socketContainer.socketOnly)
 
+func SetNeighbourTile(coOrdX, coOrdY, adjListIndex):
+	var indexToSet =  coOrdX + (coOrdY * gridDimension.y)
+	if (indexToSet > tileMap.size() - 1 || indexToSet < 0):
+		return
+	tileMap[indexToSet].tilesAvailable.append_array(tempAdjList[adjListIndex].tilesAvailable)
+
 #This function will fill all the 4 sockets temproray adjacency list corresponding to the CoOrdinates sent to it
 func GetNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 	# Array indexes in negative can wrap around, so beware!!
@@ -174,14 +199,15 @@ func GetNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 
 	#Check X
 	# No tile will be null as it will contain all the possible states of the tile
-	if (tileMap.size() > coOrdX):
-		debugPrint = "tileMap[" + str(coOrdX) + "] : Not null"
-		print(debugPrint);
-
-		#Check Y
-		if (tileMap[coOrdX].tilesAvailable.size() > coOrdY):
-			debugPrint = "tileMap[" + str(coOrdX) + "," + str(coOrdY) +"] : Not null\n\n"
-			print(debugPrint);
+	# if (tileMap.size() > coOrdX):
+	# 	debugPrint = "tileMap[" + str(coOrdX) + "] : Not null"
+	# 	print(debugPrint);
+		
+	var transposedIndex = coOrdX + (coOrdY * gridDimension.y)
+	#Check Y
+	# if (tileMap.size() > transposedIndex):							#Dont think so we need this
+	debugPrint = "tileMap[" + str(coOrdX) + "," + str(coOrdY) +"] : Not null\n\n"
+	print(debugPrint);
 			
 			#This is a valid tile at this point
 			
@@ -192,11 +218,12 @@ func GetNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 			#Get each adjacency list of the current tile and store in cache for faster access
 			#Transpose 1D array to 2D using gridDimensions
 			# RowNo. + (ColumnNo. * Columns)
-			var indexToCheck = coOrdX + (coOrdY * gridDimension.y)
-			var posXAdjList = tilePrefabsList[indexToCheck].socketContainer.adjPosX
-			var negXAdjList = tilePrefabsList[indexToCheck].socketContainer.adjNegX
-			var posYAdjList = tilePrefabsList[indexToCheck].socketContainer.adjPosY
-			var negYAdjList = tilePrefabsList[indexToCheck].socketContainer.adjNegY
+			# var indexToCheck = coOrdX + (coOrdY * gridDimension.y)			# This is for directly accessing the tile from tilePrefabs
+	var indexToCheck = tileMap[transposedIndex].currentTileIndex
+	var posXAdjList = tilePrefabsList[indexToCheck].socketContainer.adjPosX
+	var negXAdjList = tilePrefabsList[indexToCheck].socketContainer.adjNegX
+	var posYAdjList = tilePrefabsList[indexToCheck].socketContainer.adjPosY
+	var negYAdjList = tilePrefabsList[indexToCheck].socketContainer.adjNegY
 
 			# debugPrint = "Checking Adjacency Lsit | First Pos X Element [ " + str(compAdjPosX[0]) + " ] "
 			# print(debugPrint);			
@@ -214,75 +241,119 @@ func GetNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 			#tilesCache array
 
 			#Check each tiles list for compatible neighbours with the collapsed cell
-			#Compare socket PosX | "Pos X" can only be compared to "Neg X" without rotation
-			var tileIndex = 0
-			for valPosX in posXAdjList:			#This will give element, not index
-				tileIndex = 0
-				for tileVal in tilesCache:
-					# debugPrint = "valPosX [" + str(valPosX) + "] | tileVal.PosX [" + str(tileVal.NegX) + "] | [" + str(tileIndex) + "]"
+	var tileIndex = 0
+
+	#Compare socket PosX | "Pos X" can only be compared to "Neg X" without rotation
+	#Search Right side of the tile
+	transposedIndex = (coOrdX + 1) + (coOrdY * gridDimension.y)
+	if (tileMap.size() > transposedIndex && transposedIndex >= 0):	
+		# debugPrint = "Checking | Pos X | " + str(transposedIndex) + "\n\n"
+		# print(debugPrint);
+
+		for valPosX in posXAdjList:			#This will give element, not index
+			tileIndex = 0
+			for tileVal in tileMap[transposedIndex].tilesAvailable:
+				# debugPrint = "valPosX [" + str(valPosX) + "] | tileVal.PosX [" + str(tileVal.NegX) + "] | [" + str(tileIndex) + "]"
+				# print(debugPrint);
+
+				if (tileVal >= 0 && valPosX == tilesCache[tileVal].NegX):
+					#Found Compatible Socket
+					debugPrint = "Found NegX | Socket at [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tileNegX [" + str(tilesCache[tileVal].NegX) + "]"
+					print(debugPrint)
+					break
+				else:
+					# debugPrint = "NegX Removing Tile | Socket at [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tileNegX [" + str(tileMap[transposedIndex].tilesAvailable[tileIndex]) + "]"
 					# print(debugPrint);
+					tileMap[transposedIndex].tilesAvailable[tileIndex] = -1		#Dont do remove_at as it will mess up the indexing
+				tileIndex += 1
+	else:
+		debugPrint = "No Compatible Pos X socket Found!!\n\n"
+		print(debugPrint);
 
-					if (valPosX == tileVal.NegX):
-						#Found Compatible Socket
-						debugPrint = "Found Compatible NegX Socket at [" + str(tileIndex) + "] : [" + str(tileVal.NegX) + "]"
-						print(debugPrint);
-						tempAdjList[0].tilesAvailable.append(tileIndex)
-						break;
-					tileIndex += 1
-			# debugPrint = "No Compatible Pos X socket Found!!\n\n"
-			# print(debugPrint);
+	#Compare socket NegX | "Neg X" can only be compared to "Pos X" without rotation
+	#Search left side of the tile
+	transposedIndex = (coOrdX - 1) + (coOrdY * gridDimension.y)
+	if (tileMap.size() > transposedIndex && transposedIndex >= 0):
+		# debugPrint = "Checking | Neg X | " + str(transposedIndex) + "\n\n"
+		# print(debugPrint);
 
-			#Compare socket NegX | "Neg X" can only be compared to "Pos X" without rotation
-			for valNegX in negXAdjList:
-				tileIndex = 0
-				for tileVal in tilesCache:
-					# debugPrint = "valNegX [" + str(valNegX) + "] | tileVal.PosX [" + str(tileVal.PosX) + "]"
+		for valNegX in negXAdjList:
+			tileIndex = 0
+			for tileVal in tileMap[transposedIndex].tilesAvailable:
+				# debugPrint = "valNegX [" + str(valNegX) + "] | tileVal.PosX [" + str(tileVal.PosX) + "] | [" + str(tileIndex) + "]"
+				# print(debugPrint);
+
+				if (tileVal >= 0 && valNegX == tilesCache[tileVal].PosX):
+					#Found Compatible Socket
+					# debugPrint = "Found PosX | Socket at [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tileNegX [" + str(tilesCache[tileVal].PosX) + "]"
+					# print(debugPrint)
+					break
+				else:
+					# debugPrint = "PosX Removing Tile | Socket at [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tilePosX [" + str(tileMap[transposedIndex].tilesAvailable[tileIndex]) + "]"
 					# print(debugPrint);
-
-					if (valNegX == tileVal.PosX):
-						#Found Compatible Socket
-						debugPrint = "Found Compatible PosX Socket at [" + str(tileIndex) + "] : [" + str(tileVal.PosX) + "]"
-						print(debugPrint)
-						tempAdjList[1].tilesAvailable.append(tileIndex)
-						break
-					tileIndex += 1
-			# debugPrint = "No Compatible Neg X socket Found!!\n\n"
-			# print(debugPrint);
+					tileMap[transposedIndex].tilesAvailable[tileIndex] = -1
+				tileIndex += 1
+	else:
+		debugPrint = "No Compatible Neg X socket Found!!\n\n"
+		print(debugPrint);
 					
-			#Compare socket PosY | "Pos Y" can only be compared to "Neg Y" without rotation
-			for valPosY in posYAdjList:
-				tileIndex = 0
-				for tileVal in tilesCache:
-					# debugPrint = "valPosY [" + str(valPosY) + "] | tileVal.NegY [" + str(tileVal.NegY) + "]"
+	#Compare socket PosY | "Pos Y" can only be compared to "Neg Y" without rotation
+	#Search down of the tile
+	transposedIndex = coOrdX + ((coOrdY + 1) * gridDimension.y)
+	if (tileMap.size() > transposedIndex && transposedIndex >= 0):	
+		debugPrint = "Checking | Pos Y | " + str(transposedIndex) + "\n\n"
+		print(debugPrint);
+
+		for valPosY in posYAdjList:
+			tileIndex = 0
+			for tileVal in tileMap[transposedIndex].tilesAvailable:
+				# debugPrint = "valPosY [" + str(valPosY) + "] | tileVal.NegY [" + str(tileVal.NegY) + "] | [" + str(tileIndex) + "]"
+				# print(debugPrint);
+
+				if (tileVal >= 0 && valPosY == tilesCache[tileVal].NegY):
+					#Found Compatible Socket
+					debugPrint = "Found NegY | Socket at [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tileNegY [" + str(tilesCache[tileVal].NegY) + "]"
+					print(debugPrint);
+					break
+
+				#This causes a bit more problem, as in, if there are more than 1 value in the adjacency list, then the values assigned by a 
+				#previous match loop in the list, are removed by the very next match loop. And so everything turns to -1
+				else:
+					debugPrint = "PosY Removing Tile | Socket at [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tilePosY [" + str(tileMap[transposedIndex].tilesAvailable[tileIndex]) + "]"
+					print(debugPrint);
+					tileMap[transposedIndex].tilesAvailable[tileIndex] = -1
+				tileIndex += 1
+	else:
+		debugPrint = "No Compatible Pos Y socket Found!!\n\n"
+		print(debugPrint);
+
+	#Compare socket NegY | "Neg Y" can only be compared to "Pos Y" without rotation
+	#Search up of the tile
+	transposedIndex = coOrdX + ((coOrdY - 1) * gridDimension.y)
+	if (tileMap.size() > transposedIndex && transposedIndex >= 0):	
+		# debugPrint = "Checking | Neg Y | " + str(transposedIndex) + "\n\n"
+		# print(debugPrint);
+
+		for valNegY in negYAdjList:
+			tileIndex = 0
+			for tileVal in tileMap[transposedIndex].tilesAvailable:
+				# debugPrint = "valNegY [" + str(valNegY) + "] | tileVal.PosY [" + str(tileVal.PosY) + "] | [" + str(tileIndex) + "]"
+				# print(debugPrint);
+
+				if (tileVal >= 0 && valNegY == tilesCache[tileVal].PosY):
+					#Found Compatible Socket
+					# debugPrint = "Found PosY | Socket at [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tilePosY [" + str(tilesCache[tileVal].PosY) + "]"
 					# print(debugPrint);
-
-					if (valPosY == tileVal.NegY):
-						#Found Compatible Socket
-						# debugPrint = "Found Compatible NegY Socket at [" + str(tileIndex) + "] : [" + str(tileVal.NegY) + "]"
-						# print(debugPrint);
-						tempAdjList[2].tilesAvailable.append(tileIndex)
-						break
-					tileIndex += 1
-			# debugPrint = "No Compatible Pos Y socket Found!!\n\n"
-			# print(debugPrint);
-
-			#Compare socket NegY | "Neg Y" can only be compared to "Pos Y" without rotation
-			for valNegY in negYAdjList:
-				tileIndex = 0
-				for tileVal in tilesCache:
-					# debugPrint = "valNegY [" + str(valNegY) + "] | tileVal.PosY [" + str(tileVal.PosY) + "]"
+					break
+				else:
+					# debugPrint = "PosX Removing Tile | Socket at [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tilePosX [" + str(tileMap[transposedIndex].tilesAvailable[tileIndex]) + "]"
 					# print(debugPrint);
+					tileMap[transposedIndex].tilesAvailable[tileIndex] = -1
+				tileIndex += 1
+	else:
+		debugPrint = "No Compatible Neg Y socket Found!!\n\n"
+		print(debugPrint);
 
-					if (valNegY == tileVal.PosY):
-						#Found Compatible Socket
-						# debugPrint = "Found Compatible PosY Socket at [" + str(tileIndex) + "] : [" + str(tileVal.PosY) + "]"
-						# print(debugPrint);
-						tempAdjList[3].tilesAvailable.append(tileIndex)
-						break
-					tileIndex += 1
-			# debugPrint = "No Compatible Neg Y socket Found!!\n\n"
-			# print(debugPrint);
-
-			return 1				#Successful searching for adjacency
+		return 1				#Successful searching for adjacency
 
 	return -1				#UnSuccessful searching for adjacency | Some error occured
