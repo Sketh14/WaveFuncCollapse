@@ -192,53 +192,66 @@ func CheckNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 			#For now, we are just iterating through the whole adjacency array and comparing with the
 			#tilesCache array
 
-			#Compare socket PosX
+			#Compare socket PosX | "Pos X" can only be compared to "Neg X" without rotation
 			# var socCache = 0
-			var tileIndex = 0
-			for valX in compAdjPosX:			#This will give element, not index
+			var tileIndex = 0			#This is for debugging
+			for valPosX in compAdjPosX:			#This will give element, not index
 				for tileVal in tilesCache:
-					# debugPrint = "valX [" + str(valX) + "]"
+					# debugPrint = "valPosX [" + str(valPosX) + "] | tileVal.PosX [" + str(tileVal.NegX) + "] | [" + str(tileIndex) + "]"
 					# print(debugPrint);
 
-					if (valX == tileVal.posX):
+					if (valPosX == tileVal.NegX):
 						#Found Compatible Socket
-						print("Found Compatible Socket :", tileVal.posX)
+						debugPrint = "Found Compatible NegX Socket at [" + str(tileIndex) + "] : [" + str(tileVal.NegX) + "]"
+						print(debugPrint);
 						return tileIndex
 					tileIndex += 1			
 			# debugPrint = "No Compatible Pos X socket Found!!\n\n"
 			# print(debugPrint);
 
-			#Compare socket NegX
+			#Compare socket NegX | "Neg X" can only be compared to "Pos X" without rotation
 			tileIndex = 0
 			for valNegX in compAdjNegX:
 				for tileVal in tilesCache:
-					if (valNegX == tileVal.negX):
+					# debugPrint = "valNegX [" + str(valNegX) + "] | tileVal.PosX [" + str(tileVal.PosX) + "]"
+					# print(debugPrint);
+
+					if (valNegX == tileVal.PosX):
 						#Found Compatible Socket
-						print("Found Compatible Socket :", tileVal.negX)
+						debugPrint = "Found Compatible PosX Socket at [" + str(tileIndex) + "] : [" + str(tileVal.PosX) + "]"
+						print(debugPrint);
 						return tileIndex
 					tileIndex += 1
 			# debugPrint = "No Compatible Neg X socket Found!!\n\n"
 			# print(debugPrint);
 					
-			#Compare socket PosY
+			#Compare socket PosY | "Pos Y" can only be compared to "Neg Y" without rotation
 			tileIndex = 0
 			for valPosY in compAdjPosY:
 				for tileVal in tilesCache:
-					if (valPosY == tileVal.posY):
+					# debugPrint = "valPosY [" + str(valPosY) + "] | tileVal.NegY [" + str(tileVal.NegY) + "]"
+					# print(debugPrint);
+
+					if (valPosY == tileVal.NegY):
 						#Found Compatible Socket
-						print("Found Compatible Socket :", tileVal.posY)
+						debugPrint = "Found Compatible NegY Socket at [" + str(tileIndex) + "] : [" + str(tileVal.NegY) + "]"
+						print(debugPrint);
 						return tileIndex
 					tileIndex += 1
 			# debugPrint = "No Compatible Pos Y socket Found!!\n\n"
 			# print(debugPrint);
 
-			#Compare socket NegY
+			#Compare socket NegY | "Neg Y" can only be compared to "Pos Y" without rotation
 			tileIndex = 0
 			for valNegY in compAdjNegY:
 				for tileVal in tilesCache:
-					if (valNegY == tileVal.negY):
+					# debugPrint = "valNegY [" + str(valNegY) + "] | tileVal.PosY [" + str(tileVal.PosY) + "]"
+					# print(debugPrint);
+
+					if (valNegY == tileVal.PosY):
 						#Found Compatible Socket
-						print("Found Compatible Socket :", tileVal.negY)
+						debugPrint = "Found Compatible PosY Socket at [" + str(tileIndex) + "] : [" + str(tileVal.PosY) + "]"
+						print(debugPrint);
 						return tileIndex
 					tileIndex += 1
 			# debugPrint = "No Compatible Neg Y socket Found!!\n\n"

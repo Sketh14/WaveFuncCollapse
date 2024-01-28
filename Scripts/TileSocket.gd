@@ -17,12 +17,12 @@ extends Node
 
 #This could be optimized maybe
 func _ready():
-    process_mode = Node.PROCESS_MODE_DISABLED       # Dont need to enable this, this is only a container
-    socketOnly = OnlySocket.new()
-    socketOnly.pos2X = posX;
-    socketOnly.pos2Y = posY;
-    socketOnly.neg2X = negX;
-    socketOnly.neg2Y = negY;
+	process_mode = Node.PROCESS_MODE_DISABLED       # Dont need to enable this, this is only a container
+	socketOnly = OnlySocket.new()
+	socketOnly.PosX = posX;
+	socketOnly.PosY = posY;
+	socketOnly.NegX = negX;
+	socketOnly.NegY = negY;
 
 # @export var shgsr: Array[adjacencyContainer]
 # class adjacencyContainer extends Resource:
@@ -32,7 +32,7 @@ func _ready():
 #     @export var negY : Array[int]
 
 class OnlySocket extends Node:
-    @export var pos2X : int
-    @export var neg2X : int
-    @export var pos2Y : int
-    @export var neg2Y : int
+	@export var PosX : int
+	@export var NegX : int
+	@export var PosY : int
+	@export var NegY : int
