@@ -29,67 +29,69 @@
 
 [node name="Big_Rock" type="Node" parent="TilePrefabsContainer"]
 
-[node name="TilePrefab" parent="TilePrefabsContainer/Big_Rock" instance=ExtResource("3_05jhd")]
+[node name="BR_TilePrefab" parent="TilePrefabsContainer/Big_Rock" instance=ExtResource("3_05jhd")]
 visible = false
 
-[node name="TilePrefab2" parent="TilePrefabsContainer/Big_Rock" instance=ExtResource("4_q2lxa")]
+[node name="BR_TilePrefab2" parent="TilePrefabsContainer/Big_Rock" instance=ExtResource("4_q2lxa")]
 visible = false
 
-[node name="TilePrefab3" parent="TilePrefabsContainer/Big_Rock" instance=ExtResource("5_65i02")]
+[node name="BR_TilePrefab3" parent="TilePrefabsContainer/Big_Rock" instance=ExtResource("5_65i02")]
 visible = false
 
-[node name="TilePrefab4" parent="TilePrefabsContainer/Big_Rock" instance=ExtResource("6_536fc")]
+[node name="BR_TilePrefab4" parent="TilePrefabsContainer/Big_Rock" instance=ExtResource("6_536fc")]
 visible = false
 
 [node name="Grass" type="Node" parent="TilePrefabsContainer"]
 
-[node name="TilePrefab" parent="TilePrefabsContainer/Grass" instance=ExtResource("7_djgam")]
+[node name="Gr_TilePrefab" parent="TilePrefabsContainer/Grass" instance=ExtResource("7_djgam")]
 visible = false
 
-[node name="TilePrefab2" parent="TilePrefabsContainer/Grass" instance=ExtResource("8_fegtx")]
+[node name="Gr_TilePrefab2" parent="TilePrefabsContainer/Grass" instance=ExtResource("8_fegtx")]
 visible = false
 
-[node name="TilePrefab3" parent="TilePrefabsContainer/Grass" instance=ExtResource("9_r7xw4")]
+[node name="Gr_TilePrefab3" parent="TilePrefabsContainer/Grass" instance=ExtResource("9_r7xw4")]
 visible = false
 
-[node name="TilePrefab4" parent="TilePrefabsContainer/Grass" instance=ExtResource("10_80o5n")]
+[node name="Gr_TilePrefab4" parent="TilePrefabsContainer/Grass" instance=ExtResource("10_80o5n")]
 visible = false
 
 [node name="Objects" type="Node" parent="TilePrefabsContainer"]
 
-[node name="TilePrefab" parent="TilePrefabsContainer/Objects" instance=ExtResource("11_flbq1")]
+[node name="Ob_TilePrefab" parent="TilePrefabsContainer/Objects" instance=ExtResource("11_flbq1")]
 visible = false
 
-[node name="TilePrefab2" parent="TilePrefabsContainer/Objects" instance=ExtResource("12_2n7yp")]
+[node name="Ob_TilePrefab2" parent="TilePrefabsContainer/Objects" instance=ExtResource("12_2n7yp")]
 visible = false
 
 [node name="Path" type="Node" parent="TilePrefabsContainer"]
 
-[node name="TilePrefab" parent="TilePrefabsContainer/Path" instance=ExtResource("13_rupan")]
+[node name="Pt_TilePrefab" parent="TilePrefabsContainer/Path" instance=ExtResource("13_rupan")]
 visible = false
 
-[node name="TilePrefab2" parent="TilePrefabsContainer/Path" instance=ExtResource("14_w3oc4")]
+[node name="Pt_TilePrefab2" parent="TilePrefabsContainer/Path" instance=ExtResource("14_w3oc4")]
 visible = false
 
 [node name="Rocks" type="Node" parent="TilePrefabsContainer"]
 
-[node name="TilePrefab" parent="TilePrefabsContainer/Rocks" instance=ExtResource("15_0fqti")]
+[node name="Roc_TilePrefab" parent="TilePrefabsContainer/Rocks" instance=ExtResource("15_0fqti")]
 visible = false
 
-[node name="TilePrefab2" parent="TilePrefabsContainer/Rocks" instance=ExtResource("16_iwpit")]
+[node name="Roc_TilePrefab2" parent="TilePrefabsContainer/Rocks" instance=ExtResource("16_iwpit")]
 visible = false
 
-[node name="TilePrefab3" parent="TilePrefabsContainer/Rocks" instance=ExtResource("17_5corl")]
+[node name="Roc_TilePrefab3" parent="TilePrefabsContainer/Rocks" instance=ExtResource("17_5corl")]
 visible = false
 
 [node name="Tomb" type="Node" parent="TilePrefabsContainer"]
 
-[node name="TilePrefab" parent="TilePrefabsContainer/Tomb" instance=ExtResource("18_5e26a")]
+[node name="Tmb_TilePrefab" parent="TilePrefabsContainer/Tomb" instance=ExtResource("18_5e26a")]
 visible = false
 
-[node name="TilePrefab2" parent="TilePrefabsContainer/Tomb" instance=ExtResource("19_m56u3")]
+[node name="Tmb_TilePrefab2" parent="TilePrefabsContainer/Tomb" instance=ExtResource("19_m56u3")]
 visible = false
 
-[node name="WaveFunctionCollapse" type="Node" parent="."]
+[node name="WaveFunctionCollapse" type="Node" parent="." node_paths=PackedStringArray("tilePrefabs", "tileHolder")]
 script = ExtResource("1_427g2")
+tilePrefabs = [NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab2"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab3"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab4"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab2"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab3"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab4"), NodePath("../TilePrefabsContainer/Objects/Ob_TilePrefab"), NodePath("../TilePrefabsContainer/Objects/Ob_TilePrefab2"), NodePath("../TilePrefabsContainer/Path/Pt_TilePrefab"), NodePath("../TilePrefabsContainer/Path/Pt_TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab3"), NodePath("../TilePrefabsContainer/Tomb/Tmb_TilePrefab"), NodePath("../TilePrefabsContainer/Tomb/Tmb_TilePrefab2")]
 gridDimension = Vector2i(4, 4)
+tileHolder = NodePath("../TileHolder")

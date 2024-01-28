@@ -16,17 +16,17 @@ func _ready():
 	CheckForNeighbours(0, 0, -1)
 	# GenerateTileMap()
 
-#================================>	Testing  <================================
 func InitializeTileMap():
 	for index in gridDimension.x:
 		var tileCell = SuperTileCell.new()
 		tileMap.append(tileCell)
-	# TestingTiles()
-
+	TestingTiles()
+	
+#================================>	Testing  <================================
 func TestingTiles():
 	var createdTile = CreateTile(0)
 	tileMap[0].tilesAvailable.append(createdTile)
-	var createdTile2 = CreateTile(14)
+	var createdTile2 = CreateTile(0)
 	tileMap[0].tilesAvailable.append(createdTile2)
 	
 	var coOrdX = 0
