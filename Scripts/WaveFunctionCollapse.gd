@@ -151,10 +151,10 @@ func PrintListOfTileWithIndex(index):
 		debugPrint = "Index [" + str(index) + "] | i[" + str(i) + "] : " + str(listVal)
 		print(debugPrint)
 
-		if (listVal > -1):
-			var socCont = tilePrefabsList[listVal].socketContainer
-			debugPrint = "Index [" + str(i) + "] | PosX : " + str(socCont.posX) + " | PosY : " + str(socCont.posY) + "| NegX : " + str(socCont.negX) + "| NegY : " + str(socCont.negY)
-			print(debugPrint)
+		# if (listVal > -1):
+		# 	var socCont = tilePrefabsList[listVal].socketContainer
+		# 	debugPrint = "Removed | Index [" + str(i) + "] | PosX : " + str(socCont.posX) + " | PosY : " + str(socCont.posY) + "| NegX : " + str(socCont.negX) + "| NegY : " + str(socCont.negY)
+		# 	print(debugPrint)
 		i += 1
 
 
@@ -182,6 +182,7 @@ func LoadTilesData_2():
 	for xVal in sizeX:
 		tilesCache.append(tilePrefabsList[xVal].socketContainer.socketOnly)
 
+#This is from the previous algorithm | This could be also considered Testing Code
 func SetNeighbourTile(coOrdX, coOrdY, adjListIndex):
 	var indexToSet =  coOrdX + (coOrdY * gridDimension.y)
 	if (indexToSet > tileMap.size() - 1 || indexToSet < 0):
@@ -209,38 +210,38 @@ func GetNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 	debugPrint = "tileMap[" + str(coOrdX) + "," + str(coOrdY) +"] : Not null\n\n"
 	print(debugPrint);
 			
-			#This is a valid tile at this point
+	#This is a valid tile at this point
 			
-			#As all the tiles are in super position state. We will need to get the whole tile list 
-			#and compare each tile's, every socket with the current tile's adjacency list, to get the
-			#suitable tile to connect with the current tile's socket
+	#As all the tiles are in super position state. We will need to get the whole tile list 
+	#and compare each tile's, every socket with the current tile's adjacency list, to get the
+	#suitable tile to connect with the current tile's socket
 			
-			#Get each adjacency list of the current tile and store in cache for faster access
-			#Transpose 1D array to 2D using gridDimensions
-			# RowNo. + (ColumnNo. * Columns)
-			# var indexToCheck = coOrdX + (coOrdY * gridDimension.y)			# This is for directly accessing the tile from tilePrefabs
-	var indexToCheck = tileMap[transposedIndex].currentTileIndex
+	#Get each adjacency list of the current tile and store in cache for faster access
+	#Transpose 1D array to 2D using gridDimensions
+	# RowNo. + (ColumnNo. * Columns)
+	# var indexToCheck = coOrdX + (coOrdY * gridDimension.y)			# This is for directly accessing the tile from tilePrefabs
+	var indexToCheck = tileMap[transposedIndex].currentTileIndex		# We assume that the index will be set, as without index, this shouldnt be triggered
 	var posXAdjList = tilePrefabsList[indexToCheck].socketContainer.adjPosX
 	var negXAdjList = tilePrefabsList[indexToCheck].socketContainer.adjNegX
 	var posYAdjList = tilePrefabsList[indexToCheck].socketContainer.adjPosY
 	var negYAdjList = tilePrefabsList[indexToCheck].socketContainer.adjNegY
 
-			# debugPrint = "Checking Adjacency Lsit | First Pos X Element [ " + str(compAdjPosX[0]) + " ] "
-			# print(debugPrint);			
+	# debugPrint = "Checking Adjacency Lsit | First Pos X Element [ " + str(compAdjPosX[0]) + " ] "
+	# print(debugPrint);			
 
-			#Compare each socket with adjacency list of the current tile
-			#PosY -> NegY | NegY -> PosY | PosX -> NegX | NegX -> PosX
+	#Compare each socket with adjacency list of the current tile
+	#PosY -> NegY | NegY -> PosY | PosX -> NegX | NegX -> PosX
 
-			#==========================================> Suggestion <==========================================
-			#Run a sorting algorithm to sort the adjacency list in ascending/descending order
-			#After the list is sorted, we can run binary search to check if the given socket value
-			#is greater, less or equal to the socket got from the tilesCache
-			#==========================================> Suggestion <==========================================
+	#==========================================> Suggestion <==========================================
+	#Run a sorting algorithm to sort the adjacency list in ascending/descending order
+	#After the list is sorted, we can run binary search to check if the given socket value
+	#is greater, less or equal to the socket got from the tilesCache
+	#==========================================> Suggestion <==========================================
 
-			#For now, we are just iterating through the whole adjacency array and comparing with the
-			#tilesCache array
+	#For now, we are just iterating through the whole adjacency array and comparing with the
+	#tilesCache array
 
-			#Check each tiles list for compatible neighbours with the collapsed cell
+	#Check each tiles list for compatible neighbours with the collapsed cell
 	var tileIndex = 0
 	var foundTile = false
 
@@ -251,9 +252,10 @@ func GetNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 		# debugPrint = "Checking | Pos X | " + str(transposedIndex) + "\n\n"
 		# print(debugPrint);
 
+		tileIndex = 0
 		for tileVal in tileMap[transposedIndex].tilesAvailable:
-			tileIndex = 0
 			var tempNegX = tilesCache[tileVal].NegX
+			foundTile = false
 			for valPosX in posXAdjList:			#This will give element, not index
 				# debugPrint = "valPosX [" + str(valPosX) + "] | tileVal.PosX [" + str(tileVal.NegX) + "] | [" + str(tileIndex) + "]"
 				# print(debugPrint);
@@ -264,6 +266,7 @@ func GetNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 					# print(debugPrint)
 					foundTile = true
 					break
+
 			if (!foundTile):
 				# debugPrint = "NegX Removing Tile | Socket at [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tileNegX [" + str(tileMap[transposedIndex].tilesAvailable[tileIndex]) + "]"
 				# print(debugPrint);
@@ -280,9 +283,10 @@ func GetNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 		# debugPrint = "Checking | Neg X | " + str(transposedIndex) + "\n\n"
 		# print(debugPrint);
 
+		tileIndex = 0
 		for tileVal in tileMap[transposedIndex].tilesAvailable:
-			tileIndex = 0
 			var tempNegX = tilesCache[tileVal].NegX
+			foundTile = false
 			for valNegX in negXAdjList:
 				# debugPrint = "valNegX [" + str(valNegX) + "] | tileVal.PosX [" + str(tileVal.PosX) + "] | [" + str(tileIndex) + "]"
 				# print(debugPrint);
@@ -293,7 +297,7 @@ func GetNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 					# print(debugPrint)
 					foundTile = true
 					break
-			
+
 			if (!foundTile):
 				# debugPrint = "PosX Removing Tile | Socket at [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tilePosX [" + str(tileMap[transposedIndex].tilesAvailable[tileIndex]) + "]"
 				# print(debugPrint);
@@ -310,27 +314,35 @@ func GetNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 		debugPrint = "Checking | Pos Y | " + str(transposedIndex) + "\n\n"
 		print(debugPrint);
 
+		tileIndex = 0
 		for tileVal in tileMap[transposedIndex].tilesAvailable:
-			tileIndex = 0
 			var tempNegY = tilesCache[tileVal].NegY
+			foundTile = false
+
+			debugPrint = "=====================> Checking | tileVal : " + str(tileVal) + "  | tileNegY : " + str(tilesCache[tileVal].NegY) + " <=====================\n\n"
+			print(debugPrint);
+			
+			var listIndex = 0				#THis is for debugging only
 			for valPosY in posYAdjList:
-				# debugPrint = "valPosY [" + str(valPosY) + "] | tileVal.NegY [" + str(tileVal.NegY) + "] | [" + str(tileIndex) + "]"
-				# print(debugPrint);
+				debugPrint = "valPosY [" + str(listIndex) + "] : " + str(valPosY) 
+				print(debugPrint);
 
-				if (tileVal >= 0 && valPosY == tempNegY):
+				if (valPosY == tempNegY):
 					#Found Compatible Socket
-					debugPrint = "Found NegY | Socket at [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tileNegY [" + str(tilesCache[tileVal].NegY) + "]"
+					debugPrint = "Found NegY | Socket [" + str(tileIndex) + "] : [" + str(tileVal) + "]"
 					print(debugPrint);
+					foundTile = true;
 					break
-
-				#This causes a bit more problem, as in, if there are more than 1 value in the adjacency list, then the values assigned by a 
-				#previous match loop in the list, are removed by the very next match loop. And so everything turns to -1
+				listIndex += 1
 				
+			#This causes a bit more problem, as in, if there are more than 1 value in the adjacency list, then the values assigned by a 
+			#previous match loop in the list, are removed by the very next match loop. And so everything turns to -1
 			if (!foundTile):
-				# debugPrint = "PosY Removing Tile | Socket at [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tilePosY [" + str(tileMap[transposedIndex].tilesAvailable[tileIndex]) + "]"
-				# print(debugPrint);
 				tileMap[transposedIndex].tilesAvailable[tileIndex] = -1
+				debugPrint = "PosY Removing Tile | Socket [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tileValueRemoved : " + str(tileMap[transposedIndex].tilesAvailable[tileIndex])
+				print(debugPrint);
 			tileIndex += 1
+			
 	else:
 		debugPrint = "No Compatible Pos Y socket Found!!\n\n"
 		print(debugPrint);
@@ -342,19 +354,21 @@ func GetNeighboursAdjaceny(coOrdX, coOrdY) -> int:
 		# debugPrint = "Checking | Neg Y | " + str(transposedIndex) + "\n\n"
 		# print(debugPrint);
 
+		tileIndex = 0
 		for tileVal in tileMap[transposedIndex].tilesAvailable:
-			tileIndex = 0
 			var tempPosY = tilesCache[tileVal].PosY
+			foundTile = false
 			for valNegY in negYAdjList:
 				# debugPrint = "valNegY [" + str(valNegY) + "] | tileVal.PosY [" + str(tileVal.PosY) + "] | [" + str(tileIndex) + "]"
 				# print(debugPrint);
 
-				if (tileVal >= 0 && valNegY == tempPosY):
+				if (valNegY == tempPosY):
 					#Found Compatible Socket
 					# debugPrint = "Found PosY | Socket at [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tilePosY [" + str(tilesCache[tileVal].PosY) + "]"
 					# print(debugPrint);
 					foundTile = true;
 					break
+
 			if (!foundTile):
 				# debugPrint = "PosX Removing Tile | Socket at [" + str(tileIndex) + "] : [" + str(tileVal) + "] | tilePosX [" + str(tileMap[transposedIndex].tilesAvailable[tileIndex]) + "]"
 				# print(debugPrint);
