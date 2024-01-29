@@ -8,4 +8,9 @@
 									22 JANUARY 2024
 --------------------------------------------------------------------------------------
 => [Do] To increase the efficiency of the algorithm to figure out the socket adjaceny faster
-    (-) [Suggestion] Can sort the list in ascending/descending order. 
+    (-) [Suggestion] Can sort the list in ascending/descending order.
+
+--------------------------------------------------------------------------------------
+									30 JANUARY 2024
+--------------------------------------------------------------------------------------
+=> [Do] Create empty tile with all the sockets set to 0
