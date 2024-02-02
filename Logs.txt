@@ -14,3 +14,21 @@
 									30 JANUARY 2024
 --------------------------------------------------------------------------------------
 => [Do] Create empty tile with all the sockets set to 0
+
+--------------------------------------------------------------------------------------
+									03 FEBRUARY 2024
+--------------------------------------------------------------------------------------
+- Changed TransposedIndexData -> TransposedTileData
+- Made overloaded function to print TilesAvailable that takes Co-Ordinates as parameter
+- Added function tips
+- SetTilesToCheckData logic change
+	(-) New element has to be created everytime we want to push data to the Stack or else the same element will be set to each position in the Stack
+- SetTileAdjacency logic change
+	(-) Checking currTileIndex as it has to be compared not tileToCheck.transposedIndex
+	(-) tileMap was also accessing the wrong element.
+		[+] Taking index1D of the tileToCheck, as it has be checked
+- Renaming
+	(-) TransposedIndexData -> TransposedTileData
+	(-) transposedIndex -> index1D
+	(-) SetTransposedStackData -> SetTilesToCheckData
+	(-) tempIndexData -> tempTileData
