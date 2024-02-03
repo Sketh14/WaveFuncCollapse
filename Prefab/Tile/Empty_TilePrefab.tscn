@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmw85xn2ygshe"]
+
+[ext_resource type="Script" path="res://Scripts/TileController.gd" id="1_iax72"]
+[ext_resource type="Texture2D" uid="uid://ccyc8d6v8bn16" path="res://Sprites/White_block.png" id="2_tuw7b"]
+[ext_resource type="Script" path="res://Scripts/TileSocket.gd" id="3_lxan5"]
+[ext_resource type="Shape2D" uid="uid://cfglgyum6mooq" path="res://CollisionShapes/TileColShape2D.tres" id="4_ho5gy"]
+
+[node name="TilePrefab" type="Node2D" node_paths=PackedStringArray("sprite2D", "socketContainer")]
+script = ExtResource("1_iax72")
+sprite2D = NodePath("")
+socketContainer = NodePath("Socket")
+
+[node name="TileSprite2" type="Sprite2D" parent="."]
+modulate = Color(0.447059, 0.458824, 0.105882, 1)
+texture = ExtResource("2_tuw7b")
+region_enabled = true
+region_rect = Rect2(72, 52, 32, 32)
+
+[node name="Socket" type="Node" parent="."]
+script = ExtResource("3_lxan5")
+adjPosX = Array[int]([0])
+adjNegX = Array[int]([0])
+adjPosY = Array[int]([0])
+adjNegY = Array[int]([0])
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = ExtResource("4_ho5gy")
+
+[connection signal="input_event" from="Area2D" to="Socket" method="_on_area_2d_input_event"]

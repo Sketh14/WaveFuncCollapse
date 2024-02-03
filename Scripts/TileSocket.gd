@@ -46,11 +46,11 @@ func _ready():
 #     @export var negY : Array[int]
 
 func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
-	if ((event is InputEventMouseButton) && !_selected):
+	if (!_selected && (event is InputEventMouseButton)):
 		_selected = true
 		if (_wave_function_handler != null):
-			_wave_function_handler.SetTile(0,0,13)
-		print("Tile Value Set!!", 0)
+			_wave_function_handler.SetTile(coOrdX, coOrdY, index)
+		print("Tile Value Set!!", index)
 
 class OnlySocket extends Node:
 	var PosX : int

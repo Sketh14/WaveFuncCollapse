@@ -203,7 +203,7 @@ func SetTileAdjacency(currTileIndex:int, tileToCheck:TransposedTileData) -> int:
 			# debugPrint = "=====================> Checking | tileVal : " + str(tileVal) + "  | socketVal : " + str(tempCompSocketVal) + " <=====================\n\n"
 			# print(debugPrint);
 			
-			var listIndex = 0				#THis is for debugging only
+			# var listIndex = 0				#THis is for debugging only
 			for socketVal in adjList:				
 				if (socketVal == tempCompSocketVal):
 					#Found Compatible Socket
@@ -219,7 +219,7 @@ func SetTileAdjacency(currTileIndex:int, tileToCheck:TransposedTileData) -> int:
 
 				# debugPrint = "listIndex [" + str(listIndex) +"] | socketVal [" + str(tileAvailableIndex) + "] : " + str(socketVal) 
 				# print(debugPrint);
-				listIndex += 1
+				# listIndex += 1
 				
 			#This causes a bit more problem, as in, if there are more than 1 value in the adjacency list, then the values assigned by a 
 			#previous match loop in the list, are removed by the very next match loop. And so everything turns to -1
@@ -248,9 +248,9 @@ func SetNeighboursAdjacenyForCoOrd(coOrdX:int, coOrdY:int) -> int:
 	# if (tileMap.size() <= index1D || index1D < 0):
 		return 0		#Early return if out of range
 
-	var debugPrint = "\n\nChecing For Neighbours in tile["+ str(coOrdX) + "," + str(coOrdY) +"]"
-	# var debugPrint = "\n\nChecing For Neighbours in tile["+ str(index1D) +"]"
+	debugPrint = "\n\nChecing For Neighbours in tile["+ str(coOrdX) + "," + str(coOrdY) +"]"
 	print(debugPrint);
+	# var debugPrint = "\n\nChecing For Neighbours in tile["+ str(index1D) +"]"
 			
 	#This is a valid tile at this point
 			

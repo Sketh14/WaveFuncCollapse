@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://clbkh75hjnqub"]
+[gd_scene load_steps=21 format=3 uid="uid://clbkh75hjnqub"]
 
 [ext_resource type="Script" path="res://Scripts/WaveFunctionCollapse.gd" id="1_427g2"]
+[ext_resource type="PackedScene" uid="uid://dmw85xn2ygshe" path="res://Prefab/Tile/Empty_TilePrefab.tscn" id="1_ng7v5"]
 [ext_resource type="PackedScene" uid="uid://dja2gy701kmw7" path="res://Prefab/Tile/Big_Rock/TilePrefab_12.tscn" id="3_05jhd"]
 [ext_resource type="PackedScene" uid="uid://b3cssyctexol5" path="res://Prefab/Tile/Big_Rock/TilePrefab_13.tscn" id="4_q2lxa"]
 [ext_resource type="PackedScene" uid="uid://c76exxauexome" path="res://Prefab/Tile/Big_Rock/TilePrefab_14.tscn" id="5_65i02"]
@@ -18,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://ojvg6e1sc80" path="res://Prefab/Tile/Rocks/TilePrefab_17.tscn" id="17_5corl"]
 [ext_resource type="PackedScene" uid="uid://cy126ydmwi2g5" path="res://Prefab/Tile/Tomb/TilePrefab_9.tscn" id="18_5e26a"]
 [ext_resource type="PackedScene" uid="uid://dkp5lstff45kv" path="res://Prefab/Tile/Tomb/TilePrefab_10.tscn" id="19_m56u3"]
+[ext_resource type="PackedScene" uid="uid://k0jfptyluqce" path="res://Prefab/PlaceHolderTiles/place_holder_tile_.tscn" id="19_qebm0"]
 
 [node name="Main01" type="Node2D"]
 
@@ -26,6 +28,8 @@
 [node name="TileHolder" type="Node" parent="."]
 
 [node name="TilePrefabsContainer" type="Node" parent="."]
+
+[node name="TilePrefab" parent="TilePrefabsContainer" instance=ExtResource("1_ng7v5")]
 
 [node name="Big_Rock" type="Node" parent="TilePrefabsContainer"]
 
@@ -92,6 +96,104 @@ visible = false
 
 [node name="WaveFunctionCollapse" type="Node" parent="." node_paths=PackedStringArray("tilePrefabsList", "tileHolder")]
 script = ExtResource("1_427g2")
-tilePrefabsList = [NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab2"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab3"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab4"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab2"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab3"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab4"), NodePath("../TilePrefabsContainer/Objects/Ob_TilePrefab"), NodePath("../TilePrefabsContainer/Objects/Ob_TilePrefab2"), NodePath("../TilePrefabsContainer/Path/Pt_TilePrefab"), NodePath("../TilePrefabsContainer/Path/Pt_TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab3"), NodePath("../TilePrefabsContainer/Tomb/Tmb_TilePrefab"), NodePath("../TilePrefabsContainer/Tomb/Tmb_TilePrefab2")]
+tilePrefabsList = [NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab2"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab3"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab4"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab2"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab3"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab4"), NodePath("../TilePrefabsContainer/Objects/Ob_TilePrefab"), NodePath("../TilePrefabsContainer/Objects/Ob_TilePrefab2"), NodePath("../TilePrefabsContainer/Path/Pt_TilePrefab"), NodePath("../TilePrefabsContainer/Path/Pt_TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab3"), NodePath("../TilePrefabsContainer/Tomb/Tmb_TilePrefab"), NodePath("../TilePrefabsContainer/Tomb/Tmb_TilePrefab2"), NodePath("../TilePrefabsContainer/TilePrefab")]
 gridDimension = Vector2i(4, 4)
 tileHolder = NodePath("../TileHolder")
+
+[node name="MainCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Bottom_Panel" type="Panel" parent="MainCanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.85
+anchor_right = 0.85
+anchor_bottom = 0.95
+offset_bottom = -6.10352e-05
+
+[node name="GridContainer" type="GridContainer" parent="MainCanvasLayer/Bottom_Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.5
+anchor_right = 0.97
+anchor_bottom = 0.5
+offset_top = -16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 5
+columns = 17
+
+[node name="PlaceHolderTile_0" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+
+[node name="PlaceHolderTile_1" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 1
+
+[node name="PlaceHolderTile_2" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 2
+
+[node name="PlaceHolderTile_3" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 3
+
+[node name="PlaceHolderTile_4" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 4
+
+[node name="PlaceHolderTile_5" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 5
+
+[node name="PlaceHolderTile_6" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 6
+
+[node name="PlaceHolderTile_7" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 7
+
+[node name="PlaceHolderTile_8" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 8
+
+[node name="PlaceHolderTile_9" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 9
+
+[node name="PlaceHolderTile_10" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 10
+
+[node name="PlaceHolderTile_11" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 11
+
+[node name="PlaceHolderTile_12" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 12
+
+[node name="PlaceHolderTile_13" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 13
+
+[node name="PlaceHolderTile_14" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 14
+
+[node name="PlaceHolderTile_15" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 15
+
+[node name="PlaceHolderTile_16" parent="MainCanvasLayer/Bottom_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+layout_mode = 2
+tileIndex = 16
+
+[node name="Side_Panel" type="Panel" parent="MainCanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.91
+anchor_top = 0.05
+anchor_right = 0.98
+anchor_bottom = 0.95
