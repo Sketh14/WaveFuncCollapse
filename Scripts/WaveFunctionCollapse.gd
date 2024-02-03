@@ -45,7 +45,7 @@ func _ready():
 
 	#Testing 2
 	SetTile(0, 0, 13)
-	PrintListOfTileWithCoOrd(0, 1)
+	# PrintListOfTileWithCoOrd(0, 1)
 
 
 ## Initialize tiles as well as fill the tilesAvailable list at the start so that the tiles are in a super-position state 
@@ -102,6 +102,9 @@ func SetTile(coOrdX, coOrdY, valToSet):
 
 	tileMap[index1D].currentTileIndex = valToSet
 	tileMap[index1D].collapsed = true
+
+	var createdTile = CreateTile(valToSet)
+	createdTile.position = Vector2(32.0 * coOrdX, 32.0 * coOrdY)			# Tiles size is 64 x 64
 	
 	#Set the first 4 adjacent tiles in the immediate vicinity of the current set tile
 	SetTilesToCheckData(coOrdX, coOrdY)
@@ -110,8 +113,8 @@ func SetTile(coOrdX, coOrdY, valToSet):
 	# while (tilesToCheckStack.size() > 0):
 	if(true):
 		var tileToCheck = tilesToCheckStack.pop_back()
-		debugPrint = "Got Tile to check| index : X[" + str(tileToCheck.tileCoOrdX) + "], Y[" + str(tileToCheck.tileCoOrdY) + "]"
-		print(debugPrint)
+		# debugPrint = "Got Tile to check| index : X[" + str(tileToCheck.tileCoOrdX) + "], Y[" + str(tileToCheck.tileCoOrdY) + "]"
+		# print(debugPrint)
 		SetTileAdjacency(index1D, tileToCheck)
 		
 		#index1D error | not being set for the neighbours when it is neighbours turn
@@ -155,8 +158,8 @@ func SetTileAdjacency(currTileIndex, tileToCheck) -> int:
 	#Compare Socket | "Positive Socket" can only be compared to "Negative Socket" without rotation
 	#Search down of the tile
 	if (tileMap.size() > currTileIndex && currTileIndex >= 0):	
-		debugPrint = "Checking | Index [" + str(currTileIndex) + "] | SocketDir [" + str(tileToCheck.socketDir) + "]\n\n"
-		print(debugPrint);
+		# debugPrint = "Checking | Index [" + str(currTileIndex) + "] | SocketDir [" + str(tileToCheck.socketDir) + "]\n\n"
+		# print(debugPrint);
 
 		var tileAvailableIndex = 0
 		var foundTile = false
@@ -181,8 +184,8 @@ func SetTileAdjacency(currTileIndex, tileToCheck) -> int:
 			if (tileVal < 0):			#Tile previously has been set to 0
 				totalCount -= 1
 
-				debugPrint = "tileVal is 0 | Reducing Total Count | totalCount[" + str(totalCount) + "]\n\n"
-				print(debugPrint);
+				# debugPrint = "tileVal is 0 | Reducing Total Count | totalCount[" + str(totalCount) + "]\n\n"
+				# print(debugPrint);
 				continue
 
 			var tempCompSocketVal			#cache value to compare with
@@ -204,8 +207,8 @@ func SetTileAdjacency(currTileIndex, tileToCheck) -> int:
 			for socketVal in adjList:				
 				if (socketVal == tempCompSocketVal):
 					#Found Compatible Socket
-					debugPrint = "Found Socket | Socket [" + str(tileAvailableIndex) + "] : [" + str(tempCompSocketVal) + "]"
-					print(debugPrint);
+					# debugPrint = "Found Socket | Socket [" + str(tileAvailableIndex) + "] : [" + str(tempCompSocketVal) + "]"
+					# print(debugPrint);
 					foundTile = true;
 					
 					#Cell fully collapsed
@@ -214,8 +217,8 @@ func SetTileAdjacency(currTileIndex, tileToCheck) -> int:
 						return 1
 					break
 
-				debugPrint = "listIndex [" + str(listIndex) +"] | socketVal [" + str(tileAvailableIndex) + "] : " + str(socketVal) 
-				print(debugPrint);
+				# debugPrint = "listIndex [" + str(listIndex) +"] | socketVal [" + str(tileAvailableIndex) + "] : " + str(socketVal) 
+				# print(debugPrint);
 				listIndex += 1
 				
 			#This causes a bit more problem, as in, if there are more than 1 value in the adjacency list, then the values assigned by a 

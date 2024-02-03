@@ -16,7 +16,7 @@
 => [Do] Create empty tile with all the sockets set to 0
 
 --------------------------------------------------------------------------------------
-									03 FEBRUARY 2024
+									02 FEBRUARY 2024
 --------------------------------------------------------------------------------------
 - Changed TransposedIndexData -> TransposedTileData
 - Made overloaded function to print TilesAvailable that takes Co-Ordinates as parameter
@@ -32,3 +32,20 @@
 	(-) transposedIndex -> index1D
 	(-) SetTransposedStackData -> SetTilesToCheckData
 	(-) tempIndexData -> tempTileData
+	
+--------------------------------------------------------------------------------------
+									03 FEBRUARY 2024
+--------------------------------------------------------------------------------------
+- Adding InputHandling
+- Adding basic TouchControls
+- Adding Collisions to tiles
+	(-) CollisionObject + CollisionShape
+- Adding TileCreation logic to setting tile
+- Added Raycast method, but might not work
+--------------------------------------------->
+
+
+
+
+
+

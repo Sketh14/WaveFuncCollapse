@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c76exxauexome"]
+[gd_scene load_steps=6 format=3 uid="uid://c76exxauexome"]
 
 [ext_resource type="Script" path="res://Scripts/TileController.gd" id="1_w6wmf"]
 [ext_resource type="Texture2D" uid="uid://cr4vmeraqpd1d" path="res://Sprites/TX Tileset Grass.png" id="2_jhn2x"]
 [ext_resource type="Texture2D" uid="uid://on7xocak68ox" path="res://Sprites/TX Props.png" id="3_5sy51"]
 [ext_resource type="Script" path="res://Scripts/TileSocket.gd" id="4_brokv"]
+[ext_resource type="Shape2D" uid="uid://cfglgyum6mooq" path="res://CollisionShapes/TileColShape2D.tres" id="5_1ajtb"]
 
 [node name="TilePrefab" type="Node2D" node_paths=PackedStringArray("sprite2D", "socketContainer")]
 script = ExtResource("1_w6wmf")
@@ -30,3 +31,8 @@ adjPosX = Array[int]([48, 52, 64, 68, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44])
 adjNegX = Array[int]([50])
 adjPosY = Array[int]([57])
 adjNegY = Array[int]([47, 59, 67, 3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43])
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = ExtResource("5_1ajtb")

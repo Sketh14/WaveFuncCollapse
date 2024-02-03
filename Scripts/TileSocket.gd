@@ -15,6 +15,9 @@ extends Node
 @export var adjPosY : Array[int]
 @export var adjNegY : Array[int]
 
+#Touch Controls
+var _selected = false
+
 #This could be optimized maybe
 func _ready():
 	process_mode = Node.PROCESS_MODE_DISABLED       # Dont need to enable this, this is only a container
@@ -30,6 +33,20 @@ func _ready():
 #     @export var negX : Array[int]
 #     @export var posY : Array[int]
 #     @export var negY : Array[int]
+
+
+
+func _on_area_2d_mouse_entered():
+	# print("Mouse entered tile")
+	pass # Replace with function body.
+
+
+
+
+func _on_area_2d_input_event(viewport:Node, event:InputEvent, shape_idx:int):
+	print("Mouse input event")
+	pass # Replace with function body.
+
 
 class OnlySocket extends Node:
 	var PosX : int
