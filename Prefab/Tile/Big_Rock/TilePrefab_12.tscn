@@ -38,4 +38,3 @@ adjNegY = Array[int]([51])
 shape = ExtResource("5_5uhvq")
 
 [connection signal="input_event" from="Area2D" to="Socket" method="_on_area_2d_input_event"]
-[connection signal="mouse_entered" from="Area2D" to="Socket" method="_on_area_2d_mouse_entered"]

@@ -43,9 +43,6 @@
 - Adding TileCreation logic to setting tile
 - Added Raycast method, but might not work
 --------------------------------------------->
-
-
-
-
-
-
+- Added Raycast logic to TouchHandler
+	(-) Will not work with 2D
+- Might have to connect signals manually

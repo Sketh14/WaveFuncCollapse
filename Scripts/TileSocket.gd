@@ -34,19 +34,9 @@ func _ready():
 #     @export var posY : Array[int]
 #     @export var negY : Array[int]
 
-
-
-func _on_area_2d_mouse_entered():
-	# print("Mouse entered tile")
-	pass # Replace with function body.
-
-
-
-
 func _on_area_2d_input_event(viewport:Node, event:InputEvent, shape_idx:int):
-	print("Mouse input event")
-	pass # Replace with function body.
-
+	if event is InputEventMouseButton:
+		print("Mouse input event")
 
 class OnlySocket extends Node:
 	var PosX : int

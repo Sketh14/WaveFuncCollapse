@@ -17,8 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://dtkthjk1v6npu" path="res://Prefab/Tile/Rocks/TilePrefab_16.tscn" id="16_iwpit"]
 [ext_resource type="PackedScene" uid="uid://ojvg6e1sc80" path="res://Prefab/Tile/Rocks/TilePrefab_17.tscn" id="17_5corl"]
 [ext_resource type="PackedScene" uid="uid://cy126ydmwi2g5" path="res://Prefab/Tile/Tomb/TilePrefab_9.tscn" id="18_5e26a"]
+[ext_resource type="Script" path="res://Scripts/TouchHandler.gd" id="19_4q21k"]
 [ext_resource type="PackedScene" uid="uid://dkp5lstff45kv" path="res://Prefab/Tile/Tomb/TilePrefab_10.tscn" id="19_m56u3"]
-[ext_resource type="Script" path="res://Scripts/InputHandler.gd" id="19_nu6j0"]
 
 [node name="Main01" type="Node2D"]
 
@@ -97,5 +97,6 @@ tilePrefabsList = [NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab"), N
 gridDimension = Vector2i(4, 4)
 tileHolder = NodePath("../TileHolder")
 
-[node name="InputHandler" type="Node" parent="."]
-script = ExtResource("19_nu6j0")
+[node name="InputHandler" type="Node" parent="." node_paths=PackedStringArray("_mainCam")]
+script = ExtResource("19_4q21k")
+_mainCam = NodePath("../Camera2D")
