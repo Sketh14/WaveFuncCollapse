@@ -58,14 +58,14 @@ func InitializeData():
 		for valY in tilePrefabsList.size():
 			tileCell.tilesAvailable.append(valY)
 
-func PrintListOfTileWithCoOrd(coOrdX, coOrdY):
+func PrintListOfTileWithCoOrd(coOrdX:int, coOrdY:int):
 	var index1D = coOrdX + (coOrdY * gridDimension.y)
 	# debugPrint = "Checking Tiles | X: [" + str(coOrdX) + "] ,Y: [" + str(coOrdY) + "] Index : " + str(index1D)
 	print(debugPrint)
 	PrintListOfTileWithIndex(index1D)
 
 ## Prints the tilesAvailable list in a specific Tile 
-func PrintListOfTileWithIndex(index):
+func PrintListOfTileWithIndex(index:int):
 	var i = 0
 	for listVal in tileMap[index].tilesAvailable:
 		debugPrint = "Index [" + str(index) + "] | i[" + str(i) + "] : " + str(listVal)
@@ -79,7 +79,7 @@ func PrintListOfTileWithIndex(index):
 
 ## Function to actually instantiate tile.
 ## This will not set the image of the tile.
-func CreateTile(tileIndex) -> Node2D:
+func CreateTile(tileIndex:int) -> Node2D:
 	# print("Generating Tile in YDir")
 	# var tileToPlace = load(tilePrefabsList[0])
 	var tileToPlace = tilePrefabsList[tileIndex].duplicate()
@@ -95,7 +95,7 @@ func FillTilesCache():
 		tilesCache.append(tilePrefabsList[xVal].socketContainer.socketOnly)
 
 ## Set a specific tile value and also check for the neighbouring tiles data
-func SetTile(coOrdX, coOrdY, valToSet):
+func SetTile(coOrdX:int, coOrdY:int, valToSet:int):
 	var index1D = coOrdX + (coOrdY * gridDimension.y)
 	if (tileMap.size() <= index1D || index1D < 0):
 		return
@@ -124,7 +124,7 @@ func SetTile(coOrdX, coOrdY, valToSet):
 
 ## Helper function to set the Stack which checks the neighbouring tiles of the current selected tile.
 ## It adds the right/left/bottom/top tiles to the Stack
-func SetTilesToCheckData(coOrdX, coOrdY):
+func SetTilesToCheckData(coOrdX:int, coOrdY:int):
 	# debugPrint = "Setting Tile Data|  X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "]"
 	# print(debugPrint)
 	
@@ -153,7 +153,7 @@ func SetTilesToCheckData(coOrdX, coOrdY):
 	tempTileData.socketDir = SocketDirection.POSITIVEY
 	tilesToCheckStack.push_back(tempTileData)
 	
-func SetTileAdjacency(currTileIndex, tileToCheck) -> int:
+func SetTileAdjacency(currTileIndex:int, tileToCheck:TransposedTileData) -> int:
 
 	#Compare Socket | "Positive Socket" can only be compared to "Negative Socket" without rotation
 	#Search down of the tile
@@ -242,7 +242,7 @@ func SetTileAdjacency(currTileIndex, tileToCheck) -> int:
 #TODO: refactor into smaller functions
 # func SetNeighboursAdjacenyForCoOrd(transposedIndex) -> int:
 ## This will not work | This function will fill all the 4 sockets temproray adjacency list corresponding to the CoOrdinates sent to it
-func SetNeighboursAdjacenyForCoOrd(coOrdX, coOrdY) -> int:
+func SetNeighboursAdjacenyForCoOrd(coOrdX:int, coOrdY:int) -> int:
 	# Array indexes in negative can wrap around, so beware!!
 	if (coOrdX < 0 || coOrdX >= gridDimension.x || coOrdY < 0 || coOrdY >= gridDimension.y ):
 	# if (tileMap.size() <= index1D || index1D < 0):

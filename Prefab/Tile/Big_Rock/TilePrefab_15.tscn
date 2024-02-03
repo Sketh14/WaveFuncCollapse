@@ -36,3 +36,5 @@ adjNegY = Array[int]([55])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("5_xqwei")
+
+[connection signal="input_event" from="Area2D" to="Socket" method="_on_area_2d_input_event"]

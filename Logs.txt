@@ -46,3 +46,10 @@
 - Added Raycast logic to TouchHandler
 	(-) Will not work with 2D
 - Might have to connect signals manually
+--------------------------------------------->
+- TileSocket logic Changed
+	(-) Added variable for storing co-ordinates and index for individual tile
+	(-) Added reference for WaveFunctionHandler
+	(-) Assigning reference to WaveFunctionHandler at start
+	(-) On detecting mouse click, calling SetTile to set the desired tile
+- Update function parameters type inside WaveFunctionCollapse
