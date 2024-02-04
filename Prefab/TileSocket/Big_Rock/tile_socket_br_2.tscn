@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bypthbls22gyc"]
+
+[ext_resource type="PackedScene" uid="uid://booduc1ujq60w" path="res://Prefab/TileSocket/TileSocket_Prefab_.tscn" id="1_yue3u"]
+
+[node name="TileSocket_Prefab" instance=ExtResource("1_yue3u")]
+posX = 50
+negX = 52
+posY = 51
+negY = 49
+adjPosX = Array[int]([56])
+adjNegX = Array[int]([54, 58, 62, 66, 2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42])
+adjPosY = Array[int]([45])
+adjNegY = Array[int]([47, 59, 67, 3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43])

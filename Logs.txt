@@ -69,3 +69,12 @@
 	(-) Passing tile Co-Ords along with tileIndex to SetTile of WaveFunctionCollapse
 	(-) Made function to set UI tiles in the tilePanelHolder
 	(-) Also made function to turn all tiles UI to false
+--------------------------------------------->
+- Refactor TileController to TileSocket
+	(-) Big Rock Done
+	(-) Grass Done
+	(-) Objects Done
+	(-) Path Done
+	(-) Rocks Done
+	(-) Tomb Done
+	(-) Empty Made
