@@ -6,3 +6,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	tileLabel.text = str(tileIndex)
+
+func _on_button_pressed():
+	print("Button Pressed : ", tileIndex)
+

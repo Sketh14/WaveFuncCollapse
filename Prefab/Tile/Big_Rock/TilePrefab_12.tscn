@@ -1,28 +1,28 @@
 [gd_scene load_steps=6 format=3 uid="uid://dja2gy701kmw7"]
 
-[ext_resource type="Script" path="res://Scripts/TileController.gd" id="1_eg78y"]
-[ext_resource type="Texture2D" uid="uid://cr4vmeraqpd1d" path="res://Sprites/TX Tileset Grass.png" id="2_a03li"]
-[ext_resource type="Texture2D" uid="uid://on7xocak68ox" path="res://Sprites/TX Props.png" id="3_uft8s"]
-[ext_resource type="Script" path="res://Scripts/TileSocket.gd" id="4_cglpi"]
+[ext_resource type="Script" path="res://Scripts/TileControls/TileController.gd" id="1_sj4wo"]
+[ext_resource type="Texture2D" uid="uid://cr4vmeraqpd1d" path="res://Sprites/Environment/TX Tileset Grass.png" id="2_q475l"]
+[ext_resource type="Texture2D" uid="uid://on7xocak68ox" path="res://Sprites/Environment/TX Props.png" id="3_pgrst"]
+[ext_resource type="Script" path="res://Scripts/TileControls/TileSocket.gd" id="4_3lal4"]
 [ext_resource type="Shape2D" uid="uid://cfglgyum6mooq" path="res://CollisionShapes/TileColShape2D.tres" id="5_5uhvq"]
 
 [node name="TilePrefab" type="Node2D" node_paths=PackedStringArray("sprite2D", "socketContainer")]
-script = ExtResource("1_eg78y")
+script = ExtResource("1_sj4wo")
 sprite2D = NodePath("TileSprite")
 socketContainer = NodePath("Socket")
 
 [node name="TileSprite2" type="Sprite2D" parent="."]
-texture = ExtResource("2_a03li")
+texture = ExtResource("2_q475l")
 region_enabled = true
 region_rect = Rect2(72, 52, 32, 32)
 
 [node name="TileSprite" type="Sprite2D" parent="."]
-texture = ExtResource("3_uft8s")
+texture = ExtResource("3_pgrst")
 region_enabled = true
 region_rect = Rect2(0, 452, 32, 32)
 
 [node name="Socket" type="Node" parent="."]
-script = ExtResource("4_cglpi")
+script = ExtResource("4_3lal4")
 posX = 46
 negX = 48
 posY = 47

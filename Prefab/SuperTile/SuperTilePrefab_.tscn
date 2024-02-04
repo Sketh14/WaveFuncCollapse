@@ -1,0 +1,93 @@
+[gd_scene load_steps=2 format=3 uid="uid://tj0xwpbh4vrr"]
+
+[ext_resource type="PackedScene" uid="uid://dja2gy701kmw7" path="res://Prefab/Tile/Big_Rock/TilePrefab_12.tscn" id="2_maky3"]
+
+[node name="TilePrefab" type="Node2D"]
+
+[node name="TilePrefab" parent="." instance=ExtResource("2_maky3")]
+position = Vector2(-48, -64)
+
+[node name="TilePrefab2" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(-16, -64)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab3" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(16, -64)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab4" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(48, -64)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab5" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(-48, -32)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab6" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(-16, -32)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab7" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(16, -32)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab8" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(48, -32)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab9" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(-48, 0)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab10" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(-16, 0)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab11" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(16, 0)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab12" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(48, 0)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab13" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(-48, 32)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab14" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(-16, 32)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab15" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(16, 32)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab16" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(48, 32)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab17" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(-48, 64)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")
+
+[node name="TilePrefab18" parent="." node_paths=PackedStringArray("sprite2D", "socketContainer") instance=ExtResource("2_maky3")]
+position = Vector2(-16, 64)
+sprite2D = NodePath("../TilePrefab/TileSprite")
+socketContainer = NodePath("../TilePrefab/Socket")

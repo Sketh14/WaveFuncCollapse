@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://k0jfptyluqce"]
+[gd_scene load_steps=5 format=3 uid="uid://k0jfptyluqce"]
 
-[ext_resource type="Script" path="res://Scripts/PlaceHolderTileController.gd" id="1_a4guv"]
-[ext_resource type="Texture2D" uid="uid://ccyc8d6v8bn16" path="res://Sprites/White_block.png" id="1_y2sph"]
+[ext_resource type="Script" path="res://Scripts/UI/PlaceHolderTileController.gd" id="1_a4guv"]
+[ext_resource type="Texture2D" uid="uid://ccyc8d6v8bn16" path="res://Sprites/UI/White_block.png" id="1_y2sph"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4rkxv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ke86r"]
+bg_color = Color(0, 0, 0, 0.462745)
 
 [node name="PlaceHolderTile_" type="Control" node_paths=PackedStringArray("tileLabel")]
-process_mode = 4
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 3
 anchors_preset = 8
@@ -48,3 +53,15 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_4rkxv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ke86r")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

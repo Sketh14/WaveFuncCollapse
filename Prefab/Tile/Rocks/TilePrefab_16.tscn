@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dtkthjk1v6npu"]
 
-[ext_resource type="Script" path="res://Scripts/TileController.gd" id="1_3unic"]
-[ext_resource type="Texture2D" uid="uid://cr4vmeraqpd1d" path="res://Sprites/TX Tileset Grass.png" id="2_ug2um"]
-[ext_resource type="Texture2D" uid="uid://on7xocak68ox" path="res://Sprites/TX Props.png" id="3_3cacg"]
-[ext_resource type="Script" path="res://Scripts/TileSocket.gd" id="4_wb58q"]
+[ext_resource type="Script" path="res://Scripts/TileControls/TileController.gd" id="1_3unic"]
+[ext_resource type="Texture2D" uid="uid://cr4vmeraqpd1d" path="res://Sprites/Environment/TX Tileset Grass.png" id="2_ug2um"]
+[ext_resource type="Texture2D" uid="uid://on7xocak68ox" path="res://Sprites/Environment/TX Props.png" id="3_3cacg"]
+[ext_resource type="Script" path="res://Scripts/TileControls/TileSocket.gd" id="4_wb58q"]
 [ext_resource type="Shape2D" uid="uid://cfglgyum6mooq" path="res://CollisionShapes/TileColShape2D.tres" id="5_5n7te"]
 
 [node name="TilePrefab" type="Node2D" node_paths=PackedStringArray("sprite2D", "socketContainer")]

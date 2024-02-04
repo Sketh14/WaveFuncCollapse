@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm6e57g4jpsjn"
-path="res://.godot/imported/TX Plant.png-6b15118bbe5360a65835ccec7a7b0cac.ctex"
+uid="uid://on7xocak68ox"
+path="res://.godot/imported/TX Props.png-c7079594bd1804ddf6bf3dce27949d9a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/TX Plant.png"
-dest_files=["res://.godot/imported/TX Plant.png-6b15118bbe5360a65835ccec7a7b0cac.ctex"]
+source_file="res://Sprites/Environment/TX Props.png"
+dest_files=["res://.godot/imported/TX Props.png-c7079594bd1804ddf6bf3dce27949d9a.ctex"]
 
 [params]
 

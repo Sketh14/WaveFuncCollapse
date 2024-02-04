@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://on7xocak68ox"
-path="res://.godot/imported/TX Props.png-0ecab72a0109ed9619e70dc968e1dacd.ctex"
+uid="uid://ccyc8d6v8bn16"
+path="res://.godot/imported/White_block.png-17e0b00b61ab0f98b9bbc31d9167bc40.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/TX Props.png"
-dest_files=["res://.godot/imported/TX Props.png-0ecab72a0109ed9619e70dc968e1dacd.ctex"]
+source_file="res://Sprites/UI/White_block.png"
+dest_files=["res://.godot/imported/White_block.png-17e0b00b61ab0f98b9bbc31d9167bc40.ctex"]
 
 [params]
 

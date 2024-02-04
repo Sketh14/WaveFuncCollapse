@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cd2ayenfw8jvt"
-path="res://.godot/imported/Gameboy Tileset.png-4a7bceac64f4e18deead2f795bfc1a70.ctex"
+path="res://.godot/imported/Gameboy Tileset.png-7dc48c5ec4eac57747f32374493f253d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Gameboy Tileset.png"
-dest_files=["res://.godot/imported/Gameboy Tileset.png-4a7bceac64f4e18deead2f795bfc1a70.ctex"]
+source_file="res://Sprites/Environment/Gameboy Tileset.png"
+dest_files=["res://.godot/imported/Gameboy Tileset.png-7dc48c5ec4eac57747f32374493f253d.ctex"]
 
 [params]
 

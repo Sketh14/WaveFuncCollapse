@@ -1,13 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://dmw85xn2ygshe"]
 
-[ext_resource type="Script" path="res://Scripts/TileController.gd" id="1_iax72"]
-[ext_resource type="Texture2D" uid="uid://ccyc8d6v8bn16" path="res://Sprites/White_block.png" id="2_tuw7b"]
-[ext_resource type="Script" path="res://Scripts/TileSocket.gd" id="3_lxan5"]
+[ext_resource type="Script" path="res://Scripts/TileControls/TileController.gd" id="1_iax72"]
+[ext_resource type="Texture2D" uid="uid://ccyc8d6v8bn16" path="res://Sprites/UI/White_block.png" id="2_tuw7b"]
+[ext_resource type="Script" path="res://Scripts/TileControls/TileSocket.gd" id="3_lxan5"]
 [ext_resource type="Shape2D" uid="uid://cfglgyum6mooq" path="res://CollisionShapes/TileColShape2D.tres" id="4_ho5gy"]
 
-[node name="TilePrefab" type="Node2D" node_paths=PackedStringArray("sprite2D", "socketContainer")]
+[node name="TilePrefab" type="Node2D" node_paths=PackedStringArray("socketContainer")]
 script = ExtResource("1_iax72")
-sprite2D = NodePath("")
 socketContainer = NodePath("Socket")
 
 [node name="TileSprite2" type="Sprite2D" parent="."]
