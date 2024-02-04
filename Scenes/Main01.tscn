@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://clbkh75hjnqub"]
+[gd_scene load_steps=23 format=3 uid="uid://b1njk8mndwsuk"]
 
 [ext_resource type="PackedScene" uid="uid://bui7nabcck66v" path="res://Prefab/SuperTile/SuperTilePrefab2_.tscn" id="1_6fv0g"]
 [ext_resource type="Script" path="res://Scripts/WaveFunctionCollapse.gd" id="1_427g2"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://cy126ydmwi2g5" path="res://Prefab/Tile/Tomb/TilePrefab_9.tscn" id="18_5e26a"]
 [ext_resource type="PackedScene" uid="uid://dkp5lstff45kv" path="res://Prefab/Tile/Tomb/TilePrefab_10.tscn" id="19_m56u3"]
 [ext_resource type="PackedScene" uid="uid://k0jfptyluqce" path="res://Prefab/PlaceHolderTiles_UI/place_holder_tile_UI_.tscn" id="19_qebm0"]
+[ext_resource type="Script" path="res://Scripts/UI/TilePanelController.gd" id="21_w75fi"]
 
 [node name="Main01" type="Node2D"]
 
@@ -105,7 +106,6 @@ gridDimension = Vector2i(4, 4)
 tileHolder = NodePath("../TileHolder")
 
 [node name="MainCanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="PlaceHolderTile_Panel" type="Panel" parent="MainCanvasLayer"]
 anchors_preset = -1
@@ -114,6 +114,7 @@ anchor_top = 0.85
 anchor_right = 0.85
 anchor_bottom = 0.95
 offset_bottom = -6.10352e-05
+script = ExtResource("21_w75fi")
 
 [node name="GridContainer" type="GridContainer" parent="MainCanvasLayer/PlaceHolderTile_Panel"]
 layout_mode = 1

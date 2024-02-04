@@ -3,10 +3,15 @@ extends Control
 @export var tileIndex : int
 @export var tileLabel : Label
 
+var tilePanelController = null
+var tilePanelControllerPath = "Main01/MainCanvasLayer/PlaceHolderTile_Panel"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	tileLabel.text = str(tileIndex)
+	tilePanelController = get_tree().get_root().get_node(tilePanelControllerPath)
 
 func _on_button_pressed():
 	print("Button Pressed : ", tileIndex)
+	tilePanelController.set_supertile_with_index(tileIndex)
 
