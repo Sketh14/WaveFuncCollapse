@@ -47,6 +47,12 @@ func _ready():
 	# SetTile(0, 0, 13)
 	# PrintListOfTileWithCoOrd(0, 1)
 
+## Fill up the tiles cache so that all the tiles data can be accessed fast
+## As all the tiles are held in the tilesPrefabList. It would be better to only have the socketData in a cache to access fast. 
+func FillTilesCache():
+	var sizeX = tilePrefabsList.size()
+	for xVal in sizeX:
+		tilesCache.append(tilePrefabsList[xVal].socketContainer.socketOnly)
 
 ## Initialize tiles as well as fill the tilesAvailable list at the start so that the tiles are in a super-position state 
 func InitializeData():
@@ -87,13 +93,6 @@ func CreateTile(tileIndex:int) -> Node2D:
 	tileHolder.add_child(tileToPlace)
 	return tileToPlace
 
-## Fill up the tiles cache so that all the tiles data can be accessed fast
-## As all the tiles are held in the tilesPrefabList. It would be better to only have the socketData in a cache to access fast. 
-func FillTilesCache():
-	var sizeX = tilePrefabsList.size()
-	for xVal in sizeX:
-		tilesCache.append(tilePrefabsList[xVal].socketContainer.socketOnly)
-
 ## Set a specific tile value and also check for the neighbouring tiles data
 func SetTile(coOrdX:int, coOrdY:int, valToSet:int):
 	var index1D = coOrdX + (coOrdY * gridDimension.y)
@@ -103,6 +102,7 @@ func SetTile(coOrdX:int, coOrdY:int, valToSet:int):
 	tileMap[index1D].currentTileIndex = valToSet
 	tileMap[index1D].collapsed = true
 
+	
 	var createdTile = CreateTile(valToSet)
 	createdTile.position = Vector2(32.0 * coOrdX, 32.0 * coOrdY)			# Tiles size is 64 x 64
 	
