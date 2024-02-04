@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/TileControls/TileSocket.gd" id="3_lxan5"]
 [ext_resource type="Shape2D" uid="uid://cfglgyum6mooq" path="res://CollisionShapes/TileColShape2D.tres" id="4_ho5gy"]
 
-[node name="TilePrefab" type="Node2D" node_paths=PackedStringArray("socketContainer")]
+[node name="Empty_TilePrefab" type="Node2D" node_paths=PackedStringArray("socketContainer")]
 script = ExtResource("1_iax72")
 socketContainer = NodePath("Socket")
 

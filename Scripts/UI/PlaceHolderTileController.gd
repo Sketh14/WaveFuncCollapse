@@ -10,8 +10,9 @@ var tilePanelControllerPath = "Main01/MainCanvasLayer/PlaceHolderTile_Panel"
 func _ready():
 	tileLabel.text = str(tileIndex)
 	tilePanelController = get_tree().get_root().get_node(tilePanelControllerPath)
+	if (tilePanelController == null):
+		print("Tile Panel Controller Not Found")
 
 func _on_button_pressed():
 	print("Button Pressed : ", tileIndex)
 	tilePanelController.set_supertile_with_index(tileIndex)
-

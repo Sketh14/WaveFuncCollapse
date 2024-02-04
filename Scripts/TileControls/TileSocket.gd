@@ -46,7 +46,7 @@ func _ready():
 #     @export var negY : Array[int]
 
 func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
-	if (!_selected && (event is InputEventMouseButton)):
+	if (!_selected && (event is InputEventMouseButton) && event.is_action_pressed("Clicked")):
 		_selected = true
 		if (_wave_function_handler != null):
 			_wave_function_handler.SetTile(coOrdX, coOrdY, index)

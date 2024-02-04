@@ -44,7 +44,7 @@ func _ready():
 	# GenerateTileMap()
 
 	#Testing 2
-	SetTile(0, 0, 13)
+	# SetTile(0, 0, 13)
 	# PrintListOfTileWithCoOrd(0, 1)
 
 

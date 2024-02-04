@@ -57,3 +57,15 @@
 - Created placeholder tiles to select from
 - Created an empty tile for start instantiation
 - Added UI to select the placeholder tiles
+
+--------------------------------------------------------------------------------------
+									04 FEBRUARY 2024
+--------------------------------------------------------------------------------------
+- SuperTileController
+	(-) Fetchin TilepanelController at the start, to trigger set_tiles later
+- Added action Left Mouse button click detection and handling according to that
+- TilepanelController
+	(-) Getting gridDimension and caching it
+	(-) Passing tile Co-Ords along with tileIndex to SetTile of WaveFunctionCollapse
+	(-) Made function to set UI tiles in the tilePanelHolder
+	(-) Also made function to turn all tiles UI to false

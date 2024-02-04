@@ -33,7 +33,7 @@
 
 [node name="TilePrefabsContainer" type="Node" parent="."]
 
-[node name="TilePrefab" parent="TilePrefabsContainer" instance=ExtResource("1_ng7v5")]
+[node name="Empty_TilePrefab" parent="TilePrefabsContainer" instance=ExtResource("1_ng7v5")]
 visible = false
 
 [node name="Big_Rock" type="Node" parent="TilePrefabsContainer"]
@@ -101,7 +101,7 @@ visible = false
 
 [node name="WaveFunctionCollapse" type="Node" parent="." node_paths=PackedStringArray("tilePrefabsList", "tileHolder")]
 script = ExtResource("1_427g2")
-tilePrefabsList = [NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab2"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab3"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab4"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab2"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab3"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab4"), NodePath("../TilePrefabsContainer/Objects/Ob_TilePrefab"), NodePath("../TilePrefabsContainer/Objects/Ob_TilePrefab2"), NodePath("../TilePrefabsContainer/Path/Pt_TilePrefab"), NodePath("../TilePrefabsContainer/Path/Pt_TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab3"), NodePath("../TilePrefabsContainer/Tomb/Tmb_TilePrefab"), NodePath("../TilePrefabsContainer/Tomb/Tmb_TilePrefab2"), NodePath("../TilePrefabsContainer/TilePrefab")]
+tilePrefabsList = [NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab2"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab3"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab4"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab2"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab3"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab4"), NodePath("../TilePrefabsContainer/Objects/Ob_TilePrefab"), NodePath("../TilePrefabsContainer/Objects/Ob_TilePrefab2"), NodePath("../TilePrefabsContainer/Path/Pt_TilePrefab"), NodePath("../TilePrefabsContainer/Path/Pt_TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab3"), NodePath("../TilePrefabsContainer/Tomb/Tmb_TilePrefab"), NodePath("../TilePrefabsContainer/Tomb/Tmb_TilePrefab2"), NodePath("../TilePrefabsContainer/Empty_TilePrefab")]
 gridDimension = Vector2i(4, 4)
 tileHolder = NodePath("../TileHolder")
 
@@ -109,9 +109,9 @@ tileHolder = NodePath("../TileHolder")
 
 [node name="PlaceHolderTile_Panel" type="Panel" parent="MainCanvasLayer"]
 anchors_preset = -1
-anchor_left = 0.05
+anchor_left = 0.03
 anchor_top = 0.85
-anchor_right = 0.85
+anchor_right = 0.87
 anchor_bottom = 0.95
 offset_bottom = -6.10352e-05
 script = ExtResource("21_w75fi")
@@ -128,74 +128,96 @@ offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 5
-columns = 17
+columns = 18
 
 [node name="PlaceHolderTile_0" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 
 [node name="PlaceHolderTile_1" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 1
 
 [node name="PlaceHolderTile_2" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 2
 
 [node name="PlaceHolderTile_3" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 3
 
 [node name="PlaceHolderTile_4" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 4
 
 [node name="PlaceHolderTile_5" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 5
 
 [node name="PlaceHolderTile_6" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 6
 
 [node name="PlaceHolderTile_7" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 7
 
 [node name="PlaceHolderTile_8" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 8
 
 [node name="PlaceHolderTile_9" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 9
 
 [node name="PlaceHolderTile_10" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 10
 
 [node name="PlaceHolderTile_11" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 11
 
 [node name="PlaceHolderTile_12" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 12
 
 [node name="PlaceHolderTile_13" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 13
 
 [node name="PlaceHolderTile_14" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 14
 
 [node name="PlaceHolderTile_15" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 15
 
 [node name="PlaceHolderTile_16" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
 layout_mode = 2
 tileIndex = 16
+
+[node name="PlaceHolderTile_" parent="MainCanvasLayer/PlaceHolderTile_Panel/GridContainer" instance=ExtResource("19_qebm0")]
+visible = false
+layout_mode = 2
+tileIndex = 17
 
 [node name="Side_Panel" type="Panel" parent="MainCanvasLayer"]
 anchors_preset = -1
