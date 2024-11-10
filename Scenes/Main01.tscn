@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b1njk8mndwsuk"]
+[gd_scene load_steps=41 format=3 uid="uid://b1njk8mndwsuk"]
 
 [ext_resource type="PackedScene" uid="uid://bui7nabcck66v" path="res://Prefab/SuperTile/SuperTilePrefab2_.tscn" id="1_6fv0g"]
 [ext_resource type="Script" path="res://Scripts/WaveFunctionCollapse.gd" id="1_427g2"]
@@ -21,7 +21,25 @@
 [ext_resource type="PackedScene" uid="uid://cy126ydmwi2g5" path="res://Prefab/Tile/Tomb/TilePrefab_9.tscn" id="18_5e26a"]
 [ext_resource type="PackedScene" uid="uid://dkp5lstff45kv" path="res://Prefab/Tile/Tomb/TilePrefab_10.tscn" id="19_m56u3"]
 [ext_resource type="PackedScene" uid="uid://k0jfptyluqce" path="res://Prefab/PlaceHolderTiles_UI/place_holder_tile_UI_.tscn" id="19_qebm0"]
+[ext_resource type="PackedScene" uid="uid://dfyb8etgkg0qm" path="res://Prefab/TileSocket/tile_socket_empty.tscn" id="20_ea3n0"]
 [ext_resource type="Script" path="res://Scripts/UI/TilePanelController.gd" id="21_w75fi"]
+[ext_resource type="PackedScene" uid="uid://ds485h878imr" path="res://Prefab/TileSocket/Big_Rock/tile_socket_br_1.tscn" id="21_wkahl"]
+[ext_resource type="PackedScene" uid="uid://bypthbls22gyc" path="res://Prefab/TileSocket/Big_Rock/tile_socket_br_2.tscn" id="22_pd7qo"]
+[ext_resource type="PackedScene" uid="uid://ce781nr73u1wp" path="res://Prefab/TileSocket/Big_Rock/tile_socket_br_3.tscn" id="23_5e2n1"]
+[ext_resource type="PackedScene" uid="uid://bo1c4fcqtwgik" path="res://Prefab/TileSocket/Big_Rock/tile_socket_br_4.tscn" id="24_oumgt"]
+[ext_resource type="PackedScene" uid="uid://dasdnmrpd6t3" path="res://Prefab/TileSocket/Grass/tile_socket_grass_1.tscn" id="25_vf1wa"]
+[ext_resource type="PackedScene" uid="uid://bdobqd5nbbb7m" path="res://Prefab/TileSocket/Grass/tile_socket_grass_2.tscn" id="26_5tcfa"]
+[ext_resource type="PackedScene" uid="uid://docw6exowdnf6" path="res://Prefab/TileSocket/Grass/tile_socket_grass_3.tscn" id="27_jue3t"]
+[ext_resource type="PackedScene" uid="uid://dmp7ysdgaux7x" path="res://Prefab/TileSocket/Grass/tile_socket_grass_4.tscn" id="28_4karm"]
+[ext_resource type="PackedScene" uid="uid://dvfqhsy46da4l" path="res://Prefab/TileSocket/Objects/tile_socket_obj_1.tscn" id="29_unfkg"]
+[ext_resource type="PackedScene" uid="uid://da3d8vklmli1s" path="res://Prefab/TileSocket/Objects/tile_socket_obj_2.tscn" id="30_umkvk"]
+[ext_resource type="PackedScene" uid="uid://qavub10dh1nt" path="res://Prefab/TileSocket/Path/tile_socket_path_1.tscn" id="31_o43k1"]
+[ext_resource type="PackedScene" uid="uid://2mly6u5r67di" path="res://Prefab/TileSocket/Path/tile_socket_path_2.tscn" id="32_5kag4"]
+[ext_resource type="PackedScene" uid="uid://h7ykltjm03j5" path="res://Prefab/TileSocket/Rocks/tile_socket_rock_1.tscn" id="33_nw2e4"]
+[ext_resource type="PackedScene" uid="uid://ck13wycnd5fp7" path="res://Prefab/TileSocket/Rocks/tile_socket_rock_2.tscn" id="34_np0sw"]
+[ext_resource type="PackedScene" uid="uid://goml3mo8ryl1" path="res://Prefab/TileSocket/Rocks/tile_socket_rock_3.tscn" id="35_1bqce"]
+[ext_resource type="PackedScene" uid="uid://cq0qmdl67dx2k" path="res://Prefab/TileSocket/Tomb/tile_socket_tomb_1.tscn" id="36_sf287"]
+[ext_resource type="PackedScene" uid="uid://bwy3giluss6be" path="res://Prefab/TileSocket/Tomb/tile_socket_tomb_2.tscn" id="37_s4qdi"]
 
 [node name="Main01" type="Node2D"]
 
@@ -50,6 +68,14 @@ visible = false
 [node name="BR_TilePrefab4" parent="TilePrefabsContainer/Big_Rock" instance=ExtResource("6_536fc")]
 visible = false
 
+[node name="Objects" type="Node" parent="TilePrefabsContainer"]
+
+[node name="Ob_TilePrefab" parent="TilePrefabsContainer/Objects" instance=ExtResource("11_flbq1")]
+visible = false
+
+[node name="Ob_TilePrefab2" parent="TilePrefabsContainer/Objects" instance=ExtResource("12_2n7yp")]
+visible = false
+
 [node name="Grass" type="Node" parent="TilePrefabsContainer"]
 
 [node name="Gr_TilePrefab" parent="TilePrefabsContainer/Grass" instance=ExtResource("7_djgam")]
@@ -62,14 +88,6 @@ visible = false
 visible = false
 
 [node name="Gr_TilePrefab4" parent="TilePrefabsContainer/Grass" instance=ExtResource("10_80o5n")]
-visible = false
-
-[node name="Objects" type="Node" parent="TilePrefabsContainer"]
-
-[node name="Ob_TilePrefab" parent="TilePrefabsContainer/Objects" instance=ExtResource("11_flbq1")]
-visible = false
-
-[node name="Ob_TilePrefab2" parent="TilePrefabsContainer/Objects" instance=ExtResource("12_2n7yp")]
 visible = false
 
 [node name="Path" type="Node" parent="TilePrefabsContainer"]
@@ -98,6 +116,56 @@ visible = false
 
 [node name="Tmb_TilePrefab2" parent="TilePrefabsContainer/Tomb" instance=ExtResource("19_m56u3")]
 visible = false
+
+[node name="TileSocketContainer" type="Node" parent="."]
+
+[node name="TileSocket_Prefab" parent="TileSocketContainer" instance=ExtResource("20_ea3n0")]
+
+[node name="Big_Rock" type="Node" parent="TileSocketContainer"]
+
+[node name="TileSocket_Prefab" parent="TileSocketContainer/Big_Rock" instance=ExtResource("21_wkahl")]
+
+[node name="TileSocket_Prefab2" parent="TileSocketContainer/Big_Rock" instance=ExtResource("22_pd7qo")]
+
+[node name="TileSocket_Prefab3" parent="TileSocketContainer/Big_Rock" instance=ExtResource("23_5e2n1")]
+
+[node name="TileSocket_Prefab4" parent="TileSocketContainer/Big_Rock" instance=ExtResource("24_oumgt")]
+
+[node name="Grass" type="Node" parent="TileSocketContainer"]
+
+[node name="TileSocket_Prefab" parent="TileSocketContainer/Grass" instance=ExtResource("25_vf1wa")]
+
+[node name="TileSocket_Prefab2" parent="TileSocketContainer/Grass" instance=ExtResource("26_5tcfa")]
+
+[node name="TileSocket_Prefab3" parent="TileSocketContainer/Grass" instance=ExtResource("27_jue3t")]
+
+[node name="TileSocket_Prefab4" parent="TileSocketContainer/Grass" instance=ExtResource("28_4karm")]
+
+[node name="Objects" type="Node" parent="TileSocketContainer"]
+
+[node name="TileSocket_Prefab" parent="TileSocketContainer/Objects" instance=ExtResource("29_unfkg")]
+
+[node name="TileSocket_Prefab2" parent="TileSocketContainer/Objects" instance=ExtResource("30_umkvk")]
+
+[node name="Path" type="Node" parent="TileSocketContainer"]
+
+[node name="TileSocket_Prefab" parent="TileSocketContainer/Path" instance=ExtResource("31_o43k1")]
+
+[node name="TileSocket_Prefab2" parent="TileSocketContainer/Path" instance=ExtResource("32_5kag4")]
+
+[node name="Rocks" type="Node" parent="TileSocketContainer"]
+
+[node name="TileSocket_Prefab" parent="TileSocketContainer/Rocks" instance=ExtResource("33_nw2e4")]
+
+[node name="TileSocket_Prefab2" parent="TileSocketContainer/Rocks" instance=ExtResource("34_np0sw")]
+
+[node name="TileSocket_Prefab3" parent="TileSocketContainer/Rocks" instance=ExtResource("35_1bqce")]
+
+[node name="Tomb" type="Node" parent="TileSocketContainer"]
+
+[node name="TileSocket_Prefab2" parent="TileSocketContainer/Tomb" instance=ExtResource("36_sf287")]
+
+[node name="TileSocket_Prefab3" parent="TileSocketContainer/Tomb" instance=ExtResource("37_s4qdi")]
 
 [node name="WaveFunctionCollapse" type="Node" parent="." node_paths=PackedStringArray("tilePrefabsList", "tileHolder")]
 script = ExtResource("1_427g2")
