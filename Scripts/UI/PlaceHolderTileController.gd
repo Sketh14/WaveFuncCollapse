@@ -1,7 +1,11 @@
+"""
+This is the Controller for UI Tile which can be selected to set the selected Super Tile
+"""
+
 extends Control
 
-@export var tileIndex : int
-@export var tileLabel : Label
+@export var tileIndex: int
+@export var tileLabel: Label
 
 var tilePanelController = null
 var tilePanelControllerPath = "Main01/MainCanvasLayer/PlaceHolderTile_Panel"

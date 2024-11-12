@@ -48,8 +48,11 @@
 [node name="TileHolder" type="Node" parent="."]
 
 [node name="TilePrefab" parent="TileHolder" instance=ExtResource("1_6fv0g")]
+visible = true
 
 [node name="TilePrefabsContainer" type="Node" parent="."]
+
+[node name="SuperTilePrefab2" parent="TilePrefabsContainer" instance=ExtResource("1_6fv0g")]
 
 [node name="Empty_TilePrefab" parent="TilePrefabsContainer" instance=ExtResource("1_ng7v5")]
 visible = false
@@ -117,58 +120,59 @@ visible = false
 [node name="Tmb_TilePrefab2" parent="TilePrefabsContainer/Tomb" instance=ExtResource("19_m56u3")]
 visible = false
 
-[node name="TileSocketContainer" type="Node" parent="."]
+[node name="TileSocketContainer_Old" type="Node" parent="."]
 
-[node name="TileSocket_Prefab" parent="TileSocketContainer" instance=ExtResource("20_ea3n0")]
+[node name="TileSocket_Prefab" parent="TileSocketContainer_Old" instance=ExtResource("20_ea3n0")]
 
-[node name="Big_Rock" type="Node" parent="TileSocketContainer"]
+[node name="Big_Rock" type="Node" parent="TileSocketContainer_Old"]
 
-[node name="TileSocket_Prefab" parent="TileSocketContainer/Big_Rock" instance=ExtResource("21_wkahl")]
+[node name="TileSocket_Prefab" parent="TileSocketContainer_Old/Big_Rock" instance=ExtResource("21_wkahl")]
 
-[node name="TileSocket_Prefab2" parent="TileSocketContainer/Big_Rock" instance=ExtResource("22_pd7qo")]
+[node name="TileSocket_Prefab2" parent="TileSocketContainer_Old/Big_Rock" instance=ExtResource("22_pd7qo")]
 
-[node name="TileSocket_Prefab3" parent="TileSocketContainer/Big_Rock" instance=ExtResource("23_5e2n1")]
+[node name="TileSocket_Prefab3" parent="TileSocketContainer_Old/Big_Rock" instance=ExtResource("23_5e2n1")]
 
-[node name="TileSocket_Prefab4" parent="TileSocketContainer/Big_Rock" instance=ExtResource("24_oumgt")]
+[node name="TileSocket_Prefab4" parent="TileSocketContainer_Old/Big_Rock" instance=ExtResource("24_oumgt")]
 
-[node name="Grass" type="Node" parent="TileSocketContainer"]
+[node name="Grass" type="Node" parent="TileSocketContainer_Old"]
 
-[node name="TileSocket_Prefab" parent="TileSocketContainer/Grass" instance=ExtResource("25_vf1wa")]
+[node name="TileSocket_Prefab" parent="TileSocketContainer_Old/Grass" instance=ExtResource("25_vf1wa")]
 
-[node name="TileSocket_Prefab2" parent="TileSocketContainer/Grass" instance=ExtResource("26_5tcfa")]
+[node name="TileSocket_Prefab2" parent="TileSocketContainer_Old/Grass" instance=ExtResource("26_5tcfa")]
 
-[node name="TileSocket_Prefab3" parent="TileSocketContainer/Grass" instance=ExtResource("27_jue3t")]
+[node name="TileSocket_Prefab3" parent="TileSocketContainer_Old/Grass" instance=ExtResource("27_jue3t")]
 
-[node name="TileSocket_Prefab4" parent="TileSocketContainer/Grass" instance=ExtResource("28_4karm")]
+[node name="TileSocket_Prefab4" parent="TileSocketContainer_Old/Grass" instance=ExtResource("28_4karm")]
 
-[node name="Objects" type="Node" parent="TileSocketContainer"]
+[node name="Objects" type="Node" parent="TileSocketContainer_Old"]
 
-[node name="TileSocket_Prefab" parent="TileSocketContainer/Objects" instance=ExtResource("29_unfkg")]
+[node name="TileSocket_Prefab" parent="TileSocketContainer_Old/Objects" instance=ExtResource("29_unfkg")]
 
-[node name="TileSocket_Prefab2" parent="TileSocketContainer/Objects" instance=ExtResource("30_umkvk")]
+[node name="TileSocket_Prefab2" parent="TileSocketContainer_Old/Objects" instance=ExtResource("30_umkvk")]
 
-[node name="Path" type="Node" parent="TileSocketContainer"]
+[node name="Path" type="Node" parent="TileSocketContainer_Old"]
 
-[node name="TileSocket_Prefab" parent="TileSocketContainer/Path" instance=ExtResource("31_o43k1")]
+[node name="TileSocket_Prefab" parent="TileSocketContainer_Old/Path" instance=ExtResource("31_o43k1")]
 
-[node name="TileSocket_Prefab2" parent="TileSocketContainer/Path" instance=ExtResource("32_5kag4")]
+[node name="TileSocket_Prefab2" parent="TileSocketContainer_Old/Path" instance=ExtResource("32_5kag4")]
 
-[node name="Rocks" type="Node" parent="TileSocketContainer"]
+[node name="Rocks" type="Node" parent="TileSocketContainer_Old"]
 
-[node name="TileSocket_Prefab" parent="TileSocketContainer/Rocks" instance=ExtResource("33_nw2e4")]
+[node name="TileSocket_Prefab" parent="TileSocketContainer_Old/Rocks" instance=ExtResource("33_nw2e4")]
 
-[node name="TileSocket_Prefab2" parent="TileSocketContainer/Rocks" instance=ExtResource("34_np0sw")]
+[node name="TileSocket_Prefab2" parent="TileSocketContainer_Old/Rocks" instance=ExtResource("34_np0sw")]
 
-[node name="TileSocket_Prefab3" parent="TileSocketContainer/Rocks" instance=ExtResource("35_1bqce")]
+[node name="TileSocket_Prefab3" parent="TileSocketContainer_Old/Rocks" instance=ExtResource("35_1bqce")]
 
-[node name="Tomb" type="Node" parent="TileSocketContainer"]
+[node name="Tomb" type="Node" parent="TileSocketContainer_Old"]
 
-[node name="TileSocket_Prefab2" parent="TileSocketContainer/Tomb" instance=ExtResource("36_sf287")]
+[node name="TileSocket_Prefab2" parent="TileSocketContainer_Old/Tomb" instance=ExtResource("36_sf287")]
 
-[node name="TileSocket_Prefab3" parent="TileSocketContainer/Tomb" instance=ExtResource("37_s4qdi")]
+[node name="TileSocket_Prefab3" parent="TileSocketContainer_Old/Tomb" instance=ExtResource("37_s4qdi")]
 
-[node name="WaveFunctionCollapse" type="Node" parent="." node_paths=PackedStringArray("tilePrefabsList", "tileHolder")]
+[node name="WaveFunctionCollapse" type="Node" parent="." node_paths=PackedStringArray("superTilePrefab", "tilePrefabsList", "tileHolder")]
 script = ExtResource("1_427g2")
+superTilePrefab = NodePath("../TilePrefabsContainer/SuperTilePrefab2")
 tilePrefabsList = [NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab2"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab3"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab4"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab2"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab3"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab4"), NodePath("../TilePrefabsContainer/Objects/Ob_TilePrefab"), NodePath("../TilePrefabsContainer/Objects/Ob_TilePrefab2"), NodePath("../TilePrefabsContainer/Path/Pt_TilePrefab"), NodePath("../TilePrefabsContainer/Path/Pt_TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab3"), NodePath("../TilePrefabsContainer/Tomb/Tmb_TilePrefab"), NodePath("../TilePrefabsContainer/Tomb/Tmb_TilePrefab2"), NodePath("../TilePrefabsContainer/Empty_TilePrefab")]
 gridDimension = Vector2i(4, 4)
 tileHolder = NodePath("../TileHolder")

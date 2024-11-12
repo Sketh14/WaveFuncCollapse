@@ -1,3 +1,8 @@
+"""
+This script does not do anything for now
+"""
+
+class_name TileController
 extends Node2D
 
 @export var sprite2D: Sprite2D

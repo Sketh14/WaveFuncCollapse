@@ -78,3 +78,25 @@
 	(-) Rocks Done
 	(-) Tomb Done
 	(-) Empty Made
+
+--------------------------------------------------------------------------------------
+									10 NOVEMBER 2024
+--------------------------------------------------------------------------------------
+- Adding enum SocketPos for better handling of SocketData of TileSocket
+- TileSocket
+	(-) Replacing OnlySocket with array of integers [Does not work]
+
+--------------------------------------------------------------------------------------
+									10 NOVEMBER 2024
+--------------------------------------------------------------------------------------
+- Naming classes
+
+- SuperTileController
+	(-) Passing "self" to TilePanelController to set its value
+- TileSocket
+	(-) Removing "_on_area_2d_input_event" as we will use SuperTileController
+- WaveFunctionCollapse
+	(-) Adding an export var for SuperTile prefab
+
+Project
+- Disabling Area2D for all the TilePrefabs

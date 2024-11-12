@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ccyc8d6v8bn16" path="res://Sprites/UI/White_block.png" id="2_h8uk8"]
 
 [node name="SuperTilePrefab2" type="Node2D"]
+visible = false
 script = ExtResource("1_ctig7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

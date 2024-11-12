@@ -33,6 +33,7 @@ adjPosY = Array[int]([49, 53, 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 61])
 adjNegY = Array[int]([51])
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("5_5uhvq")
