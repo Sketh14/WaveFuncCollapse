@@ -18,5 +18,5 @@ func _ready():
 		print("Tile Panel Controller Not Found")
 
 func _on_button_pressed():
-	print("Button Pressed : ", tileIndex)
+	# print("Button Pressed : ", tileIndex)
 	tilePanelController.set_supertile_with_index(tileIndex)

@@ -1,17 +1,16 @@
-[gd_scene load_steps=46 format=3 uid="uid://b1njk8mndwsuk"]
+[gd_scene load_steps=45 format=3 uid="uid://b1njk8mndwsuk"]
 
 [ext_resource type="PackedScene" uid="uid://bui7nabcck66v" path="res://Prefab/SuperTile/SuperTilePrefab2_.tscn" id="1_6fv0g"]
 [ext_resource type="Script" path="res://Scripts/WaveFunctionCollapse.gd" id="1_427g2"]
 [ext_resource type="PackedScene" uid="uid://dmw85xn2ygshe" path="res://Prefab/Tile/Empty_TilePrefab.tscn" id="1_ng7v5"]
+[ext_resource type="Script" path="res://Scripts/Controllers/SuperTileController.gd" id="2_oahl4"]
 [ext_resource type="PackedScene" uid="uid://dja2gy701kmw7" path="res://Prefab/Tile/Big_Rock/BR_TilePrefab1.tscn" id="3_05jhd"]
-[ext_resource type="Script" path="res://Scripts/TileControls/TileController.gd" id="3_hupo5"]
-[ext_resource type="Texture2D" uid="uid://cr4vmeraqpd1d" path="res://Sprites/Environment/TX Tileset Grass.png" id="4_3ggvp"]
+[ext_resource type="PackedScene" uid="uid://bws7t25k3hde4" path="res://Prefab/Tile/Big_Rock/test_tile_prefab.tscn" id="3_e84ql"]
+[ext_resource type="Texture2D" uid="uid://ccyc8d6v8bn16" path="res://Sprites/UI/White_block.png" id="3_fijyv"]
+[ext_resource type="Shape2D" uid="uid://cfglgyum6mooq" path="res://CollisionShapes/TileColShape2D.tres" id="4_gfe8k"]
 [ext_resource type="PackedScene" uid="uid://b3cssyctexol5" path="res://Prefab/Tile/Big_Rock/BR_TilePrefab2.tscn" id="4_q2lxa"]
 [ext_resource type="PackedScene" uid="uid://c76exxauexome" path="res://Prefab/Tile/Big_Rock/BR_TilePrefab3.tscn" id="5_65i02"]
-[ext_resource type="Texture2D" uid="uid://on7xocak68ox" path="res://Sprites/Environment/TX Props.png" id="5_raebg"]
-[ext_resource type="Script" path="res://Scripts/TileControls/TileSocket.gd" id="6_3i3bp"]
 [ext_resource type="PackedScene" uid="uid://ctw05qim8p357" path="res://Prefab/Tile/Big_Rock/BR_TilePrefab4.tscn" id="6_536fc"]
-[ext_resource type="Shape2D" uid="uid://cfglgyum6mooq" path="res://CollisionShapes/TileColShape2D.tres" id="7_1dgu8"]
 [ext_resource type="PackedScene" uid="uid://dfqt8yugg5ie3" path="res://Prefab/Tile/Grass/Gr_TilePrefab1.tscn" id="7_djgam"]
 [ext_resource type="PackedScene" uid="uid://chq8pg5wb8i2e" path="res://Prefab/Tile/Grass/Gr_TilePrefab2.tscn" id="8_fegtx"]
 [ext_resource type="PackedScene" uid="uid://b1wbos7y1a7h0" path="res://Prefab/Tile/Grass/Gr_TilePrefab3.tscn" id="9_r7xw4"]
@@ -53,47 +52,28 @@
 [node name="TileHolder" type="Node" parent="."]
 
 [node name="TilePrefab" parent="TileHolder" instance=ExtResource("1_6fv0g")]
-visible = true
 
 [node name="TilePrefabsContainer" type="Node" parent="."]
 
-[node name="SuperTilePrefab2" parent="TilePrefabsContainer" instance=ExtResource("1_6fv0g")]
+[node name="SuperTilePrefab2" type="Node2D" parent="TilePrefabsContainer"]
+visible = false
+script = ExtResource("2_oahl4")
+
+[node name="Sprite2D" type="Sprite2D" parent="TilePrefabsContainer/SuperTilePrefab2"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_fijyv")
+
+[node name="Area2D" type="Area2D" parent="TilePrefabsContainer/SuperTilePrefab2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TilePrefabsContainer/SuperTilePrefab2/Area2D"]
+shape = ExtResource("4_gfe8k")
 
 [node name="Empty_TilePrefab" parent="TilePrefabsContainer" instance=ExtResource("1_ng7v5")]
 visible = false
 
-[node name="Test_TilePrefab" type="Node2D" parent="TilePrefabsContainer" node_paths=PackedStringArray("sprite2D", "socketContainer")]
+[node name="Test_TilePrefab" parent="TilePrefabsContainer" instance=ExtResource("3_e84ql")]
 visible = false
-script = ExtResource("3_hupo5")
-sprite2D = NodePath("../Big_Rock/BR_TilePrefab/TileSprite")
-socketContainer = NodePath("../Big_Rock/BR_TilePrefab/Socket")
-
-[node name="TileSprite2" type="Sprite2D" parent="TilePrefabsContainer/Test_TilePrefab"]
-texture = ExtResource("4_3ggvp")
-region_enabled = true
-region_rect = Rect2(72, 52, 32, 32)
-
-[node name="TileSprite" type="Sprite2D" parent="TilePrefabsContainer/Test_TilePrefab"]
-texture = ExtResource("5_raebg")
-region_enabled = true
-region_rect = Rect2(0, 452, 32, 32)
-
-[node name="Socket" type="Node" parent="TilePrefabsContainer/Test_TilePrefab"]
-script = ExtResource("6_3i3bp")
-posX = 46
-negX = 48
-posY = 47
-negY = 45
-adjPosX = Array[int]([60])
-adjNegX = Array[int]([54, 58, 62, 66, 2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42])
-adjPosY = Array[int]([49, 53, 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 61])
-adjNegY = Array[int]([51])
-
-[node name="Area2D" type="Area2D" parent="TilePrefabsContainer/Test_TilePrefab"]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TilePrefabsContainer/Test_TilePrefab/Area2D"]
-shape = ExtResource("7_1dgu8")
+position = Vector2(-59, -56)
 
 [node name="Big_Rock" type="Node" parent="TilePrefabsContainer"]
 
@@ -337,4 +317,4 @@ anchor_top = 0.05
 anchor_right = 0.98
 anchor_bottom = 0.95
 
-[connection signal="input_event" from="TilePrefabsContainer/Test_TilePrefab/Area2D" to="TilePrefabsContainer/Test_TilePrefab/Socket" method="_on_area_2d_input_event" flags=18]
+[connection signal="input_event" from="TilePrefabsContainer/SuperTilePrefab2/Area2D" to="TilePrefabsContainer/SuperTilePrefab2" method="_on_area_2d_input_event" flags=18]

@@ -1,6 +1,8 @@
 class_name SuperTileController extends Node
 
-@export var superTileIndex: int
+# @export var superTileIndex: int
+var superTileXCoOrd: int
+var superTileYCoOrd: int
 
 # @export var tilePanelControllerPath: String
 var tilePanelController = null
@@ -16,6 +18,6 @@ func _ready():
 
 func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 	if (event is InputEventMouseButton && event.is_action_pressed("Clicked")):
-		tilePanelController.selectedSuperTileIndex = superTileIndex
+		# tilePanelController.selectedSuperTileIndex = superTileIndex
 		tilePanelController.set_tiles_in_panel_from_list(self)
-		print("Set Super Tile index : ", superTileIndex)
+		# print("Set Super Tile index : ", superTileIndex)

@@ -109,3 +109,16 @@ Project
 
 - WaveFunctionCollapse
 	(-) Creating a list of strings to hold the path of Prefabs and load using this
+
+- TileController
+	(-) Comment _ready [This was the problem]
+
+- SuperTileController
+	(-) Removing index and using x,y co-ordinates
+
+- TilePanelController
+	(-) Removing index and using super tile itself
+
+- WaveFunctionCollapse
+	(-) Create a started Super Tile
+	(-) Logic for creating SuperTile

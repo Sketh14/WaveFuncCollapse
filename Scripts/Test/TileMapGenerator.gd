@@ -8,7 +8,7 @@ extends Node
 @export var gridDimension: Vector2
 @export var tileHolder: Node
 
-const tilePrefabPath = "res://Prefab/Tile/Grass/TilePrefab_2.tscn" # "res://Prefab/TilePrefab.tscn"
+const tilePrefabPath = "res://Prefab/Tile/Big_Rock/BR_TilePrefab1.tscn" # "res://Prefab/TilePrefab.tscn"
 var tilePrefab: PackedScene
 
 # Called when the node enters the scene tree for the first time.

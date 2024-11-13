@@ -22,7 +22,7 @@ enum SocketDirection {POSITIVEX, NEGATIVEX, POSITIVEY, NEGATIVEY}
 
 # We will access this map as a 1D array only with multiple rows and columns, each index depicting a tile 
 # containing superposition tiles. 
-# We will go Column first
+# We will go (Dimension * Row + Column)
 var tileMap: Array[SuperTileCell]
 
 #This will hold the adjacent list of the neighbous tile whose adjacency is to be checked
@@ -39,6 +39,9 @@ var debugPrint = "DEBUG PRINT"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Create a starting tile
+	CreateSuperTile(0, 0)
+
 	FillTilesCache()
 	InitializeData()
 	# CheckForNeighbours(0, 0, -1)
@@ -53,12 +56,13 @@ func _ready():
 
 	#Testing 2
 	# SetTile(0, 0, 13)
-	PrintListOfTileWithCoOrd(0, 0)
+	# PrintListOfTileWithCoOrd(0, 0)
 
 """
 # Works as intended
 func CreateTestTile():
-	var tileToPlace = TestTile.duplicate()
+	# var tileToPlace = TestTile.duplicate()
+	var tileToPlace = load("res://Prefab/Tile/Big_Rock/test_tile_prefab.tscn").instantiate()
 	tileToPlace.visible = true
 	tileHolder.add_child(tileToPlace)
 	tileToPlace.position = Vector2(10, 10)
@@ -108,19 +112,24 @@ func PrintListOfTileWithIndex(index: int):
 
 ## Function to actually instantiate tile.
 ## This will not set the image of the tile.
-func CreateTile(tileIndexX: int) -> Node2D:
-	print("Generating Tile | Prefab Child Index : ", tileIndexX)
-	var tileToPlace = load(tilePrefabsLocationList[0])
-	# var fhgh = load("res://Prefab/Tile/Big_Rock/TilePrefab_12.tscn")
+func CreateTile(tileIndexX: int) -> Node:
+	# print("Generating Tile | Prefab Child Index : ", tileIndexX, " | Path : ", tilePrefabsLocationList[tileIndexX])
+	var tileToPlace = load(tilePrefabsLocationList[tileIndexX]).instantiate()
 
 	# This does not duplicate the Node properly if children are present
 	# Also, we are duplicating scene, not existing Node
 	# var tileToPlace = tilePrefabsList[tileIndexX].duplicate()
 
-
 	tileToPlace.visible = true
 	tileHolder.add_child(tileToPlace)
 	return tileToPlace
+
+func CreateSuperTile(tileCoOrdX: int, tileCoOrdY: int):
+	var superTile = superTilePrefab.duplicate()
+	superTile.visible = true
+	var position = Vector2(tileCoOrdX, tileCoOrdY)
+	superTile.position = position
+	tileHolder.add_child(superTile)
 
 """
 func CreateSuperTile(tileCoOrdX, tileCoOrdY):
@@ -141,7 +150,7 @@ func SetTile(coOrdX: int, coOrdY: int, valToSet: int):
 	tileMap[index1D].collapsed = true
 
 	# Create SuperTiles in each possible direction
-	"""
+	# """
 	var superTile
 	var tilePosXMult = 0
 	var tilePosYMult = 1
@@ -152,12 +161,12 @@ func SetTile(coOrdX: int, coOrdY: int, valToSet: int):
 			var position = Vector2(32.0 * (coOrdX + (1 * tilePosXMult)), 32.0 * (coOrdY + (1 * tilePosYMult)))
 			superTile.position = position
 			# print("Instantiating at Position : ", position)
-			# tileHolder.add_child(superTile)
+			tileHolder.add_child(superTile)
 			tilePosYMult = tilePosYMult * -1
 			tilePosXMult = tilePosXMult * -1
 		tilePosYMult = 0
 		tilePosXMult = 1
-	"""
+	# """
 
 	var createdTile = CreateTile(valToSet)
 	createdTile.position = Vector2(32.0 * coOrdX, 32.0 * coOrdY) # Tiles size is 64 x 64

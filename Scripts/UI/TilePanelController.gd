@@ -1,6 +1,6 @@
 class_name TilePanelController extends Node
 
-var selectedSuperTileIndex: int
+# var selectedSuperTileIndex: int
 var placeholderTileInde: int
 
 var tiles_grid_container
@@ -22,21 +22,23 @@ func _ready():
 # This is called from PlaceHolderTileController
 # When a Super Tile needs to be assigned a tile, then this function will be called
 func set_supertile_with_index(tile_index: int):
-	if (selectedSuperTileIndex == -1):
+	# if (selectedSuperTileIndex == -1):
+	if (selectedSuperTile == null):
 		return
 	
-	var tempPosY = selectedSuperTileIndex / gridDimensionCache.y;
-	var tempPosX = selectedSuperTileIndex % gridDimensionCache.y;
-	debugPrint = "Set SuperTile[" + str(tempPosX) + "][" + str(tempPosY) + "] called with index :  " + str(tile_index)
+	# var tempPosY = selectedSuperTileIndex / gridDimensionCache.y;
+	# var tempPosX = selectedSuperTileIndex % gridDimensionCache.y;
+	# debugPrint = "Set SuperTile[" + str(tempPosX) + "][" + str(tempPosY) + "] called with index :  " + str(tile_index)
 	print(debugPrint)
-	_wave_function_handler.SetTile(tempPosX, tempPosY, tile_index)
+	_wave_function_handler.SetTile(selectedSuperTile.superTileXCoOrd, selectedSuperTile.superTileYCoOrd, tile_index)
 
 	# selectedSuperTile.get_child(1).process_mode = Node.PROCESS_MODE_DISABLED
 	# selectedSuperTile.visible = false
 	selectedSuperTile.queue_free()
 
 	#Reset once the selected superTile has been set
-	selectedSuperTileIndex = -1
+	# selectedSuperTileIndex = -1
+	selectedSuperTile = null
 	turn_all_tiles_off()
 
 #This is called from SuperTileController for now
@@ -46,7 +48,12 @@ func set_tiles_in_panel_from_list(super_tile): # tile_index : int
 		return
 
 	selectedSuperTile = super_tile
-	var tilesInList = _wave_function_handler.tileMap[selectedSuperTileIndex].tilesAvailable
+	# var tempPosX = _wave_function_handler.gridDimension.x * selectedSuperTile.superTileXCoOrd;
+	# var tempPosY = selectedSuperTile.superTileYCoOrd;
+
+	var tempCoOrd = _wave_function_handler.gridDimension.x * selectedSuperTile.superTileXCoOrd + selectedSuperTile.superTileYCoOrd;
+	var tilesInList = _wave_function_handler.tileMap[tempCoOrd].tilesAvailable
+	# var tilesInList = _wave_function_handler.tileMap[selectedSuperTileIndex].tilesAvailable
 	for tileVal in tilesInList:
 		if (tileVal == -1): continue
 		tiles_grid_container.get_child(tileVal).visible = true
