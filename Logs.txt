@@ -87,7 +87,7 @@
 	(-) Replacing OnlySocket with array of integers [Does not work]
 
 --------------------------------------------------------------------------------------
-									10 NOVEMBER 2024
+									12 NOVEMBER 2024
 --------------------------------------------------------------------------------------
 - Naming classes
 
@@ -100,3 +100,12 @@
 
 Project
 - Disabling Area2D for all the TilePrefabs
+
+--------------------------------------------------------------------------------------
+									13 NOVEMBER 2024
+--------------------------------------------------------------------------------------
+- Project
+	(-) Renaming prefab objects
+
+- WaveFunctionCollapse
+	(-) Creating a list of strings to hold the path of Prefabs and load using this

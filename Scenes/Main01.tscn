@@ -1,25 +1,30 @@
-[gd_scene load_steps=41 format=3 uid="uid://b1njk8mndwsuk"]
+[gd_scene load_steps=46 format=3 uid="uid://b1njk8mndwsuk"]
 
 [ext_resource type="PackedScene" uid="uid://bui7nabcck66v" path="res://Prefab/SuperTile/SuperTilePrefab2_.tscn" id="1_6fv0g"]
 [ext_resource type="Script" path="res://Scripts/WaveFunctionCollapse.gd" id="1_427g2"]
 [ext_resource type="PackedScene" uid="uid://dmw85xn2ygshe" path="res://Prefab/Tile/Empty_TilePrefab.tscn" id="1_ng7v5"]
-[ext_resource type="PackedScene" uid="uid://dja2gy701kmw7" path="res://Prefab/Tile/Big_Rock/TilePrefab_12.tscn" id="3_05jhd"]
-[ext_resource type="PackedScene" uid="uid://b3cssyctexol5" path="res://Prefab/Tile/Big_Rock/TilePrefab_13.tscn" id="4_q2lxa"]
-[ext_resource type="PackedScene" uid="uid://c76exxauexome" path="res://Prefab/Tile/Big_Rock/TilePrefab_14.tscn" id="5_65i02"]
-[ext_resource type="PackedScene" uid="uid://ctw05qim8p357" path="res://Prefab/Tile/Big_Rock/TilePrefab_15.tscn" id="6_536fc"]
-[ext_resource type="PackedScene" uid="uid://dfqt8yugg5ie3" path="res://Prefab/Tile/Grass/TilePrefab_2.tscn" id="7_djgam"]
-[ext_resource type="PackedScene" uid="uid://chq8pg5wb8i2e" path="res://Prefab/Tile/Grass/TilePrefab_3.tscn" id="8_fegtx"]
-[ext_resource type="PackedScene" uid="uid://b1wbos7y1a7h0" path="res://Prefab/Tile/Grass/TilePrefab_5.tscn" id="9_r7xw4"]
-[ext_resource type="PackedScene" uid="uid://dne3mqwrl6dsu" path="res://Prefab/Tile/Grass/TilePrefab_6.tscn" id="10_80o5n"]
-[ext_resource type="PackedScene" uid="uid://dj07e8xsgalbt" path="res://Prefab/Tile/Objects/TilePrefab_7.tscn" id="11_flbq1"]
-[ext_resource type="PackedScene" uid="uid://qcq4re5ae7hr" path="res://Prefab/Tile/Objects/TilePrefab_8.tscn" id="12_2n7yp"]
-[ext_resource type="PackedScene" uid="uid://b4pmm8rjwn02o" path="res://Prefab/Tile/Path/TilePrefab_1.tscn" id="13_rupan"]
-[ext_resource type="PackedScene" uid="uid://blwdqp1shbb47" path="res://Prefab/Tile/Path/TilePrefab_4.tscn" id="14_w3oc4"]
-[ext_resource type="PackedScene" uid="uid://drf6mpd0c1y8q" path="res://Prefab/Tile/Rocks/TilePrefab_11.tscn" id="15_0fqti"]
-[ext_resource type="PackedScene" uid="uid://dtkthjk1v6npu" path="res://Prefab/Tile/Rocks/TilePrefab_16.tscn" id="16_iwpit"]
-[ext_resource type="PackedScene" uid="uid://ojvg6e1sc80" path="res://Prefab/Tile/Rocks/TilePrefab_17.tscn" id="17_5corl"]
-[ext_resource type="PackedScene" uid="uid://cy126ydmwi2g5" path="res://Prefab/Tile/Tomb/TilePrefab_9.tscn" id="18_5e26a"]
-[ext_resource type="PackedScene" uid="uid://dkp5lstff45kv" path="res://Prefab/Tile/Tomb/TilePrefab_10.tscn" id="19_m56u3"]
+[ext_resource type="PackedScene" uid="uid://dja2gy701kmw7" path="res://Prefab/Tile/Big_Rock/BR_TilePrefab1.tscn" id="3_05jhd"]
+[ext_resource type="Script" path="res://Scripts/TileControls/TileController.gd" id="3_hupo5"]
+[ext_resource type="Texture2D" uid="uid://cr4vmeraqpd1d" path="res://Sprites/Environment/TX Tileset Grass.png" id="4_3ggvp"]
+[ext_resource type="PackedScene" uid="uid://b3cssyctexol5" path="res://Prefab/Tile/Big_Rock/BR_TilePrefab2.tscn" id="4_q2lxa"]
+[ext_resource type="PackedScene" uid="uid://c76exxauexome" path="res://Prefab/Tile/Big_Rock/BR_TilePrefab3.tscn" id="5_65i02"]
+[ext_resource type="Texture2D" uid="uid://on7xocak68ox" path="res://Sprites/Environment/TX Props.png" id="5_raebg"]
+[ext_resource type="Script" path="res://Scripts/TileControls/TileSocket.gd" id="6_3i3bp"]
+[ext_resource type="PackedScene" uid="uid://ctw05qim8p357" path="res://Prefab/Tile/Big_Rock/BR_TilePrefab4.tscn" id="6_536fc"]
+[ext_resource type="Shape2D" uid="uid://cfglgyum6mooq" path="res://CollisionShapes/TileColShape2D.tres" id="7_1dgu8"]
+[ext_resource type="PackedScene" uid="uid://dfqt8yugg5ie3" path="res://Prefab/Tile/Grass/Gr_TilePrefab1.tscn" id="7_djgam"]
+[ext_resource type="PackedScene" uid="uid://chq8pg5wb8i2e" path="res://Prefab/Tile/Grass/Gr_TilePrefab2.tscn" id="8_fegtx"]
+[ext_resource type="PackedScene" uid="uid://b1wbos7y1a7h0" path="res://Prefab/Tile/Grass/Gr_TilePrefab3.tscn" id="9_r7xw4"]
+[ext_resource type="PackedScene" uid="uid://dne3mqwrl6dsu" path="res://Prefab/Tile/Grass/Gr_TilePrefab4.tscn" id="10_80o5n"]
+[ext_resource type="PackedScene" uid="uid://dj07e8xsgalbt" path="res://Prefab/Tile/Objects/Ob_TilePrefab1.tscn" id="11_flbq1"]
+[ext_resource type="PackedScene" uid="uid://qcq4re5ae7hr" path="res://Prefab/Tile/Objects/Ob_TilePrefab2.tscn" id="12_2n7yp"]
+[ext_resource type="PackedScene" uid="uid://b4pmm8rjwn02o" path="res://Prefab/Tile/Path/Pt_TilePrefab1.tscn" id="13_rupan"]
+[ext_resource type="PackedScene" uid="uid://blwdqp1shbb47" path="res://Prefab/Tile/Path/Pt_TilePrefab2.tscn" id="14_w3oc4"]
+[ext_resource type="PackedScene" uid="uid://drf6mpd0c1y8q" path="res://Prefab/Tile/Rocks/Roc_TilePrefab1.tscn" id="15_0fqti"]
+[ext_resource type="PackedScene" uid="uid://dtkthjk1v6npu" path="res://Prefab/Tile/Rocks/Roc_TilePrefab2.tscn" id="16_iwpit"]
+[ext_resource type="PackedScene" uid="uid://ojvg6e1sc80" path="res://Prefab/Tile/Rocks/Roc_TilePrefab3.tscn" id="17_5corl"]
+[ext_resource type="PackedScene" uid="uid://cy126ydmwi2g5" path="res://Prefab/Tile/Tomb/Tmb_TilePrefab1.tscn" id="18_5e26a"]
+[ext_resource type="PackedScene" uid="uid://dkp5lstff45kv" path="res://Prefab/Tile/Tomb/Tmb_TilePrefab2.tscn" id="19_m56u3"]
 [ext_resource type="PackedScene" uid="uid://k0jfptyluqce" path="res://Prefab/PlaceHolderTiles_UI/place_holder_tile_UI_.tscn" id="19_qebm0"]
 [ext_resource type="PackedScene" uid="uid://dfyb8etgkg0qm" path="res://Prefab/TileSocket/tile_socket_empty.tscn" id="20_ea3n0"]
 [ext_resource type="Script" path="res://Scripts/UI/TilePanelController.gd" id="21_w75fi"]
@@ -56,6 +61,39 @@ visible = true
 
 [node name="Empty_TilePrefab" parent="TilePrefabsContainer" instance=ExtResource("1_ng7v5")]
 visible = false
+
+[node name="Test_TilePrefab" type="Node2D" parent="TilePrefabsContainer" node_paths=PackedStringArray("sprite2D", "socketContainer")]
+visible = false
+script = ExtResource("3_hupo5")
+sprite2D = NodePath("../Big_Rock/BR_TilePrefab/TileSprite")
+socketContainer = NodePath("../Big_Rock/BR_TilePrefab/Socket")
+
+[node name="TileSprite2" type="Sprite2D" parent="TilePrefabsContainer/Test_TilePrefab"]
+texture = ExtResource("4_3ggvp")
+region_enabled = true
+region_rect = Rect2(72, 52, 32, 32)
+
+[node name="TileSprite" type="Sprite2D" parent="TilePrefabsContainer/Test_TilePrefab"]
+texture = ExtResource("5_raebg")
+region_enabled = true
+region_rect = Rect2(0, 452, 32, 32)
+
+[node name="Socket" type="Node" parent="TilePrefabsContainer/Test_TilePrefab"]
+script = ExtResource("6_3i3bp")
+posX = 46
+negX = 48
+posY = 47
+negY = 45
+adjPosX = Array[int]([60])
+adjNegX = Array[int]([54, 58, 62, 66, 2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42])
+adjPosY = Array[int]([49, 53, 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 61])
+adjNegY = Array[int]([51])
+
+[node name="Area2D" type="Area2D" parent="TilePrefabsContainer/Test_TilePrefab"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TilePrefabsContainer/Test_TilePrefab/Area2D"]
+shape = ExtResource("7_1dgu8")
 
 [node name="Big_Rock" type="Node" parent="TilePrefabsContainer"]
 
@@ -174,6 +212,7 @@ visible = false
 script = ExtResource("1_427g2")
 superTilePrefab = NodePath("../TilePrefabsContainer/SuperTilePrefab2")
 tilePrefabsList = [NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab2"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab3"), NodePath("../TilePrefabsContainer/Big_Rock/BR_TilePrefab4"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab2"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab3"), NodePath("../TilePrefabsContainer/Grass/Gr_TilePrefab4"), NodePath("../TilePrefabsContainer/Objects/Ob_TilePrefab"), NodePath("../TilePrefabsContainer/Objects/Ob_TilePrefab2"), NodePath("../TilePrefabsContainer/Path/Pt_TilePrefab"), NodePath("../TilePrefabsContainer/Path/Pt_TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab2"), NodePath("../TilePrefabsContainer/Rocks/Roc_TilePrefab3"), NodePath("../TilePrefabsContainer/Tomb/Tmb_TilePrefab"), NodePath("../TilePrefabsContainer/Tomb/Tmb_TilePrefab2"), NodePath("../TilePrefabsContainer/Empty_TilePrefab")]
+tilePrefabsLocationList = Array[String](["res://Prefab/Tile/Big_Rock/BR_TilePrefab1.tscn", "res://Prefab/Tile/Big_Rock/BR_TilePrefab2.tscn", "res://Prefab/Tile/Big_Rock/BR_TilePrefab3.tscn", "res://Prefab/Tile/Big_Rock/BR_TilePrefab4.tscn", "res://Prefab/Tile/Grass/Gr_TilePrefab1.tscn", "res://Prefab/Tile/Grass/Gr_TilePrefab2.tscn", "res://Prefab/Tile/Grass/Gr_TilePrefab3.tscn", "res://Prefab/Tile/Grass/Gr_TilePrefab4.tscn", "res://Prefab/Tile/Objects/Ob_TilePrefab1.tscn", "res://Prefab/Tile/Objects/Ob_TilePrefab2.tscn", "res://Prefab/Tile/Path/Pt_TilePrefab1.tscn", "res://Prefab/Tile/Path/Pt_TilePrefab2.tscn", "res://Prefab/Tile/Rocks/Roc_TilePrefab1.tscn", "res://Prefab/Tile/Rocks/Roc_TilePrefab2.tscn", "res://Prefab/Tile/Rocks/Roc_TilePrefab3.tscn", "res://Prefab/Tile/Tomb/Tmb_TilePrefab1.tscn", "res://Prefab/Tile/Tomb/Tmb_TilePrefab2.tscn", "res://Prefab/Tile/Empty_TilePrefab.tscn"])
 gridDimension = Vector2i(4, 4)
 tileHolder = NodePath("../TileHolder")
 
@@ -297,3 +336,5 @@ anchor_left = 0.91
 anchor_top = 0.05
 anchor_right = 0.98
 anchor_bottom = 0.95
+
+[connection signal="input_event" from="TilePrefabsContainer/Test_TilePrefab/Area2D" to="TilePrefabsContainer/Test_TilePrefab/Socket" method="_on_area_2d_input_event" flags=18]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://tj0xwpbh4vrr"]
 
-[ext_resource type="PackedScene" uid="uid://dja2gy701kmw7" path="res://Prefab/Tile/Big_Rock/TilePrefab_12.tscn" id="2_maky3"]
+[ext_resource type="PackedScene" uid="uid://dja2gy701kmw7" path="res://Prefab/Tile/Big_Rock/BR_TilePrefab1.tscn" id="2_maky3"]
 
 [node name="TilePrefab" type="Node2D"]
 

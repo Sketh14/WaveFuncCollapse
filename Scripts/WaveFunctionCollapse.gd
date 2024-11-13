@@ -14,8 +14,11 @@ enum SocketDirection {POSITIVEX, NEGATIVEX, POSITIVEY, NEGATIVEY}
 
 @export var superTilePrefab: Node
 @export var tilePrefabsList: Array[Node2D]
+@export var tilePrefabsLocationList: Array[String]
 @export var gridDimension: Vector2i
 @export var tileHolder: Node
+
+# @export var TestTile: Node
 
 # We will access this map as a 1D array only with multiple rows and columns, each index depicting a tile 
 # containing superposition tiles. 
@@ -46,10 +49,20 @@ func _ready():
 	# PrintAdjListOfIndex(1)
 	# PrintListOfTileWithIndex(4)
 	# GenerateTileMap()
+	# CreateTestTile()
 
 	#Testing 2
 	# SetTile(0, 0, 13)
 	PrintListOfTileWithCoOrd(0, 0)
+
+"""
+# Works as intended
+func CreateTestTile():
+	var tileToPlace = TestTile.duplicate()
+	tileToPlace.visible = true
+	tileHolder.add_child(tileToPlace)
+	tileToPlace.position = Vector2(10, 10)
+"""
 
 ## Fill up the tiles cache so that all the tiles data can be accessed fast
 ## As all the tiles are held in the tilesPrefabList. It would be better to only have the socketData in a cache to access fast. 
@@ -96,9 +109,15 @@ func PrintListOfTileWithIndex(index: int):
 ## Function to actually instantiate tile.
 ## This will not set the image of the tile.
 func CreateTile(tileIndexX: int) -> Node2D:
-	# print("Generating Tile in YDir")
-	# var tileToPlace = load(tilePrefabsList[0])
-	var tileToPlace = tilePrefabsList[tileIndexX].duplicate()
+	print("Generating Tile | Prefab Child Index : ", tileIndexX)
+	var tileToPlace = load(tilePrefabsLocationList[0])
+	# var fhgh = load("res://Prefab/Tile/Big_Rock/TilePrefab_12.tscn")
+
+	# This does not duplicate the Node properly if children are present
+	# Also, we are duplicating scene, not existing Node
+	# var tileToPlace = tilePrefabsList[tileIndexX].duplicate()
+
+
 	tileToPlace.visible = true
 	tileHolder.add_child(tileToPlace)
 	return tileToPlace
@@ -122,6 +141,7 @@ func SetTile(coOrdX: int, coOrdY: int, valToSet: int):
 	tileMap[index1D].collapsed = true
 
 	# Create SuperTiles in each possible direction
+	"""
 	var superTile
 	var tilePosXMult = 0
 	var tilePosYMult = 1
@@ -137,6 +157,7 @@ func SetTile(coOrdX: int, coOrdY: int, valToSet: int):
 			tilePosXMult = tilePosXMult * -1
 		tilePosYMult = 0
 		tilePosXMult = 1
+	"""
 
 	var createdTile = CreateTile(valToSet)
 	createdTile.position = Vector2(32.0 * coOrdX, 32.0 * coOrdY) # Tiles size is 64 x 64
