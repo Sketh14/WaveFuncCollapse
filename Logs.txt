@@ -122,3 +122,15 @@ Project
 - WaveFunctionCollapse
 	(-) Create a started Super Tile
 	(-) Logic for creating SuperTile
+
+--------------------------------------------------------------------------------------
+									17 NOVEMBER 2024
+--------------------------------------------------------------------------------------
+
+[IMP] Sockets for Y are flipped
+	[=] [Do] PosX should be NegX and vice versa
+
+Json for adjaceny list
+
+---------------------------------------------------------------------------------------------
+[DO] - Use adjaceny list for better readability
