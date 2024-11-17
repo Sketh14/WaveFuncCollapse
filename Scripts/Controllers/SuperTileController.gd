@@ -20,4 +20,4 @@ func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int
 	if (event is InputEventMouseButton && event.is_action_pressed("Clicked")):
 		# tilePanelController.selectedSuperTileIndex = superTileIndex
 		tilePanelController.set_tiles_in_panel_from_list(self)
-		# print("Set Super Tile index : ", superTileIndex)
+		print("Super Tile Clicked | superTileXCoOrd : ", superTileXCoOrd, " | superTileYCoOrd : ", superTileYCoOrd)

@@ -130,7 +130,13 @@ Project
 [IMP] Sockets for Y are flipped
 	[=] [Do] PosX should be NegX and vice versa
 
-Json for adjaceny list
+- Json for adjaceny list
+
+- Fixing Tile Values
+	(-) Fixing Adjacency lists
+	(-) Fixing Socket Values
+- WaveFunctionCollapse
+	(-) [BUG FIX] Fixing index calculation for 1D Map array
 
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
