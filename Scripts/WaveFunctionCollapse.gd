@@ -176,8 +176,8 @@ func SetTile(coOrdX: int, coOrdY: int, valToSet: int):
 	CreateTile(valToSet, coOrdX, coOrdY)
 	
 	#Set the first 4 adjacent tiles in the immediate vicinity of the current set tile
-	SetTilesToCheckData1(coOrdX, coOrdY)
-	# SetTilesToCheckData2(coOrdX, coOrdY)
+	# SetTilesToCheckData1(coOrdX, coOrdY)
+	SetTilesToCheckData2(coOrdX, coOrdY)
 
 	# """
 	# Set while loop here and keep repeating unless all the adjoining cells are collapsed 
@@ -200,14 +200,16 @@ func SetTilesToCheckData1(coOrdX: int, coOrdY: int):
 	
 	var tempTileData
 	
-	"""
+	# """
 	tempTileData = TransposedTileData.new()
 	tempTileData.tileCoOrdX = coOrdX + 1
 	tempTileData.tileCoOrdY = coOrdY
 	tempTileData.socketDir = SocketDirection.POSITIVEX
 	tilesToCheckStack.push_back(tempTileData)
 	CreateSuperTile(coOrdX + 1, coOrdY)
+	# """
 
+	# """
 	tempTileData = TransposedTileData.new()
 	tempTileData.tileCoOrdX = coOrdX - 1
 	tempTileData.tileCoOrdY = coOrdY
@@ -216,14 +218,16 @@ func SetTilesToCheckData1(coOrdX: int, coOrdY: int):
 	CreateSuperTile(coOrdX - 1, coOrdY)
 	# """
 
+	# """
 	tempTileData = TransposedTileData.new()
 	tempTileData.tileCoOrdX = coOrdX
 	tempTileData.tileCoOrdY = coOrdY - 1 # To adjust with Godot's Co-Ordinate system
 	tempTileData.socketDir = SocketDirection.POSITIVEY
 	tilesToCheckStack.push_back(tempTileData)
 	CreateSuperTile(coOrdX, coOrdY - 1)
+	# """
 
-	"""
+	# """
 	tempTileData = TransposedTileData.new()
 	tempTileData.tileCoOrdX = coOrdX
 	tempTileData.tileCoOrdY = coOrdY + 1 # To adjust with Godot's Co-Ordinate system
@@ -259,7 +263,8 @@ func SetTilesToCheckData2(coOrdX: int, coOrdY: int):
 				# Wrong Below
 				# tempTileData.socketDir = ((tileCountY - tileCountX) * tilePosXMult) + ((2 + tileCountY) * tilePosYMult)
 				if (tileCountX == 0):
-					tempTileData.socketDir = 2 + tileCountY
+					# Correcting according to Godot
+					tempTileData.socketDir = 3 - tileCountY # Up is Negative for Godot
 				else:
 					tempTileData.socketDir = tileCountY
 
@@ -268,7 +273,7 @@ func SetTilesToCheckData2(coOrdX: int, coOrdY: int):
 				print("Tile Pushed | tileCountX : " + str(tileCountX) + " | tileCountY : " + str(tileCountY)
 						+ " | [" + str(tempTileCoOrdX) + "," + str(tempTileCoOrdY) + "]"
 						+ " | socketDir : " + str(tempTileData.socketDir))
-				"""
+				# """
 
 			tilePosYMult = tilePosYMult * -1
 			tilePosXMult = tilePosXMult * -1
@@ -283,7 +288,7 @@ func SetTileAdjacency(currTileIndex: int, tileToCheck: TransposedTileData) -> in
 	#Search down of the tile
 	if (tileMap.size() > currTileIndex && currTileIndex >= 0):
 		"""
-		print("Checking | Index [" + str(currTileIndex) + "] | SocketDir [" + str(tileToCheck.socketDir) + "]\n\n");
+		print("Checking | Index [" + str(currTileIndex) + "] | SocketDir [" + str(tileToCheck.socketDir) + "]");
 		# """
 
 		# =========================================>		Getting Adjacent List		<======================================
@@ -301,7 +306,7 @@ func SetTileAdjacency(currTileIndex: int, tileToCheck: TransposedTileData) -> in
 				adjList = tilePrefabsList[currentTilePrefabIndex].socketContainer.adjPosY
 			SocketDirection.NEGATIVEY:
 				adjList = tilePrefabsList[currentTilePrefabIndex].socketContainer.adjNegY
-		# """
+		"""
 		print("Adjacency List : " + str(adjList) + " | currTileIndex : " + str(currTileIndex)
 				+ " | currentTilePrefabIndex : " + str(currentTilePrefabIndex));
 		# """
@@ -318,7 +323,7 @@ func SetTileAdjacency(currTileIndex: int, tileToCheck: TransposedTileData) -> in
 		print("Tile To Check | CoOrdX : " + str(tileToCheck.tileCoOrdX) + " | CoOrdY : " + str(tileToCheck.tileCoOrdY)
 			+ " | tileToCheckIndex1D : " + str(tileToCheckIndex1D) + " | tileMap Size : " + str(tileMap.size())
 			+ " | SocketDir " + str(tileToCheck.socketDir))
-		"""
+		# """
 
 		var totalCount = tileMap[tileToCheckIndex1D].tilesAvailable.size()
 		var tilesAvailableIndexToCheck = 0
@@ -328,8 +333,7 @@ func SetTileAdjacency(currTileIndex: int, tileToCheck: TransposedTileData) -> in
 			if (tileVal < 0): # Tile previously has been set to 0
 				totalCount -= 1
 
-				# debugPrint = "tileVal is 0 | Reducing Total Count | totalCount[" + str(totalCount) + "]\n\n"
-				# print(debugPrint);
+				# print("tileVal is 0 | Reducing Total Count | totalCount[" + str(totalCount) + "]\n\n")
 				continue
 
 			# Get the socket data for the tile which is to be compared
@@ -345,7 +349,7 @@ func SetTileAdjacency(currTileIndex: int, tileToCheck: TransposedTileData) -> in
 					tempCompSocketVal = tilesCache[tileVal].PosY
 			foundTile = false
 
-			# """
+			"""
 			print("=====================> Checking | tileVal : " + str(tileVal) + "  | socketVal : "
 					+ str(tempCompSocketVal) + " <=====================\n\n")
 			# """
@@ -373,13 +377,14 @@ func SetTileAdjacency(currTileIndex: int, tileToCheck: TransposedTileData) -> in
 			if (!foundTile):
 				totalCount -= 1
 				tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck] = -1
+				"""
 				print("Removing Tile | Socket [" + str(tilesAvailableIndexToCheck) + "] : [" + str(tileVal) + "] | tileValueRemoved : "
 						+ str(tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck]));
+				# """
 			tilesAvailableIndexToCheck += 1
 		return 0
 	else:
-		debugPrint = "Invalid tileIndexX to search!!\n\n"
-		print(debugPrint)
+		print("Invalid tileIndexX to search!!\n\n")
 		return -1
 		
 #======================> 1st Iteration <===========================

@@ -152,6 +152,7 @@ Project
 - Scene
 	(-) Prefabs
 		[=] Fixing X and Y adjacent list of TilePrefabs
+-  Fixing Y according to Godot system
 
 
 ---------------------------------------------------------------------------------------------
