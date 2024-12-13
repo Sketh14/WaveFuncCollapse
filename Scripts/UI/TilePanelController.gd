@@ -46,6 +46,7 @@ func set_supertile_with_index(tile_index: int):
 func set_tiles_in_panel_from_list(super_tile): # tile_index : int
 	if (!is_instance_of(super_tile, SuperTileController)):
 		return
+	print("Setting Tiles in the Panel List")
 
 	selectedSuperTile = super_tile
 	# var tempPosX = _wave_function_handler.gridDimension.x * selectedSuperTile.superTileXCoOrd;

@@ -138,5 +138,21 @@ Project
 - WaveFunctionCollapse
 	(-) [BUG FIX] Fixing index calculation for 1D Map array
 
+--------------------------------------------------------------------------------------
+									21 NOVEMBER 2024
+--------------------------------------------------------------------------------------
+- WaveFunctionCollapse
+	(-) SuperTile bounds check while creation
+	(-) Adjacency Tile bounds check
+	(-) Combining both
+
+--------------------------------------------------------------------------------------
+									21 NOVEMBER 2024
+--------------------------------------------------------------------------------------
+- Scene
+	(-) Prefabs
+		[=] Fixing X and Y adjacent list of TilePrefabs
+
+
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability

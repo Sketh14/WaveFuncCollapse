@@ -29,8 +29,8 @@ posY = 65
 negY = 67
 adjPosX = Array[int]([48, 52, 4, 8, 12, 16, 68, 20, 24, 28, 32, 36, 40, 44])
 adjNegX = Array[int]([54, 58, 2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 66])
-adjPosY = Array[int]([49, 53, 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41])
-adjNegY = Array[int]([63])
+adjPosY = Array[int]([63])
+adjNegY = Array[int]([49, 53, 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41])
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
