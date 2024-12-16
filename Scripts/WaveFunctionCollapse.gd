@@ -1,16 +1,5 @@
 extends Node
-
-class SuperTileCell:
-	var collapsed: bool
-	var currentTileIndex: int
-	var tilesAvailable: Array[int]
-
-class TransposedTileData:
-	var tileCoOrdX: int
-	var tileCoOrdY: int
-	var socketDir: SocketDirection
-
-enum SocketDirection {POSITIVEX, NEGATIVEX, POSITIVEY, NEGATIVEY}
+class_name WaveFunctionCollapse
 
 @export var superTilePrefab: Node
 @export var tilePrefabsList: Array[Node2D]
@@ -23,7 +12,7 @@ enum SocketDirection {POSITIVEX, NEGATIVEX, POSITIVEY, NEGATIVEY}
 # We will access this map as a 1D array only with multiple rows and columns, each index depicting a tile 
 # containing superposition tiles. 
 # We will go (Dimension * Row + Column)
-var tileMap: Array[SuperTileCell]
+var tileMap: Array[Helper.SuperTileCell]
 
 #This will hold the adjacent list of the neighbous tile whose adjacency is to be checked
 # var tempAdjList : Array[SuperTileCell]
@@ -32,7 +21,7 @@ var tileMap: Array[SuperTileCell]
 var tilesCache: Array[Node]
 
 #Stack that will contain all the tiles that ar to be checked in adjacency
-var tilesToCheckStack: Array[TransposedTileData]
+var tilesToCheckStack: Array[Helper.TransposedTileData]
 
 var debugPrint = "DEBUG PRINT"
 
@@ -87,7 +76,7 @@ func FillTilesCache():
 func InitializeData():
 	var totalSize = gridDimension.x * gridDimension.y
 	for valX in totalSize:
-		var tileCell = SuperTileCell.new()
+		var tileCell = Helper.SuperTileCell.new()
 		tileMap.append(tileCell)
 		#Really don't want to do this here
 		for valY in tilePrefabsList.size():
@@ -205,37 +194,37 @@ func SetTilesToCheckData1(coOrdX: int, coOrdY: int):
 	var tempTileData
 	
 	# """
-	tempTileData = TransposedTileData.new()
+	tempTileData = Helper.TransposedTileData.new()
 	tempTileData.tileCoOrdX = coOrdX + 1
 	tempTileData.tileCoOrdY = coOrdY
-	tempTileData.socketDir = SocketDirection.POSITIVEX
+	tempTileData.socketDir = UniversalConstants.SocketDirection.POSITIVEX
 	tilesToCheckStack.push_back(tempTileData)
 	CreateSuperTile(coOrdX + 1, coOrdY)
 	# """
 
 	# """
-	tempTileData = TransposedTileData.new()
+	tempTileData = Helper.TransposedTileData.new()
 	tempTileData.tileCoOrdX = coOrdX - 1
 	tempTileData.tileCoOrdY = coOrdY
-	tempTileData.socketDir = SocketDirection.NEGATIVEX
+	tempTileData.socketDir = UniversalConstants.SocketDirection.NEGATIVEX
 	tilesToCheckStack.push_back(tempTileData)
 	CreateSuperTile(coOrdX - 1, coOrdY)
 	# """
 
 	# """
-	tempTileData = TransposedTileData.new()
+	tempTileData = Helper.TransposedTileData.new()
 	tempTileData.tileCoOrdX = coOrdX
 	tempTileData.tileCoOrdY = coOrdY - 1 # To adjust with Godot's Co-Ordinate system
-	tempTileData.socketDir = SocketDirection.POSITIVEY
+	tempTileData.socketDir = UniversalConstants.SocketDirection.POSITIVEY
 	tilesToCheckStack.push_back(tempTileData)
 	CreateSuperTile(coOrdX, coOrdY - 1)
 	# """
 
 	# """
-	tempTileData = TransposedTileData.new()
+	tempTileData = Helper.TransposedTileData.new()
 	tempTileData.tileCoOrdX = coOrdX
 	tempTileData.tileCoOrdY = coOrdY + 1 # To adjust with Godot's Co-Ordinate system
-	tempTileData.socketDir = SocketDirection.NEGATIVEY
+	tempTileData.socketDir = UniversalConstants.SocketDirection.NEGATIVEY
 	tilesToCheckStack.push_back(tempTileData)
 	CreateSuperTile(coOrdX, coOrdY + 1)
 	# """
@@ -261,7 +250,7 @@ func SetTilesToCheckData2(coOrdX: int, coOrdY: int):
 				&& tempTileCoOrdY >= 0 && tempTileCoOrdY < gridDimension.y # Check if within bounds
 				&& !tileMap[(gridDimension.x * tempTileCoOrdX) + tempTileCoOrdY].collapsed): # Check if the tile is collapsed or not
 				CreateSuperTile(tempTileCoOrdX, tempTileCoOrdY)
-				tempTileData = TransposedTileData.new()
+				tempTileData = Helper.TransposedTileData.new()
 				tempTileData.tileCoOrdX = tempTileCoOrdX
 				tempTileData.tileCoOrdY = tempTileCoOrdY
 				# Wrong Below
@@ -286,7 +275,7 @@ func SetTilesToCheckData2(coOrdX: int, coOrdY: int):
 
 # Set the next tile according to the adjacency list of the current assigned tile and the direction w.r.t. current tile
 # We set a loop and remove the tile indexes in the tilesAvailable list untill all non-compatible tiles are removed
-func SetTileAdjacency(currTileIndex: int, tileToCheck: TransposedTileData) -> int:
+func SetTileAdjacency(currTileIndex: int, tileToCheck: Helper.TransposedTileData) -> int:
 
 	#Compare Socket | "Positive Socket" can only be compared to "Negative Socket" without rotation
 	#Search down of the tile
@@ -302,13 +291,13 @@ func SetTileAdjacency(currTileIndex: int, tileToCheck: TransposedTileData) -> in
 		var currentTilePrefabIndex = tileMap[currTileIndex].currentTileIndex # We assume that the index will be set, as without index, this shouldnt be triggered
 		var adjList # Cache List to compare with
 		match tileToCheck.socketDir:
-			SocketDirection.POSITIVEX:
+			UniversalConstants.SocketDirection.POSITIVEX:
 				adjList = tilePrefabsList[currentTilePrefabIndex].socketContainer.adjPosX
-			SocketDirection.NEGATIVEX:
+			UniversalConstants.SocketDirection.NEGATIVEX:
 				adjList = tilePrefabsList[currentTilePrefabIndex].socketContainer.adjNegX
-			SocketDirection.POSITIVEY:
+			UniversalConstants.SocketDirection.POSITIVEY:
 				adjList = tilePrefabsList[currentTilePrefabIndex].socketContainer.adjPosY
-			SocketDirection.NEGATIVEY:
+			UniversalConstants.SocketDirection.NEGATIVEY:
 				adjList = tilePrefabsList[currentTilePrefabIndex].socketContainer.adjNegY
 		"""
 		print("Adjacency List : " + str(adjList) + " | currTileIndex : " + str(currTileIndex)
@@ -343,13 +332,13 @@ func SetTileAdjacency(currTileIndex: int, tileToCheck: TransposedTileData) -> in
 			# Get the socket data for the tile which is to be compared
 			var tempCompSocketVal # cache value to compare with
 			match tileToCheck.socketDir:
-				SocketDirection.POSITIVEX:
+				UniversalConstants.SocketDirection.POSITIVEX:
 					tempCompSocketVal = tilesCache[tileVal].NegX
-				SocketDirection.NEGATIVEX:
+				UniversalConstants.SocketDirection.NEGATIVEX:
 					tempCompSocketVal = tilesCache[tileVal].PosX
-				SocketDirection.POSITIVEY:
+				UniversalConstants.SocketDirection.POSITIVEY:
 					tempCompSocketVal = tilesCache[tileVal].NegY
-				SocketDirection.NEGATIVEY:
+				UniversalConstants.SocketDirection.NEGATIVEY:
 					tempCompSocketVal = tilesCache[tileVal].PosY
 			foundTile = false
 

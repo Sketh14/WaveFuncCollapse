@@ -159,5 +159,13 @@ Project
 --------------------------------------------------------------------------------------
 - Shifting to UI
 
+- Scene
+	(-) Creating new UI only scene
+- Scripts
+	(-) Creating Helper
+		[=] Helper will consist of all the necessary sub classes
+		[=] Moving SuperTileCell | TransposedTileData here
+	(-) Creating UniversalConstants
+		[=] Moving SocketDirection here
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
