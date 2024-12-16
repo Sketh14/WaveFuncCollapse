@@ -134,15 +134,19 @@ func CreateTile(tileIndexX: int, tileCoOrdX: int, tileCoOrdY: int) -> Node:
 			+ "| CoOrdX : " + str(tileCoOrdX) + " | CoOrdY : " + str(tileCoOrdY))
 	return tileToPlace
 
+# var increasingOffset: int		#Check for duplicates
 func CreateSuperTile(tileCoOrdX: int, tileCoOrdY: int) -> Node:
 	var superTile = superTilePrefab.duplicate()
 	superTile.visible = true
 	var tempSuperTileController = superTile as SuperTileController
 	tempSuperTileController.superTileXCoOrd = tileCoOrdX
 	tempSuperTileController.superTileYCoOrd = tileCoOrdY
+	#Check for duplicates
+	# var position = Vector2((32.0 * tileCoOrdX) + (increasingOffset * 5), (32.0 * tileCoOrdY) + (increasingOffset * 5)) # Tiles size is 64 x 64
 	var position = Vector2(32.0 * tileCoOrdX, 32.0 * tileCoOrdY) # Tiles size is 64 x 64
 	superTile.position = position
 	tileHolder.add_child(superTile)
+	# increasingOffset += 1
 	"""
 	print("Super Tile | XCoOrd : " + str(tempSuperTileController.superTileXCoOrd)
 		+ " | YCoOrd : " + str(tempSuperTileController.superTileYCoOrd))
@@ -269,7 +273,7 @@ func SetTilesToCheckData2(coOrdX: int, coOrdY: int):
 					tempTileData.socketDir = tileCountY
 
 				tilesToCheckStack.push_back(tempTileData)
-				"""
+				# """
 				print("Tile Pushed | tileCountX : " + str(tileCountX) + " | tileCountY : " + str(tileCountY)
 						+ " | [" + str(tempTileCoOrdX) + "," + str(tempTileCoOrdY) + "]"
 						+ " | socketDir : " + str(tempTileData.socketDir))

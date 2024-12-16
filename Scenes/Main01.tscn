@@ -59,7 +59,7 @@
 visible = false
 script = ExtResource("2_oahl4")
 
-[node name="Sprite2D" type="Sprite2D" parent="TilePrefabsContainer/SuperTilePrefab2"]
+[node name="SuperTileSprite" type="Sprite2D" parent="TilePrefabsContainer/SuperTilePrefab2"]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_fijyv")
 

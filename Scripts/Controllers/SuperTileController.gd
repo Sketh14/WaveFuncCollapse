@@ -13,6 +13,7 @@ var tilePanelControllerPath = "Main01/MainCanvasLayer/PlaceHolderTile_Panel"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	tilePanelController = get_tree().get_root().get_node(tilePanelControllerPath)
+	# self.get_node("SuperTileSprite") as Sprite2D
 	if (tilePanelController == null):
 		print("Tile Panel Controller Not Found")
 
