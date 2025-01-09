@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://c6ywmav81o028"]
+[gd_scene load_steps=2 format=3 uid="uid://c6ywmav81o028"]
+
+[ext_resource type="PackedScene" uid="uid://bdeicjkvvfk7u" path="res://Prefab/UI/BtPrefab_1.tscn" id="1_w1yuo"]
 
 [node name="Main02" type="Control"]
 layout_mode = 3
@@ -18,3 +20,134 @@ offset_right = 107.0
 offset_bottom = 26.0
 grow_horizontal = 2
 text = "WAVE FUNCTION COLLAPSE"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer_1" type="GridContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -166.0
+offset_right = 166.0
+offset_bottom = 166.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 6
+
+[node name="Button_1" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_2" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_3" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_4" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_5" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_6" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_7" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_8" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_9" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_10" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_11" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_12" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_13" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_14" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_15" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_16" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_17" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_18" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_19" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_20" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_21" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_22" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_23" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_24" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_25" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_26" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_27" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_28" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_29" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_30" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_31" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_32" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_33" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_34" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_35" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
+[node name="Button_36" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2

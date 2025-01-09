@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdeicjkvvfk7u"]
+
+[ext_resource type="Theme" uid="uid://dw70fre4exfuq" path="res://Themes/BtTheme_2.tres" id="1_6y6uu"]
+[ext_resource type="Script" path="res://Scripts/UI/UITileController_1.gd" id="2_5g68f"]
+
+[node name="Button" type="Button" node_paths=PackedStringArray("btControl")]
+custom_minimum_size = Vector2(52, 52)
+offset_left = 13.0
+offset_top = 22.0
+offset_right = 65.0
+offset_bottom = 74.0
+theme = ExtResource("1_6y6uu")
+script = ExtResource("2_5g68f")
+btControl = NodePath(".")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered_tile"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited_tile"]
+[connection signal="pressed" from="." to="." method="_on_tile_bt_pressed"]

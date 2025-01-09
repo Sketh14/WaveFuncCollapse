@@ -167,5 +167,22 @@ Project
 		[=] Moving SuperTileCell | TransposedTileData here
 	(-) Creating UniversalConstants
 		[=] Moving SocketDirection here
+
+--------------------------------------------------------------------------------------
+									09 JANUARY 2024
+--------------------------------------------------------------------------------------
+- Project
+	(-) Creating new button theme
+	(-) Making UI button prefab
+- Scripts
+	(-) UniversalConstants
+		[=] Adding pressedColor as constant
+	(-) UITileController
+		[=] Basic tile controller
+- Scene
+	(-) Adding buttons to Main02
+
+
+
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability

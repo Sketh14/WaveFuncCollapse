@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://lue8bf3xrte1"]
+
+[ext_resource type="StyleBox" uid="uid://plfyw66xbyvx" path="res://Themes/Disabled_Stylebox.tres" id="1_xcbfv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_db8xr"]
+
+[resource]
+Button/styles/disabled = ExtResource("1_xcbfv")
+Button/styles/focus = SubResource("StyleBoxFlat_db8xr")
