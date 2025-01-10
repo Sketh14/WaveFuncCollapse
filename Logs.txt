@@ -182,7 +182,27 @@ Project
 - Scene
 	(-) Adding buttons to Main02
 
-
+--------------------------------------------------------------------------------------
+									09 JANUARY 2024
+--------------------------------------------------------------------------------------
+- Scene
+	(-) BtPrefab_1
+		[=] Adding Label as child to show the Tile ID
+		[=] Removing mouse_entered and mouse_exited signals
+		[=] Disabling Label as it has no use as of now
+	(-) Main02
+		[=] Adding a debug label at the bottom for showing the available Tile IDs
+		[=] Updating tileIds of Tiles
+- Scripts
+	(-) UITileController_1
+		[=] Adding label field
+		[=] No need to change the bg-color of the tile now
+		[=] Adding reference to WaveFunctionHandler as field
+	(-) UniversalConstants
+		[=] Adding textSize constant for tile-id labels
+		[=] Adding path to WaveFunctionCollapse script as constant
+	(-) WaveFunctionCollapse
+		[=] Adding debugLabel
 
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability

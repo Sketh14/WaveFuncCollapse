@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6ywmav81o028"]
+[gd_scene load_steps=3 format=3 uid="uid://c6ywmav81o028"]
 
 [ext_resource type="PackedScene" uid="uid://bdeicjkvvfk7u" path="res://Prefab/UI/BtPrefab_1.tscn" id="1_w1yuo"]
+[ext_resource type="Script" path="res://Scripts/UI_Alt/WaveFunctionCollapse2.gd" id="2_f0agi"]
 
 [node name="Main02" type="Control"]
 layout_mode = 3
@@ -21,7 +22,7 @@ offset_bottom = 26.0
 grow_horizontal = 2
 text = "WAVE FUNCTION COLLAPSE"
 
-[node name="Control" type="Control" parent="."]
+[node name="MainUI_Control" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +30,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GridContainer_1" type="GridContainer" parent="Control"]
+[node name="GridContainer_1" type="GridContainer" parent="MainUI_Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -44,110 +45,205 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 6
 
-[node name="Button_1" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_1" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "1"
+tileID = 1
 
-[node name="Button_2" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_2" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "2"
+tileID = 2
 
-[node name="Button_3" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_3" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "3"
+tileID = 3
 
-[node name="Button_4" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_4" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "4"
+tileID = 4
 
-[node name="Button_5" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_5" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "5"
+tileID = 5
 
-[node name="Button_6" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_6" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "6"
+tileID = 6
 
-[node name="Button_7" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_7" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "7"
+tileID = 7
 
-[node name="Button_8" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_8" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "8"
+tileID = 8
 
-[node name="Button_9" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_9" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "9"
+tileID = 9
 
-[node name="Button_10" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_10" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "10"
+tileID = 10
 
-[node name="Button_11" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_11" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "11"
+tileID = 11
 
-[node name="Button_12" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_12" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "12"
+tileID = 12
 
-[node name="Button_13" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_13" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "13"
+tileID = 13
 
-[node name="Button_14" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_14" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "14"
+tileID = 14
 
-[node name="Button_15" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_15" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "15"
+tileID = 15
 
-[node name="Button_16" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_16" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "16"
+tileID = 16
 
-[node name="Button_17" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_17" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "17"
+tileID = 17
 
-[node name="Button_18" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_18" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "18"
+tileID = 18
 
-[node name="Button_19" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_19" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "19"
+tileID = 19
 
-[node name="Button_20" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_20" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "20"
+tileID = 20
 
-[node name="Button_21" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_21" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "21"
+tileID = 21
 
-[node name="Button_22" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_22" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "22"
+tileID = 22
 
-[node name="Button_23" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_23" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "23"
+tileID = 23
 
-[node name="Button_24" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_24" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "24"
+tileID = 24
 
-[node name="Button_25" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_25" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "25"
+tileID = 25
 
-[node name="Button_26" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_26" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "26"
+tileID = 26
 
-[node name="Button_27" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_27" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "27"
+tileID = 27
 
-[node name="Button_28" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_28" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "28"
+tileID = 28
 
-[node name="Button_29" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_29" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "29"
+tileID = 29
 
-[node name="Button_30" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_30" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "30"
+tileID = 30
 
-[node name="Button_31" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_31" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "31"
+tileID = 31
 
-[node name="Button_32" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_32" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "32"
+tileID = 32
 
-[node name="Button_33" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_33" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "33"
+tileID = 33
 
-[node name="Button_34" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_34" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "34"
+tileID = 34
 
-[node name="Button_35" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_35" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "35"
+tileID = 35
 
-[node name="Button_36" parent="Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+[node name="Button_36" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
+text = "36"
+tileID = 36
+
+[node name="PlaceHolderTile_Panel" type="Panel" parent="MainUI_Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+
+[node name="DebugLabel" type="Label" parent="MainUI_Control/PlaceHolderTile_Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.07
+anchor_right = 0.99
+anchor_bottom = 0.93
+text = "-------------------"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel")]
+script = ExtResource("2_f0agi")
+debugLabel = NodePath("../MainUI_Control/PlaceHolderTile_Panel/DebugLabel")

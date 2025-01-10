@@ -2,40 +2,97 @@ class_name UITileController_1 extends Control
 
 @export var btControl: Control
 @export var tileID: int
-@export var tileEnabled: bool
+# @export var tileEnabled: bool # export for debug
+# @export var tileID_Label: Label
 
+var waveFunctionHandler: WaveFunctionCollapse2
 
-"""
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	"""
+		# print(btControl.theme.has_stylebox("StyleBoxFlat", "StyleBoxFlat"))
+		# print(btControl.theme.has_stylebox("Disabled_Stylebox_2", "StyleBoxFlat"))
+		# print(btControl.theme.has_stylebox("BtPrefab_1", "Button"))
+		# print(btControl.theme.has_stylebox("StyleBoxFlat", "Button"))
+		# print(btControl.theme.has_stylebox("BtTheme_2", "Button"))
+
+		# print(btControl.theme.has_stylebox("normal", "Button"))				# Somehow this is true, how????????
+		pass
+	"""
+	waveFunctionHandler = get_tree().get_root().get_node(UniversalConstants.waveFunctionScriptPath) as WaveFunctionCollapse2
 	
-	# print(btControl.theme.has_stylebox("StyleBoxFlat", "StyleBoxFlat"))
-	# print(btControl.theme.has_stylebox("Disabled_Stylebox_2", "StyleBoxFlat"))
-	# print(btControl.theme.has_stylebox("BtPrefab_1", "Button"))
-	# print(btControl.theme.has_stylebox("StyleBoxFlat", "Button"))
-	# print(btControl.theme.has_stylebox("BtTheme_2", "Button"))
-
-	# print(btControl.theme.has_stylebox("normal", "Button"))				# Somehow this is true, how????????
-	pass
-"""
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-# func _process(delta):
-# 	pass
-
+	# await get_tree().create_timer(1.0).timeout
+	# _on_tile_updated()
 
 func _on_tile_bt_pressed():
-	# if global_position.distance_to(get_global_mouse_position()) < 5:
+	var tileIdsToDebug = str(tileID)
+	waveFunctionHandler.ShowAvailableTileIdsInDebug(tileIdsToDebug)
+	# tileID_Label.text = str(tileID)
+	"""
+	if global_position.distance_to(get_global_mouse_position()) < 5:
 	if tileEnabled:
 		print("Tile Enabled : " + str(tileID))
-		btControl.theme.get_stylebox("normal", "Button").bg_color = UniversalConstants.pressedColor
+		btControl.theme.get_stylebox("normal", "Button").bg_color = UniversalConstants.pressedColor		# no need to change the color
+		tileID_Label.text = str(tileID)
+	"""
 
+"""
 func _on_mouse_entered_tile():
 	tileEnabled = true
 	# print("Mouse Entered : " + str(tileID))
 
-
 func _on_mouse_exited_tile():
 	tileEnabled = false
 	# print("Mouse Exited : " + str(tileID))
+"""
+
+"""
+https://www.reddit.com/r/godot/comments/1b2hmii/text_size_auto_increase_with_label_size/
+func _on_tile_updated():
+	tileID_Label.theme.set_font_size("font_size", "Label", 13)
+	# print("Label Font Size : " + str(tileID_Label.theme.get_font_size("font_size", "Label")))
+
+	var font = get_theme_font("font")
+	var font_size = get_theme_font_size("font_size")
+
+	var line = TextLine.new()
+	line.direction = text_direction
+	line.flags = justification_flags
+	line.alignment = horizontal_alignment
+
+	for i in 20:
+		line.clear()
+		var created = line.add_string(text, font, font_size)
+		if created:
+			var text_size = line.get_line_width()
+
+			if text_size > floor(size.x):
+				font_size -= 1
+			elif font_size < max_font_size:
+				font_size += 1
+			else:
+				break
+		else:
+			push_warning('Could not create a string')
+			break
+
+	add_theme_font_size_override("font_size", font_size)
+"""
+
+"""
+# https://github.com/godotengine/godot-proposals/issues/7750
+func _calculate_best_font_size() -> int:
+	var available_width = size.x * font_size_width_percent
+	var available_height = size.y
+
+	var font = get_theme_font("font")
+	var font_size = font_size_max
+
+	while font_size > font_size_min:
+		var text_size = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
+		if text_size.x <= available_width and text_size.y <= available_height:
+			break
+		
+		font_size -= 1
+
+	return int(max(font_size_min, min(font_size_max, font_size)))
+"""

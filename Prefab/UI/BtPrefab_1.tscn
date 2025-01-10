@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdeicjkvvfk7u"]
+[gd_scene load_steps=4 format=3 uid="uid://bdeicjkvvfk7u"]
 
 [ext_resource type="Theme" uid="uid://dw70fre4exfuq" path="res://Themes/BtTheme_2.tres" id="1_6y6uu"]
 [ext_resource type="Script" path="res://Scripts/UI/UITileController_1.gd" id="2_5g68f"]
+[ext_resource type="Theme" uid="uid://bvy3hpak27cl3" path="res://Themes/TextTheme_1.tres" id="3_boxi7"]
 
 [node name="Button" type="Button" node_paths=PackedStringArray("btControl")]
 custom_minimum_size = Vector2(52, 52)
@@ -13,6 +14,21 @@ theme = ExtResource("1_6y6uu")
 script = ExtResource("2_5g68f")
 btControl = NodePath(".")
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered_tile"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited_tile"]
+[node name="TileId_Label" type="Label" parent="."]
+visible = false
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_boxi7")
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+text_direction = 1
+
 [connection signal="pressed" from="." to="." method="_on_tile_bt_pressed"]
+[connection signal="item_rect_changed" from="TileId_Label" to="." method="_on_tile_id_label_item_rect_changed"]
