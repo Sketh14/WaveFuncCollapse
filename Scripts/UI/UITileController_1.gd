@@ -24,8 +24,8 @@ func _ready():
 	# _on_tile_updated()
 
 func _on_tile_bt_pressed():
-	var tileIdsToDebug = str(tileID)
-	waveFunctionHandler.ShowAvailableTileIdsInDebug(tileIdsToDebug)
+	# var tileIdsToDebug = str(tileID)
+	waveFunctionHandler.ShowAvailableTileIdsInDebug(tileID)
 	# tileID_Label.text = str(tileID)
 	"""
 	if global_position.distance_to(get_global_mouse_position()) < 5:

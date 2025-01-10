@@ -201,8 +201,16 @@ Project
 	(-) UniversalConstants
 		[=] Adding textSize constant for tile-id labels
 		[=] Adding path to WaveFunctionCollapse script as constant
-	(-) WaveFunctionCollapse
+	(-) WaveFunctionCollapse2
 		[=] Adding debugLabel
 
+- Scripts
+	(-) WaveFunctionCollapse2
+		[=] Loading Json logic
+	(-) UniversalConstants
+		[=] Adding path to adjacency list
+- Others
+	(-) TileAdjacencyList.json
+		[=] Adding Socket Values also
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability

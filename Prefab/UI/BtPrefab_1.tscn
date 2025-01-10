@@ -31,4 +31,3 @@ autowrap_mode = 1
 text_direction = 1
 
 [connection signal="pressed" from="." to="." method="_on_tile_bt_pressed"]
-[connection signal="item_rect_changed" from="TileId_Label" to="." method="_on_tile_id_label_item_rect_changed"]
