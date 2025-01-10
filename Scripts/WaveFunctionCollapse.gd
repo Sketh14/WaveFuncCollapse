@@ -65,6 +65,7 @@ func CreateTestTile():
 	tileToPlace.position = Vector2(10, 10)
 """
 
+# TODO: NOT NEEDED FOR NOW
 ## Fill up the tiles cache so that all the tiles data can be accessed fast
 ## As all the tiles are held in the tilesPrefabList. It would be better to only have the socketData in a cache to access fast. 
 func FillTilesCache():
@@ -72,6 +73,7 @@ func FillTilesCache():
 	for xVal in sizeX:
 		tilesCache.append(tilePrefabsList[xVal].socketContainer.socketOnly)
 
+# TODO: MOVED
 ## Initialize tiles as well as fill the tilesAvailable list at the start so that the tiles are in a super-position state 
 func InitializeData():
 	var totalSize = gridDimension.x * gridDimension.y
@@ -89,12 +91,14 @@ func InitializeData():
 		print("tileMap[2] | tiles Available[", valY, "] : ", tilesAvailable)
 	"""
 
+# TODO: NOT NEEDED FOR NOW
 # We are going Column First
 func PrintListOfTileWithCoOrd(coOrdX: int, coOrdY: int):
 	var currentIndex1D = coOrdX + (coOrdY * gridDimension.y)
 	print("Checking Tiles | X: [" + str(coOrdX) + "] ,Y: [" + str(coOrdY) + "] Index : " + str(currentIndex1D))
 	PrintListOfTileWithIndex(currentIndex1D)
 
+# TODO: NOT NEEDED FOR NOW
 ## Prints the tilesAvailable list in a specific Tile 
 func PrintListOfTileWithIndex(index: int):
 	var i = 0
@@ -185,6 +189,7 @@ func SetTile(coOrdX: int, coOrdY: int, valToSet: int):
 		# if(!tileMap[tempTransposedIndex].collapsed):
 		# 	SetTilesToCheckData(tileToCheck.tileCoOrdX, tileToCheck.tileCoOrdY)		# """
 
+# TODO: NOT NEEDED FOR NOW
 ## Helper function to set the Stack which checks the neighbouring tiles of the current selected tile.
 ## It adds the right/left/bottom/top tiles to the Stack
 func SetTilesToCheckData1(coOrdX: int, coOrdY: int):

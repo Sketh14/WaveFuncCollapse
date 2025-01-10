@@ -225,25 +225,28 @@ layout_mode = 2
 text = "36"
 tileID = 36
 
-[node name="PlaceHolderTile_Panel" type="Panel" parent="MainUI_Control"]
+[node name="Debug_Panel" type="Panel" parent="MainUI_Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -64.0
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.3
+anchor_bottom = 0.02
+offset_bottom = 300.0
 
-[node name="DebugLabel" type="Label" parent="MainUI_Control/PlaceHolderTile_Panel"]
+[node name="DebugLabel" type="Label" parent="MainUI_Control/Debug_Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.01
-anchor_top = 0.07
+anchor_top = 0.01
 anchor_right = 0.99
-anchor_bottom = 0.93
+anchor_bottom = 0.99
 text = "-------------------"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 1
 
 [node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel")]
 script = ExtResource("2_f0agi")
-debugLabel = NodePath("../MainUI_Control/PlaceHolderTile_Panel/DebugLabel")
+debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel")
+gridDimension = Vector2i(6, 6)

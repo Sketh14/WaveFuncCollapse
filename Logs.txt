@@ -212,5 +212,15 @@ Project
 - Others
 	(-) TileAdjacencyList.json
 		[=] Adding Socket Values also
+
+- Scripts
+	(-) WaveFunctionCollapse2
+		[=] Moving logic from WaveFunctionCollapse
+			<~> Adding tileMap | gridDimension
+			<~> Initialising Data logic
+			<~> Moved Left Code | TODO: REFACTOR
+- Scene
+	(-) Moving Debug Label to the top left
+
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
