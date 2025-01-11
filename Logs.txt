@@ -183,7 +183,7 @@ Project
 	(-) Adding buttons to Main02
 
 --------------------------------------------------------------------------------------
-									09 JANUARY 2024
+									10 JANUARY 2024
 --------------------------------------------------------------------------------------
 - Scene
 	(-) BtPrefab_1
@@ -235,5 +235,23 @@ Project
 - Scene
 	(-) Main02
 		[=] Adding selection tiles buttons in the bottom panel as before
+
+
+--------------------------------------------------------------------------------------
+									11 JANUARY 2024
+--------------------------------------------------------------------------------------
+- Scripts
+	(-) MainUIController_1
+		[=] Separate function for calling WaveFunctionCollapse
+		[=] Logic to turn all tiles off
+		[=] Adding field to store currently selected Tile in tileMap of WaveFunctionCollapse
+		[=] Calling to show available tiles from here
+	(-) UITileController_1
+		[=] Getting reference to MainUIController
+			<~> Calling it on button press
+	(-) UniversalConstants
+		[=] Adding path to MainUIController
+
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
+[DO] - Refactor UITileController_1 and add all buttons to MainUIController_1

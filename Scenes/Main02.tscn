@@ -356,9 +356,10 @@ text = "17"
 
 [node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel")]
 script = ExtResource("2_f0agi")
-debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugBanner")
+debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
 gridDimension = Vector2i(6, 6)
 
-[node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("selectedTilesBts")]
+[node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "selectedTilesBts")]
 script = ExtResource("5_f6myn")
+debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
 selectedTilesBts = [NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_0"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_1"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_2"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_3"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_4"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_5"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_6"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_7"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_8"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_9"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_10"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_11"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_12"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_13"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_14"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_15"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_16"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_17")]

@@ -1,3 +1,6 @@
+# TODO: Refactor this to MainUIController
+# 			[=] MainUiController to have an array of these so that each individual tile does not increase the load
+
 class_name UITileController_1 extends Control
 
 @export var btControl: Control
@@ -6,6 +9,7 @@ class_name UITileController_1 extends Control
 # @export var tileID_Label: Label
 
 var waveFunctionHandler: WaveFunctionCollapse2
+var mainUIController: MainUiController_1
 
 func _ready():
 	"""
@@ -20,13 +24,15 @@ func _ready():
 	"""
 	waveFunctionHandler = get_tree().get_root().get_node(UniversalConstants.waveFunctionScriptPath) as WaveFunctionCollapse2
 	waveFunctionHandler.tileDataInitialized_sig.connect(UpdateButtonText)
+
+	mainUIController = get_tree().get_root().get_node(UniversalConstants.mainUIControllerScriptPath) as MainUiController_1
 	
 	# await get_tree().create_timer(1.0).timeout
 	# _on_tile_updated()
 
 func _on_tile_bt_pressed():
+	mainUIController.SetCurrentAndShowAvailableTiles(tileID)
 	# var tileIdsToDebug = str(tileID)
-	waveFunctionHandler.ShowAvailableTiles(tileID)
 	# tileID_Label.text = str(tileID)
 	"""
 	if global_position.distance_to(get_global_mouse_position()) < 5:
