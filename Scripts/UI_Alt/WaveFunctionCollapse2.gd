@@ -42,7 +42,7 @@ func LoadAdjacencyJson():
 # Initialize tiles as well as fill the tilesAvailable list at the start so that the tiles are in a super-position state 
 func InitializeData():
 	var totalSize = gridDimension.x * gridDimension.y
-	var tilesListSize = tilesJsonData.tile_info.size()
+	var tilesListSize = tilesJsonData.tile_info.size() - 1
 	for valX in totalSize:
 		var tileCell = Helper.SuperTileCell.new()
 		tileMap.append(tileCell)
@@ -88,10 +88,10 @@ func SetTile(tileMapIndex: int, valToSet: int):
 	#Set the first 4 adjacent tiles in the immediate vicinity of the current set tile
 	SetTilesToCheckData2(tileMapIndex)
 
-	"""
+	# """
 	# Set while loop here and keep repeating unless all the adjoining cells are collapsed 
-	while (tilesToCheckStack.size() > 0):
-	# if (true):
+	# while (tilesToCheckStack.size() > 0):
+	if (true):
 		var tileToCheck = tilesToCheckStack.pop_back()
 		# print("\nGot Tile to check| index : X[" + str(tileToCheck.tileCoOrdX) + "], Y[" + str(tileToCheck.tileCoOrdY) + "]")
 		SetTileAdjacency(tileMapIndex, tileToCheck)
@@ -138,7 +138,7 @@ func SetTilesToCheckData2(tileMapIndex: int):
 					tempTileData.socketDir = tileCountY
 
 				tilesToCheckStack.push_back(tempTileData)
-				# """
+				"""
 				print("Tile Pushed | tileCountX : " + str(tileCountX) + " | tileCountY : " + str(tileCountY)
 						+ " | [" + str(tempTileCoOrdX) + "," + str(tempTileCoOrdY) + "]"
 						+ " | socketDir : " + str(tempTileData.socketDir))
@@ -151,107 +151,129 @@ func SetTilesToCheckData2(tileMapIndex: int):
 
 # Set the next tile according to the adjacency list of the current assigned tile and the direction w.r.t. current tile
 # We set a loop and remove the tile indexes in the tilesAvailable list untill all non-compatible tiles are removed
-func SetTileAdjacency(currTileIndex: int, tileToCheck: Helper.TransposedTileData) -> int:
+func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTileData) -> int:
+	if (tileMap.size() <= selectedTileIndex || selectedTileIndex < 0):
+		print("Invalid tileIndexX to search!!\n\n")
+		return -1
 
 	#Compare Socket | "Positive Socket" can only be compared to "Negative Socket" without rotation
 	#Search down of the tile
-	if (tileMap.size() > currTileIndex && currTileIndex >= 0):
-		# print("Checking | Index [" + str(currTileIndex) + "] | SocketDir [" + str(tileToCheck.socketDir) + "]")
 
-		# =========================================>		Getting Adjacent List		<======================================
+	# print("Checking | Index [" + str(selectedTileIndex) + "] | SocketDir [" + str(tileToCheck.socketDir) + "]")
+	# =========================================>		Getting Adjacent List		<======================================
 
-		var foundTile = false
-		
-		var currentTilePrefabIndex = tileMap[currTileIndex].currentTileIndex # We assume that the index will be set, as without index, this shouldnt be triggered
-		var adjList # Cache List to compare with
+	
+	# We assume that the index will be set, as without index, this shouldnt be triggered
+	# var selectedTileValue = tileMap[selectedTileIndex].currentTileIndex
+
+	"""
+	# No Need as we are directly checking for Socket Direction
+		# var adjList # Cache List to compare with
+		var socketDirectionToCheck
 
 		match tileToCheck.socketDir:
 			UniversalConstants.SocketDirection.POSITIVEX:
-				adjList = tilesJsonData.tile_info[currentTilePrefabIndex].adjacency_list[UniversalConstants.SocketDirection.POSITIVEX]
+				socketDirectionToCheck = UniversalConstants.SocketDirection.POSITIVEX
+				# adjList = tilesJsonData.tile_info[selectedTileValue].adjacency_list[UniversalConstants.SocketDirection.POSITIVEX]
 			UniversalConstants.SocketDirection.NEGATIVEX:
-				adjList = tilesJsonData.tile_info[currentTilePrefabIndex].adjacency_list[UniversalConstants.SocketDirection.NEGATIVEX]
+				socketDirectionToCheck = UniversalConstants.SocketDirection.NEGATIVEX
+				# adjList = tilesJsonData.tile_info[selectedTileValue].adjacency_list[UniversalConstants.SocketDirection.NEGATIVEX]
 			UniversalConstants.SocketDirection.POSITIVEY:
-				adjList = tilesJsonData.tile_info[currentTilePrefabIndex].adjacency_list[UniversalConstants.SocketDirection.POSITIVEY]
+				socketDirectionToCheck = UniversalConstants.SocketDirection.POSITIVEY
+				# adjList = tilesJsonData.tile_info[selectedTileValue].adjacency_list[UniversalConstants.SocketDirection.POSITIVEY]
 			UniversalConstants.SocketDirection.NEGATIVEY:
-				adjList = tilesJsonData.tile_info[currentTilePrefabIndex].adjacency_list[UniversalConstants.SocketDirection.NEGATIVEY]
+				socketDirectionToCheck = UniversalConstants.SocketDirection.NEGATIVEY
+				# adjList = tilesJsonData.tile_info[selectedTileValue].adjacency_list[UniversalConstants.SocketDirection.NEGATIVEY]
+	"""
+
+	"""
+	print("Adjacency List : " + str(tilesJsonData.tile_info[selectedTileValue].adjacency_list[tileToCheck.socketDir])
+			+ " | selectedTileIndex : " + str(selectedTileIndex)
+			+ " | selectedTileValue : " + str(selectedTileValue));
+	# """
+	# =========================================>		Getting Adjacent List		<======================================
+
+
+	# tilesAvailable should be sorted (in ascending order)
+	# Below is to check which tile from the Prefab List can be added above the current tile
+	# Should be a better way than this to do the below | Can run a binary search to find the index faster
+	
+	#TODO: IMPORTANT | Always check how 1D array index is calculated
+	# var tileToCheckIndex1D = tileToCheck.tileCoOrdX + (tileToCheck.tileCoOrdY * gridDimension.y)		#TODO: WRONG
+	var tileToCheckIndex1D = (gridDimension.x * tileToCheck.tileCoOrdX) + tileToCheck.tileCoOrdY
+	"""
+	print("Tile To Check | CoOrdX : " + str(tileToCheck.tileCoOrdX) + " | CoOrdY : " + str(tileToCheck.tileCoOrdY)
+		+ " | tileToCheckIndex1D : " + str(tileToCheckIndex1D) + " | tileMap Size : " + str(tileMap.size())
+		+ " | SocketDir " + str(tileToCheck.socketDir))
+	# """
+
+	var foundTile = false
+	var totalCount = tileMap[tileToCheckIndex1D].tilesAvailable.size()
+	var tilesAvailableIndexToCheck = 0
+	for compTileVal in tileMap[tileToCheckIndex1D].tilesAvailable:
+
+		# Skip if the tile at this index is not available
+		if (compTileVal < 0): # Tile previously has been set to -1
+			totalCount -= 1
+
+			# print("compTileVal is 0 | Reducing Total Count | totalCount[" + str(totalCount) + "]\n\n")
+			continue
+
+		# Get the socket data for the tile which is to be compared
+		var compSocketVal # cache value to compare with
+		match tileToCheck.socketDir:
+			UniversalConstants.SocketDirection.POSITIVEX:
+				# compSocketVal = UniversalConstants.SocketDirection.NEGATIVEX
+				compSocketVal = tilesJsonData.tile_info[compTileVal].socket_values[UniversalConstants.SocketDirection.NEGATIVEX]
+			UniversalConstants.SocketDirection.NEGATIVEX:
+				# compSocketVal = UniversalConstants.SocketDirection.POSITIVEX
+				compSocketVal = tilesJsonData.tile_info[compTileVal].socket_values[UniversalConstants.SocketDirection.POSITIVEX]
+			UniversalConstants.SocketDirection.POSITIVEY:
+				# compSocketVal = UniversalConstants.SocketDirection.NEGATIVEY
+				compSocketVal = tilesJsonData.tile_info[compTileVal].socket_values[UniversalConstants.SocketDirection.NEGATIVEY]
+			UniversalConstants.SocketDirection.NEGATIVEY:
+				# compSocketVal = UniversalConstants.SocketDirection.POSITIVEY
+				compSocketVal = tilesJsonData.tile_info[compTileVal].socket_values[UniversalConstants.SocketDirection.POSITIVEY]
+		foundTile = false
 
 		"""
-		print("Adjacency List : " + str(adjList) + " | currTileIndex : " + str(currTileIndex)
-				+ " | currentTilePrefabIndex : " + str(currentTilePrefabIndex));
-		# """
-		# =========================================>		Getting Adjacent List		<======================================
-
-
-		# tilesAvailable should be sorted (in ascending order)
-		# Below is to check which tile from the Prefab List can be added above the current tile
-		# Should be a better way than this to do the below | Can run a binary search to find the index faster
-		#TODO: IMPORTANT | Always check how 1D array index is calculated
-		# var tileToCheckIndex1D = tileToCheck.tileCoOrdX + (tileToCheck.tileCoOrdY * gridDimension.y)		#TODO: WRONG
-		var tileToCheckIndex1D = (gridDimension.x * tileToCheck.tileCoOrdX) + tileToCheck.tileCoOrdY
-		"""
-		print("Tile To Check | CoOrdX : " + str(tileToCheck.tileCoOrdX) + " | CoOrdY : " + str(tileToCheck.tileCoOrdY)
-			+ " | tileToCheckIndex1D : " + str(tileToCheckIndex1D) + " | tileMap Size : " + str(tileMap.size())
-			+ " | SocketDir " + str(tileToCheck.socketDir))
+		print("=====================> Checking | compTileVal : " + str(compTileVal) + "  | adjSocketVal : "
+				+ str(compSocketVal) + " <=====================\n\n")
 		# """
 
-		var totalCount = tileMap[tileToCheckIndex1D].tilesAvailable.size()
-		var tilesAvailableIndexToCheck = 0
-		for tileVal in tileMap[tileToCheckIndex1D].tilesAvailable:
+		# var socketIndex = 0 # THis is for debugging only
+			
+		# Get the comaptible socket values in the respective "Adjacency List" of the "Current Selected Tile" 
+		# which is in the direction of the "Tile To Compare"
+		# for adjSocketVal in adjList:
+		for adjSocketVal in tilesJsonData.tile_info[(tileMap[selectedTileIndex].currentTileIndex)].adjacency_list[tileToCheck.socketDir]:
+			# print("Adjacency Socket Val : " + str(adjSocketVal))
 
-			# Skip if the tile at this index is not available
-			if (tileVal < 0): # Tile previously has been set to 0
-				totalCount -= 1
+			# Check if the "Comparison Tile's" "Socket Value" in the desired direction is equal to the adjacency socket value 
+			if (compSocketVal == adjSocketVal):
+				# print("Found Socket | Socket [" + str(tilesAvailableIndexToCheck) + "] : [" + str(compSocketVal) + "]")
+				foundTile = true
+				#Cell fully collapsed
+				if (totalCount == 1):
+					tileMap[tileToCheckIndex1D].collapsed = true
+					return 1
+				break
+			# else:
+			# 	totalCount -= 1
+			# 	tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck] = -1
 
-				# print("tileVal is 0 | Reducing Total Count | totalCount[" + str(totalCount) + "]\n\n")
-				continue
 
-			# Get the socket data for the tile which is to be compared
-			var tempCompSocketVal # cache value to compare with
-			match tileToCheck.socketDir:
-				UniversalConstants.SocketDirection.POSITIVEX:
-					tempCompSocketVal = tilesJsonData.tile_info[currentTilePrefabIndex].socket_values[UniversalConstants.SocketDirection.NEGATIVEX]
-				UniversalConstants.SocketDirection.NEGATIVEX:
-					tempCompSocketVal = tilesJsonData.tile_info[currentTilePrefabIndex].socket_values[UniversalConstants.SocketDirection.POSITIVEX]
-				UniversalConstants.SocketDirection.POSITIVEY:
-					tempCompSocketVal = tilesJsonData.tile_info[currentTilePrefabIndex].socket_values[UniversalConstants.SocketDirection.NEGATIVEY]
-				UniversalConstants.SocketDirection.NEGATIVEY:
-					tempCompSocketVal = tilesJsonData.tile_info[currentTilePrefabIndex].socket_values[UniversalConstants.SocketDirection.POSITIVEY]
-			foundTile = false
+			# print("[" + str(socketIndex) + "] : " + str(tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck]) + "_" + str(adjSocketVal) + " | ")
+			# socketIndex += 1
 
+		#This causes a bit more problem, as in, if there are more than 1 value in the adjacency list, then the values assigned by a 
+		#previous match loop in the list, are removed by the very next match loop. And so everything turns to -1
+		if (!foundTile):
+			totalCount -= 1
+			tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck] = -1
 			"""
-			print("=====================> Checking | tileVal : " + str(tileVal) + "  | socketVal : "
-					+ str(tempCompSocketVal) + " <=====================\n\n")
+			print("Removing Tile | Socket [" + str(tilesAvailableIndexToCheck) + "] : [" + str(compTileVal) + "] | tileValueRemoved : "
+					+ str(tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck]));
 			# """
-
-			# var socketIndex = 0 # THis is for debugging only
-			for socketVal in adjList:
-				if (socketVal == tempCompSocketVal):
-					#Found Compatible Socket
-					# print("Found Socket | Socket [" + str(tilesAvailableIndexToCheck) + "] : [" + str(tempCompSocketVal) + "]")
-					foundTile = true
-					
-					#Cell fully collapsed
-					if (totalCount == 1):
-						tileMap[tileToCheckIndex1D].collapsed = true
-						return 1
-					break # No Duplicates, so break early
-				# else: # Wrong | We need to compare with each tile and then set (-1), if the current comparison tile is not in the current adjacency list
-				# 	tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck] = -1;
-
-				# print("[" + str(socketIndex) + "] : " + str(tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck]) + "_" + str(socketVal) + " | ")
-				# socketIndex += 1
-
-			#This causes a bit more problem, as in, if there are more than 1 value in the adjacency list, then the values assigned by a 
-			#previous match loop in the list, are removed by the very next match loop. And so everything turns to -1
-			if (!foundTile):
-				totalCount -= 1
-				tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck] = -1
-				"""
-				print("Removing Tile | Socket [" + str(tilesAvailableIndexToCheck) + "] : [" + str(tileVal) + "] | tileValueRemoved : "
-						+ str(tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck]));
-				# """
-			tilesAvailableIndexToCheck += 1
-		return 0
-	else:
-		print("Invalid tileIndexX to search!!\n\n")
-		return -1
+		tilesAvailableIndexToCheck += 1
+	return 0

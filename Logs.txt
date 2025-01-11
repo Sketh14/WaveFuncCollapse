@@ -260,6 +260,15 @@ Project
 	(-) Main02
 		[=] Changing tileBts index with their tileIDs
 
+- Scripts
+	(-) WaveFunctionCollapse2
+		[=] Refactoring SetTileAdjacency
+			<~> If statement at the start for early return on false
+			<~> Replacing adjList with SocketDirection
+			<~> Renaming Variables
+			<~> Fixing Adjacency Logic
+				{+} Comapring Socket Values of the Available Tiles in the list of the Comparison Tile
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
 [DO] - Refactor UITileController_1 and add all buttons to MainUIController_1
+[DO] - Short Down TransposedTileData | dont need explicit x/y Co-Ordinates

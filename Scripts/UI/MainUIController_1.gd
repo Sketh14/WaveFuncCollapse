@@ -39,6 +39,7 @@ func SetCurrentAndShowAvailableTiles(tileID: int):
 	var btTilesIndex = 0
 	var btArrSize = selectedTilesBts.size()
 	var availableTilesCount = waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable.size()
+	# Array is sorted which is why, this below is possible
 	while btTilesIndex != btArrSize:
 		if (availableTilesIndex < availableTilesCount &&
 			waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable[availableTilesIndex] == btTilesIndex):
