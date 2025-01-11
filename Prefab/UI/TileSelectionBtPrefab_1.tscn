@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bno6vf85fao5e"]
+
+[ext_resource type="Theme" uid="uid://dw70fre4exfuq" path="res://Themes/MainTileTheme_2.tres" id="1_fjtpg"]
+
+[node name="Tile_0Bt" type="Button"]
+custom_minimum_size = Vector2(52, 52)
+theme = ExtResource("1_fjtpg")
+text = "0"

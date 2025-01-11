@@ -19,13 +19,14 @@ func _ready():
 		pass
 	"""
 	waveFunctionHandler = get_tree().get_root().get_node(UniversalConstants.waveFunctionScriptPath) as WaveFunctionCollapse2
+	waveFunctionHandler.tileDataInitialized_sig.connect(UpdateButtonText)
 	
 	# await get_tree().create_timer(1.0).timeout
 	# _on_tile_updated()
 
 func _on_tile_bt_pressed():
 	# var tileIdsToDebug = str(tileID)
-	waveFunctionHandler.ShowAvailableTileIdsInDebug(tileID)
+	waveFunctionHandler.ShowAvailableTiles(tileID)
 	# tileID_Label.text = str(tileID)
 	"""
 	if global_position.distance_to(get_global_mouse_position()) < 5:
@@ -34,6 +35,9 @@ func _on_tile_bt_pressed():
 		btControl.theme.get_stylebox("normal", "Button").bg_color = UniversalConstants.pressedColor		# no need to change the color
 		tileID_Label.text = str(tileID)
 	"""
+
+func UpdateButtonText():
+	btControl.text = str(tileID) + " | " + str(waveFunctionHandler.tileMap[tileID - 1].tilesAvailable.size()) # Offset by 1
 
 """
 func _on_mouse_entered_tile():

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bdeicjkvvfk7u"]
 
-[ext_resource type="Theme" uid="uid://dw70fre4exfuq" path="res://Themes/BtTheme_2.tres" id="1_6y6uu"]
+[ext_resource type="Theme" uid="uid://dw70fre4exfuq" path="res://Themes/MainTileTheme_2.tres" id="1_u8kkf"]
 [ext_resource type="Script" path="res://Scripts/UI/UITileController_1.gd" id="2_5g68f"]
 [ext_resource type="Theme" uid="uid://bvy3hpak27cl3" path="res://Themes/TextTheme_1.tres" id="3_boxi7"]
 
@@ -10,7 +10,8 @@ offset_left = 13.0
 offset_top = 22.0
 offset_right = 65.0
 offset_bottom = 74.0
-theme = ExtResource("1_6y6uu")
+theme = ExtResource("1_u8kkf")
+text = "0"
 script = ExtResource("2_5g68f")
 btControl = NodePath(".")
 

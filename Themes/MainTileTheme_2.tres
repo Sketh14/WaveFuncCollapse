@@ -16,6 +16,7 @@ bg_color = Color(0.580392, 0, 0, 1)
 bg_color = Color(0, 0.545098, 0, 1)
 
 [resource]
+Button/font_sizes/font_size = 13
 Button/styles/disabled = SubResource("StyleBoxFlat_8i32a")
 Button/styles/focus = SubResource("StyleBoxFlat_ehf5o")
 Button/styles/hover = SubResource("StyleBoxFlat_omqnp")

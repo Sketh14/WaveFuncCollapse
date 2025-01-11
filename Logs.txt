@@ -222,5 +222,18 @@ Project
 - Scene
 	(-) Moving Debug Label to the top left
 
+- Scripts
+	(-) WaveFunctionCollapse2
+		[=] Replacing tilePrefabsList with tilesJsonData | Using Json for getting data
+		[=] Making a signal to show that the tiles list has been initialised
+	(-) UITileController_1
+		[=] Connecting signal from WaveFunctionCollapse2
+		[=] Adding count of the available tiles to bt-text
+	(-) MainUIController_1
+		[=] For all the UI Calls/Logic
+		[=] Adding button array for tiles selection
+- Scene
+	(-) Main02
+		[=] Adding selection tiles buttons in the bottom panel as before
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6ywmav81o028"]
+[gd_scene load_steps=5 format=3 uid="uid://c6ywmav81o028"]
 
 [ext_resource type="PackedScene" uid="uid://bdeicjkvvfk7u" path="res://Prefab/UI/BtPrefab_1.tscn" id="1_w1yuo"]
 [ext_resource type="Script" path="res://Scripts/UI_Alt/WaveFunctionCollapse2.gd" id="2_f0agi"]
+[ext_resource type="PackedScene" uid="uid://bno6vf85fao5e" path="res://Prefab/UI/TileSelectionBtPrefab_1.tscn" id="3_j4nbv"]
+[ext_resource type="Script" path="res://Scripts/UI/MainUIController_1.gd" id="5_f6myn"]
 
 [node name="Main02" type="Control"]
 layout_mode = 3
@@ -230,15 +232,26 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.02
 anchor_top = 0.02
-anchor_right = 0.3
+anchor_right = 0.25
 anchor_bottom = 0.02
 offset_bottom = 300.0
 
-[node name="DebugLabel" type="Label" parent="MainUI_Control/Debug_Panel"]
+[node name="DebugBanner" type="Label" parent="MainUI_Control/Debug_Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "--- DEBUG --"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="DebugLabel2" type="Label" parent="MainUI_Control/Debug_Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.01
-anchor_top = 0.01
+anchor_top = 0.09
 anchor_right = 0.99
 anchor_bottom = 0.99
 text = "-------------------"
@@ -246,7 +259,106 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1
 
+[node name="AvailableTiles_Panel" type="Panel" parent="MainUI_Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.85
+anchor_right = 0.97
+anchor_bottom = 0.95
+offset_right = 0.00012207
+offset_bottom = -6.10352e-05
+
+[node name="GridContainer" type="GridContainer" parent="MainUI_Control/AvailableTiles_Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.5
+anchor_right = 0.97
+anchor_bottom = 0.5
+offset_top = -16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 5
+columns = 18
+
+[node name="TileBt_0" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+
+[node name="TileBt_1" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "1"
+
+[node name="TileBt_2" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "2"
+
+[node name="TileBt_3" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "3"
+
+[node name="TileBt_4" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "4"
+
+[node name="TileBt_5" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "5"
+
+[node name="TileBt_6" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "6"
+
+[node name="TileBt_7" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "7"
+
+[node name="TileBt_8" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "8"
+
+[node name="TileBt_9" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "9"
+
+[node name="TileBt_10" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "10"
+
+[node name="TileBt_11" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "11"
+
+[node name="TileBt_12" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "12"
+
+[node name="TileBt_13" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "13"
+
+[node name="TileBt_14" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "14"
+
+[node name="TileBt_15" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "15"
+
+[node name="TileBt_16" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "16"
+
+[node name="TileBt_17" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
+layout_mode = 2
+text = "17"
+
 [node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel")]
 script = ExtResource("2_f0agi")
-debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel")
+debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugBanner")
 gridDimension = Vector2i(6, 6)
+
+[node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("selectedTilesBts")]
+script = ExtResource("5_f6myn")
+selectedTilesBts = [NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_0"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_1"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_2"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_3"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_4"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_5"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_6"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_7"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_8"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_9"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_10"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_11"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_12"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_13"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_14"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_15"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_16"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_17")]
