@@ -27,7 +27,7 @@ func _ready():
 func SetCurrentAndShowAvailableTiles(tileID: int):
 	# print("Tile ID to check : " + str(tileID))
 	# Offset by 1 for buttons ID
-	debugLabel.text = str(tileMap[tileID - 1].tilesAvailable)
+	debugLabel.text = str(tileMap[tileID].tilesAvailable)
 
 func LoadAdjacencyJson():
 	if not FileAccess.file_exists(UniversalConstants.adjacencyJsonPath):
@@ -49,6 +49,16 @@ func InitializeData():
 		# Really don't want to do this here
 		for valY in tilesListSize:
 			tileCell.tilesAvailable.append(valY)
+			"""
+			# Testing
+				if valX != 3:
+					tileCell.tilesAvailable.append(valY)
+				else:
+					if (valY % 3) == 0:
+						# print("Adding tile : " + str(valY))
+						tileCell.tilesAvailable.append(valY)
+			"""
+
 	tileDataInitialized_sig.emit()
 	
 	"""
@@ -76,7 +86,6 @@ func SetTile(tileMapIndex: int, valToSet: int):
 	# CreateTile(valToSet, coOrdX, coOrdY)
 	
 	#Set the first 4 adjacent tiles in the immediate vicinity of the current set tile
-	# SetTilesToCheckData1(coOrdX, coOrdY)
 	SetTilesToCheckData2(tileMapIndex)
 
 	"""
@@ -100,8 +109,7 @@ func SetTilesToCheckData2(tileMapIndex: int):
 	# var currentIndex1D = (gridDimension.x * coOrdX) + coOrdY
 	var coOrdX = tileMapIndex / gridDimension.x
 	var coOrdY = tileMapIndex - (coOrdX * gridDimension.x)
-	print("Setting Tile Data|  X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "]")
-	return
+	print("Setting Tile Data | tileMapIndex : " + str(tileMapIndex) + " | X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "]")
 	
 	var tempTileData
 

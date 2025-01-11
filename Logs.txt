@@ -252,6 +252,14 @@ Project
 	(-) UniversalConstants
 		[=] Adding path to MainUIController
 
+- Scripts
+	(-) MainUIController_1
+		[=] Deactivating previous selected tile buttons before activating for current available tiles list
+		[=] Changing logic to remove offset
+- Scene
+	(-) Main02
+		[=] Changing tileBts index with their tileIDs
+
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
 [DO] - Refactor UITileController_1 and add all buttons to MainUIController_1

@@ -47,6 +47,9 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 6
 
+[node name="Button_0" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
+layout_mode = 2
+
 [node name="Button_1" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
 layout_mode = 2
 text = "1"
@@ -221,11 +224,6 @@ tileID = 34
 layout_mode = 2
 text = "35"
 tileID = 35
-
-[node name="Button_36" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_w1yuo")]
-layout_mode = 2
-text = "36"
-tileID = 36
 
 [node name="Debug_Panel" type="Panel" parent="MainUI_Control"]
 layout_mode = 1
