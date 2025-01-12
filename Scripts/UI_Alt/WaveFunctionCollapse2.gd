@@ -170,7 +170,7 @@ func SetTilesToCheckData2(tileMapIndex: int):
 					tempTileData.socketDir = tileCountY
 
 				tilesToCheckStack.push_back(tempTileData)
-				"""
+				# """
 				print("Tile Pushed | tileCountX : " + str(tileCountX) + " | tileCountY : " + str(tileCountY)
 						+ " | [" + str(tempTileCoOrdX) + "," + str(tempTileCoOrdY) + "]"
 						+ " | socketDir : " + str(tempTileData.socketDir))
@@ -191,7 +191,9 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 	#Compare Socket | "Positive Socket" can only be compared to "Negative Socket" without rotation
 	#Search down of the tile
 
-	# print("Checking | Index [" + str(selectedTileIndex) + "] | SocketDir [" + str(tileToCheck.socketDir) + "]")
+	print("Checking | Index [" + str(selectedTileIndex) + "] | SocketDir [" + str(tileToCheck.socketDir) + "]"
+		+ " | currentTileIndex: " + str(tileMap[selectedTileIndex].currentTileIndex)
+		+ " | Dir : X[" + str(tileToCheck.tileCoOrdX) + "], Y[" + str(tileToCheck.tileCoOrdY) + "]")
 	# =========================================>		Getting Adjacent List		<======================================
 
 	# We assume that the index will be set, as without index, this shouldnt be triggered
@@ -218,8 +220,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 	"""
 
 	# """
-	print("Adjacency List : " + str(tilesJsonData.tile_info[selectedTileIndex].adjacency_list[tileToCheck.socketDir])
-			+ " | selectedTileIndex : " + str(selectedTileIndex));
+	print("Adjacency List : " + str(tilesJsonData.tile_info[tileMap[selectedTileIndex].currentTileIndex].adjacency_list[tileToCheck.socketDir]));
 	# """
 	# =========================================>		Getting Adjacent List		<======================================
 
@@ -243,6 +244,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 	if (tileMap[selectedTileIndex].collapsed):
 		var compSocketVal # cache value to compare with
 		var totalAvailableTiles = availableTilesSize
+		var currentAdjTileVal = -1
 
 		# Get the "Available Tiles" list of the "Tile To Check"
 		for i in availableTilesSize:
@@ -282,6 +284,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 
 				# Check if the "Comparison Tile's" "Socket Value" in the desired direction is equal to the adjacency socket value 
 				if (compSocketVal == adjSocketVal):
+					currentAdjTileVal = i
 					# print("Found Socket | Socket [" + str(tilesAvailableIndexToCheck) + "] : [" + str(compSocketVal) + "]")
 					foundTile = true
 					break
@@ -302,6 +305,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 		#Cell fully collapsed
 		if (totalAvailableTiles == 1):
 			tileMap[tileToCheckIndex1D].collapsed = true
+			tileMap[tileToCheckIndex1D].currentTileIndex = currentAdjTileVal
 			UpdateTileData_sig.emit(tileToCheckIndex1D)
 			return 1
 	else:
@@ -350,8 +354,9 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 				# Check from the "Available Tiles", which tile's socket value in the desired direction
 				# is equal to the adjacency socket value
 				for k in availableTilesSize:
-					if (tilesJsonData.tile_info[i].adjacency_list[tileToCheck.socketDir][j] == tilesJsonData.tile_info[k].socket_values[compSocketDir]):
-						# print("Found Socket | Socket [" + str(tilesAvailableIndexToCheck) + "] : [" + str(compSocketVal) + "]")
+					if (tilesJsonData.tile_info[i].adjacency_list[tileToCheck.socketDir][j]
+						== tilesJsonData.tile_info[k].socket_values[compSocketDir]):
+						print("Found Socket | Socket [" + str(k) + "] : [" + str(compSocketDir) + "]")
 						tileMap[tileToCheckIndex1D].tilesAvailable[i] = i
 						break
 					# print("Adjacency Socket Val : " + str(tilesJsonData.tile_info[i].adjacency_list[j]))

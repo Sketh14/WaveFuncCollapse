@@ -295,6 +295,15 @@ Project
 		[=] Logic for Checking Adjacency of UnCollapsed Tiles
 	(-) TileAdjacencyList
 		[=] FIXING SOCKET ADJACENCY LIST
+
+- Scripts
+	(-) UITileController_1
+		[=] Connecting WaveFunctionCollapse signal to UpdateButtonText
+	(-) TileAdjacencyList
+		[=] Fixing Again
+	(-) WaveFunctionCollapse2
+		[=] Assigning currentTileIndex to tileMap value if the tile is collapsed
+
 		
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability

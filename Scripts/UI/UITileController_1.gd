@@ -8,7 +8,7 @@ class_name UITileController_1 extends Control
 # @export var tileEnabled: bool # export for debug
 # @export var tileID_Label: Label
 
-# var waveFunctionHandler: WaveFunctionCollapse2
+var waveFunctionHandler: WaveFunctionCollapse2
 var mainUIController: MainUiController_1
 
 func _ready():
@@ -22,8 +22,8 @@ func _ready():
 		# print(btControl.theme.has_stylebox("normal", "Button"))				# Somehow this is true, how????????
 		pass
 	"""
-	# waveFunctionHandler = get_tree().get_root().get_node(UniversalConstants.waveFunctionScriptPath) as WaveFunctionCollapse2
-	# waveFunctionHandler.UpdateTileData_sig.connect(UpdateButtonText)
+	waveFunctionHandler = get_tree().get_root().get_node(UniversalConstants.waveFunctionScriptPath) as WaveFunctionCollapse2
+	waveFunctionHandler.UpdateTileData_sig.connect(UpdateButtonText)
 
 	mainUIController = get_tree().get_root().get_node(UniversalConstants.mainUIControllerScriptPath) as MainUiController_1
 	
@@ -42,8 +42,11 @@ func _on_tile_bt_pressed():
 		tileID_Label.text = str(tileID)
 	"""
 
-func UpdateButtonText():
-	btControl.text = str(tileID) + " | " + str(mainUIController.selectedTilesBts.size()) # Offset by 1
+func UpdateButtonText(tileMapTileID: int):
+	if (tileMapTileID == tileID && waveFunctionHandler.tileMap[tileMapTileID].collapsed):
+		btControl.text = "> " + str(waveFunctionHandler.tileMap[tileMapTileID].currentTileIndex) + " <"
+
+	# btControl.text = str(tileID) + " | " + str(mainUIController.selectedTilesBts.size()) # Offset by 1
 
 """
 func _on_mouse_entered_tile():

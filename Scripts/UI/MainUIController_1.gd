@@ -39,7 +39,6 @@ func SetCurrentAndShowAvailableTiles(tileID: int):
 	debugLabel.text = ("Tile ID : " + str(tileID) + " | Tiles Avl: " + str(waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable)
 	+ "\n Collapsed: " + str(waveFunctionHandler.tileMap[selectedTileIndexInMap].collapsed))
 
-
 	var btArrSize = selectedTilesBts.size() - 1
 	"""
 		var availableTilesIndex = 0
