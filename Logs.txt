@@ -283,8 +283,21 @@ Project
 
 		[=] Changing UpdateTileData_sig
 			<~> Sending Tile-Id along with the signal
+
+--------------------------------------------------------------------------------------
+									11 JANUARY 2024
+--------------------------------------------------------------------------------------
+
+- Scripts
+	(-) WaveFunctionCollapse2
+		[=] SetTileAdjacency Logic Change
+			<~> Using index directly instead of checking for values inside tilesAvailable list as both are same
+		[=] Logic for Checking Adjacency of UnCollapsed Tiles
+	(-) TileAdjacencyList
+		[=] FIXING SOCKET ADJACENCY LIST
 		
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
 [DO] - Refactor UITileController_1 and add all buttons to MainUIController_1
 [DO] - Short Down TransposedTileData | dont need explicit x/y Co-Ordinates
+[DO] - Replace TilesAvailable in SuperTileCell with bool or byte[Not possible in GDScript]

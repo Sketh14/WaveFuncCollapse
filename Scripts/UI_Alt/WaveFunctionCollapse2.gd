@@ -4,6 +4,11 @@ class_name WaveFunctionCollapse2
 @export var debugLabel: Label
 @export var gridDimension: Vector2i
 
+# """
+# FoR Testing
+@export var testAdjForUnCollapsedBt: Button
+# """
+
 # https://www.reddit.com/r/godot/comments/11g91c8/how_to_create_events/
 signal UpdateTileData_sig(tileID: int)
 
@@ -20,7 +25,13 @@ var tilesToCheckStack: Array[Helper.TransposedTileData]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+
+	# """
+	# TESTING
 	# var superTileToUse = Helper.SuperTileCell.new()
+	testAdjForUnCollapsedBt.connect("pressed", TestSetTileAdjacencyForUnCollapsedTile)
+	# """
+
 	LoadAdjacencyJson()
 	InitializeData()
 
@@ -69,6 +80,19 @@ func InitializeData():
 	"""
 
 # TODO: REFACTOR BELOW
+
+# """
+# For Testing
+func TestSetTileAdjacencyForUnCollapsedTile():
+	var testTileData
+
+	testTileData = Helper.TransposedTileData.new()
+	testTileData.tileCoOrdX = 0
+	testTileData.tileCoOrdY = 3
+	testTileData.socketDir = UniversalConstants.SocketDirection.POSITIVEX
+
+	SetTileAdjacency(9, testTileData)
+# """
 
 
 ## Set a specific tile value and also check for the neighbouring tiles data
@@ -193,10 +217,9 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 				# adjList = tilesJsonData.tile_info[selectedTileValue].adjacency_list[UniversalConstants.SocketDirection.NEGATIVEY]
 	"""
 
-	"""
-	print("Adjacency List : " + str(tilesJsonData.tile_info[selectedTileValue].adjacency_list[tileToCheck.socketDir])
-			+ " | selectedTileIndex : " + str(selectedTileIndex)
-			+ " | selectedTileValue : " + str(selectedTileValue));
+	# """
+	print("Adjacency List : " + str(tilesJsonData.tile_info[selectedTileIndex].adjacency_list[tileToCheck.socketDir])
+			+ " | selectedTileIndex : " + str(selectedTileIndex));
 	# """
 	# =========================================>		Getting Adjacent List		<======================================
 
@@ -216,73 +239,134 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 
 	var foundTile = false
 	var availableTilesSize = tileMap[tileToCheckIndex1D].tilesAvailable.size()
-	var totalAvailableTiles = availableTilesSize
-	var compSocketVal # cache value to compare with
 
-	# Get the "Available Tiles" list of the "Tile To Check"
-	for i in availableTilesSize:
+	if (tileMap[selectedTileIndex].collapsed):
+		var compSocketVal # cache value to compare with
+		var totalAvailableTiles = availableTilesSize
 
-		# Skip if the tile at this index is not available
-		if (tileMap[tileToCheckIndex1D].tilesAvailable[i] < 0): # Tile previously has been set to -1
-			totalAvailableTiles -= 1
-			# print("i is 0 | Reducing Total Count | availableTilesSize[" + str(availableTilesSize) + "]\n\n")
-			continue
+		# Get the "Available Tiles" list of the "Tile To Check"
+		for i in availableTilesSize:
 
-		# Get the socket data for the tile which is to be compared
+			# Skip if the tile at this index is not available
+			if (tileMap[tileToCheckIndex1D].tilesAvailable[i] < 0): # Tile previously has been set to -1
+				totalAvailableTiles -= 1
+				# print("i is 0 | Reducing Total Count | availableTilesSize[" + str(availableTilesSize) + "]\n\n")
+				continue
+
+			# Get the socket data for the tile which is to be compared
+			match tileToCheck.socketDir:
+				UniversalConstants.SocketDirection.POSITIVEX:
+					compSocketVal = (tilesJsonData.tile_info[i].socket_values[UniversalConstants.SocketDirection.NEGATIVEX])
+				UniversalConstants.SocketDirection.NEGATIVEX:
+					compSocketVal = (tilesJsonData.tile_info[i].socket_values[UniversalConstants.SocketDirection.POSITIVEX])
+				UniversalConstants.SocketDirection.POSITIVEY:
+					compSocketVal = (tilesJsonData.tile_info[i].socket_values[UniversalConstants.SocketDirection.NEGATIVEY])
+				UniversalConstants.SocketDirection.NEGATIVEY:
+					compSocketVal = (tilesJsonData.tile_info[i].socket_values[UniversalConstants.SocketDirection.POSITIVEY])
+			foundTile = false
+
+			"""
+			print("=====================> Checking | i : " + str(i)
+					+ " | TilesAvailable Val : " + str(tileMap[tileToCheckIndex1D].tilesAvailable[i])
+					+ " | adjSocketVal : " + str(compSocketVal) + " <=====================\n\n")
+			# """
+
+			# var socketIndex = 0 # THis is for debugging only
+				
+			# Get the comaptible socket values in the respective "Adjacency List" of the "Current Selected Tile" 
+			# which is in the direction of the "Tile To Compare"
+			# for adjSocketVal in adjList:
+			for adjSocketVal in (tilesJsonData.tile_info[(tileMap[selectedTileIndex].currentTileIndex)]
+								.adjacency_list[tileToCheck.socketDir]):
+				# print("Adjacency Socket Val : " + str(adjSocketVal))
+
+				# Check if the "Comparison Tile's" "Socket Value" in the desired direction is equal to the adjacency socket value 
+				if (compSocketVal == adjSocketVal):
+					# print("Found Socket | Socket [" + str(tilesAvailableIndexToCheck) + "] : [" + str(compSocketVal) + "]")
+					foundTile = true
+					break
+
+				# print("[" + str(socketIndex) + "] : " + str(tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck]) + "_" + str(adjSocketVal) + " | ")
+				# socketIndex += 1
+
+			#This causes a bit more problem, as in, if there are more than 1 value in the adjacency list, then the values assigned by a 
+			#previous match loop in the list, are removed by the very next match loop. And so everything turns to -1
+			if (!foundTile):
+				totalAvailableTiles -= 1
+				tileMap[tileToCheckIndex1D].tilesAvailable[i] = -1
+				"""
+				print("Removing Tile | Socket [" + str(tilesAvailableIndexToCheck) + "] : [" + str(i) + "] | tileValueRemoved : "
+						+ str(tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck]));
+				# """
+
+		#Cell fully collapsed
+		if (totalAvailableTiles == 1):
+			tileMap[tileToCheckIndex1D].collapsed = true
+			UpdateTileData_sig.emit(tileToCheckIndex1D)
+			return 1
+	else:
+		# This tile will not be collapsed by the following operations as the tile from which it is being called is not collapsed
+		# As the "Selected Tile" is not collapsed, there can be no way of only 1 possible solution existing for the "Tile Being Checked".
+		# If the Solution exists, then there are duplicates in the "TilesAvailable" list
+
+		# Disable Everything in the "Available Tiles" list of the "Tile To Check"
+		for i in availableTilesSize:
+			tileMap[tileToCheckIndex1D].tilesAvailable[i] = -1
+
+		# Get the socket direction for the tile which is to be compared
+		var compSocketDir
 		match tileToCheck.socketDir:
 			UniversalConstants.SocketDirection.POSITIVEX:
-				compSocketVal = (tilesJsonData.tile_info[tileMap[tileToCheckIndex1D].tilesAvailable[i]]
-								.socket_values[UniversalConstants.SocketDirection.NEGATIVEX])
+				compSocketDir = UniversalConstants.SocketDirection.NEGATIVEX
 			UniversalConstants.SocketDirection.NEGATIVEX:
-				compSocketVal = (tilesJsonData.tile_info[tileMap[tileToCheckIndex1D].tilesAvailable[i]]
-								.socket_values[UniversalConstants.SocketDirection.POSITIVEX])
+				compSocketDir = UniversalConstants.SocketDirection.POSITIVEX
 			UniversalConstants.SocketDirection.POSITIVEY:
-				compSocketVal = (tilesJsonData.tile_info[tileMap[tileToCheckIndex1D].tilesAvailable[i]]
-								.socket_values[UniversalConstants.SocketDirection.NEGATIVEY])
+				compSocketDir = UniversalConstants.SocketDirection.NEGATIVEY
 			UniversalConstants.SocketDirection.NEGATIVEY:
-				compSocketVal = (tilesJsonData.tile_info[tileMap[tileToCheckIndex1D].tilesAvailable[i]]
-								.socket_values[UniversalConstants.SocketDirection.POSITIVEY])
-		foundTile = false
+				compSocketDir = UniversalConstants.SocketDirection.POSITIVEY
 
-		# """
-		print("=====================> Checking | i : " + str(i)
-				+ " | TilesAvailable Val : " +str(tileMap[tileToCheckIndex1D].tilesAvailable[i])
-				+ " | adjSocketVal : " + str(compSocketVal) + " <=====================\n\n")
-		# """
+		var selectedTileAdjListSize = 0
+		# Get the "Available Tiles" list of the "Tile To Check"
+		for i in availableTilesSize:
 
-		# var socketIndex = 0 # THis is for debugging only
-			
-		# Get the comaptible socket values in the respective "Adjacency List" of the "Current Selected Tile" 
-		# which is in the direction of the "Tile To Compare"
-		# for adjSocketVal in adjList:
-		for adjSocketVal in (tilesJsonData.tile_info[(tileMap[selectedTileIndex].currentTileIndex)]
-							.adjacency_list[tileToCheck.socketDir]):
-			# print("Adjacency Socket Val : " + str(adjSocketVal))
+			# Skip if the tile at this index as it is not available
+			if (tileMap[selectedTileIndex].tilesAvailable[i] < 0):
+				# print("i is 0 | Reducing Total Count | availableTilesSize[" + str(availableTilesSize) + "]\n\n")
+				continue
 
-			# Check if the "Comparison Tile's" "Socket Value" in the desired direction is equal to the adjacency socket value 
-			if (compSocketVal == adjSocketVal):
-				# print("Found Socket | Socket [" + str(tilesAvailableIndexToCheck) + "] : [" + str(compSocketVal) + "]")
-				foundTile = true
-				break
+			"""
+			print("=====================> Checking | i : " + str(i)
+					+ " | TilesAvailable Val : " + str(tileMap[tileToCheckIndex1D].tilesAvailable[i])
+					+ " | adjSocketVal : " + str(compSocketDir) + " <=====================\n\n")
+			# """
 
-			# print("[" + str(socketIndex) + "] : " + str(tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck]) + "_" + str(adjSocketVal) + " | ")
-			# socketIndex += 1
+			# var socketIndex = 0 # THis is for debugging only
+				
+			# Get the comaptible socket values in the respective "Adjacency List" of the "Current Selected Tile" 
+			# which is in the direction of the "Tile To Compare"
+			selectedTileAdjListSize = tilesJsonData.tile_info[i].adjacency_list.size()
+			for j in selectedTileAdjListSize:
 
-		#This causes a bit more problem, as in, if there are more than 1 value in the adjacency list, then the values assigned by a 
-		#previous match loop in the list, are removed by the very next match loop. And so everything turns to -1
-		if (!foundTile):
-			totalAvailableTiles -= 1
-			tileMap[tileToCheckIndex1D].tilesAvailable[i] = -1
+				# Check from the "Available Tiles", which tile's socket value in the desired direction
+				# is equal to the adjacency socket value
+				for k in availableTilesSize:
+					if (tilesJsonData.tile_info[i].adjacency_list[tileToCheck.socketDir][j] == tilesJsonData.tile_info[k].socket_values[compSocketDir]):
+						# print("Found Socket | Socket [" + str(tilesAvailableIndexToCheck) + "] : [" + str(compSocketVal) + "]")
+						tileMap[tileToCheckIndex1D].tilesAvailable[i] = i
+						break
+					# print("Adjacency Socket Val : " + str(tilesJsonData.tile_info[i].adjacency_list[j]))
+
+
+			#This causes a bit more problem, as in, if there are more than 1 value in the adjacency list, then the values assigned by a 
+			#previous match loop in the list, are removed by the very next match loop. And so everything turns to -1
+			# if (!foundTile):
+			# 	tileMap[tileToCheckIndex1D].tilesAvailable[i] = -1
 			"""
 			print("Removing Tile | Socket [" + str(tilesAvailableIndexToCheck) + "] : [" + str(i) + "] | tileValueRemoved : "
 					+ str(tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck]));
 			# """
 
-	#Cell fully collapsed
-	if (totalAvailableTiles == 1):
-		tileMap[tileToCheckIndex1D].collapsed = true
 		UpdateTileData_sig.emit(tileToCheckIndex1D)
-		return 1
 
 	# UpdateTileData_sig.emit()
 	return 0

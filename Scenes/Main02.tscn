@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6ywmav81o028"]
+[gd_scene load_steps=6 format=3 uid="uid://c6ywmav81o028"]
 
 [ext_resource type="PackedScene" uid="uid://bdeicjkvvfk7u" path="res://Prefab/UI/BtPrefab_1.tscn" id="1_w1yuo"]
 [ext_resource type="Script" path="res://Scripts/UI_Alt/WaveFunctionCollapse2.gd" id="2_f0agi"]
 [ext_resource type="PackedScene" uid="uid://bno6vf85fao5e" path="res://Prefab/UI/TileSelectionBtPrefab_1.tscn" id="3_j4nbv"]
+[ext_resource type="Theme" uid="uid://dw70fre4exfuq" path="res://Themes/MainTileTheme_2.tres" id="3_vvpfg"]
 [ext_resource type="Script" path="res://Scripts/UI/MainUIController_1.gd" id="5_f6myn"]
 
 [node name="Main02" type="Control"]
@@ -352,10 +353,20 @@ text = "16"
 layout_mode = 2
 text = "17"
 
-[node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel")]
+[node name="AdjTestForUnCollapsed" type="Button" parent="MainUI_Control"]
+custom_minimum_size = Vector2(52, 52)
+offset_left = 1050.0
+offset_top = 360.0
+offset_right = 1102.0
+offset_bottom = 412.0
+theme = ExtResource("3_vvpfg")
+text = "AdjTest"
+
+[node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "testAdjForUnCollapsedBt")]
 script = ExtResource("2_f0agi")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
 gridDimension = Vector2i(6, 6)
+testAdjForUnCollapsedBt = NodePath("../MainUI_Control/AdjTestForUnCollapsed")
 
 [node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "selectedTilesBts")]
 script = ExtResource("5_f6myn")
