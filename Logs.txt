@@ -304,6 +304,15 @@ Project
 	(-) WaveFunctionCollapse2
 		[=] Assigning currentTileIndex to tileMap value if the tile is collapsed
 
+- Scripts
+	(-) TransposedTileData
+		[=] Adding field to contain parent ID
+	(-) WaveFunctionCollapse2
+		[=] Passing ParentTileID instead of calling Tile ID to SetTileAdjacency
+		[=] SetTilesToCheckData2
+			<~> ParentTileID check
+			<~> Sending ParentTileID also
+
 		
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability

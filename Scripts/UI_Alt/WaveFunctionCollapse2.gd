@@ -110,57 +110,66 @@ func SetTile(tileMapIndex: int, valToSet: int):
 	# CreateTile(valToSet, coOrdX, coOrdY)
 	
 	#Set the first 4 adjacent tiles in the immediate vicinity of the current set tile
-	SetTilesToCheckData2(tileMapIndex)
+	SetTilesToCheckData2(tileMapIndex, tileMapIndex)
 
 	# """
 	# Set while loop here and keep repeating unless all the adjoining cells are collapsed 
 	var stackPoppdCount = 0 # For Debugging
-	# while (tilesToCheckStack.size() > 0):
-	if (true):
+	var refTileMapIndex = -1
+	while (tilesToCheckStack.size() > 0):
+	# if (true):
 		var tileToCheck = tilesToCheckStack.pop_back()
 		# print("\nGot Tile to check| index : X[" + str(tileToCheck.tileCoOrdX) + "], Y[" + str(tileToCheck.tileCoOrdY) + "]")
-		SetTileAdjacency(tileMapIndex, tileToCheck)
+
+		refTileMapIndex = tileToCheck.parentTileID
+		SetTileAdjacency(refTileMapIndex, tileToCheck)
 
 		# Again Set the first 4 adjacent tiles in the immediate vicinity of the popped tile
-		# SetTilesToCheckData2((gridDimension.x * tileToCheck.coOrdX) + tileToCheck.coOrdY)
+		SetTilesToCheckData2(refTileMapIndex, (gridDimension.x * tileToCheck.tileCoOrdX) + tileToCheck.tileCoOrdY)
 
 		# For Debugging
-		# stackPoppdCount += 1
-		# if (stackPoppdCount > 2): break
+		stackPoppdCount += 1
+		if (stackPoppdCount > 100): break
 
 		#tileMapIndex error | not being set for the neighbours when it is neighbours turn
 		# var tempTransposedIndex = tileToCheck.tileCoOrdX + (tileToCheck.tileCoOrdY * gridDimension.y)
 		# if(!tileMap[tempTransposedIndex].collapsed):
 		# 	SetTilesToCheckData(tileToCheck.tileCoOrdX, tileToCheck.tileCoOrdY)		
 	# """
+	print("Stack Count : " + str(tilesToCheckStack.size()))
 
 
 ## Helper function to set the Stack which checks the neighbouring tiles of the current selected tile.
 ## It adds the right/left/bottom/top tiles to the Stack
-func SetTilesToCheckData2(tileMapIndex: int):
+func SetTilesToCheckData2(parentTileID: int, refTileMapIndex: int):
 	# var currentIndex1D = (gridDimension.x * coOrdX) + coOrdY
-	var coOrdX = tileMapIndex / gridDimension.x
-	var coOrdY = tileMapIndex - (coOrdX * gridDimension.x)
-	print("Setting Tile Data | tileMapIndex : " + str(tileMapIndex) + " | X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "]")
+	var coOrdX = (refTileMapIndex / gridDimension.x)
+	var coOrdY = refTileMapIndex - (coOrdX * gridDimension.x)
+	print("=========> Setting Tile Data | refTileMapIndex : " + str(refTileMapIndex) + " | X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "] <=======\n")
 	
 	var tempTileData
 
 	# Create SuperTiles along with Adjacecny Tile check in each possible direction
 	var tilePosXMult = 0
 	var tilePosYMult = 1
+	var tempTileCoOrdX = -1
+	var tempTileCoOrdY = -1
 	for tileCountX in 2:
 		for tileCountY in 2:
 			# print("Instantiating at Position : ", position)
-			var tempTileCoOrdX = coOrdX + (1 * tilePosXMult)
-			var tempTileCoOrdY = coOrdY + (1 * tilePosYMult)
+			tempTileCoOrdX = coOrdX + (1 * tilePosXMult)
+			tempTileCoOrdY = coOrdY + (1 * tilePosYMult)
 
-			if (!tileMap[(gridDimension.x * tempTileCoOrdX) + tempTileCoOrdY].collapsed # Check if the tile is collapsed or not
-				&& tempTileCoOrdX >= 0 && tempTileCoOrdX < gridDimension.x
-				&& tempTileCoOrdY >= 0 && tempTileCoOrdY < gridDimension.y): # Check if within bounds
+			if (tempTileCoOrdX >= 0 && tempTileCoOrdX < gridDimension.x # Check if within bounds
+				&& tempTileCoOrdY >= 0 && tempTileCoOrdY < gridDimension.y
+				&& !tileMap[(gridDimension.x * tempTileCoOrdX) + tempTileCoOrdY].collapsed # Check if the tile is collapsed or not
+				&& ((gridDimension.x * tempTileCoOrdX) + tempTileCoOrdY) != parentTileID): # Check if we are not adding the Calling Tile
+				
 				# CreateSuperTile(tempTileCoOrdX, tempTileCoOrdY)
 				tempTileData = Helper.TransposedTileData.new()
 				tempTileData.tileCoOrdX = tempTileCoOrdX
 				tempTileData.tileCoOrdY = tempTileCoOrdY
+
 				# Wrong Below
 				# tempTileData.socketDir = ((tileCountY - tileCountX) * tilePosXMult) + ((2 + tileCountY) * tilePosYMult)
 				if (tileCountX == 0):
@@ -169,17 +178,22 @@ func SetTilesToCheckData2(tileMapIndex: int):
 				else:
 					tempTileData.socketDir = tileCountY
 
+				tempTileData.parentTileID = refTileMapIndex
+
 				tilesToCheckStack.push_back(tempTileData)
 				# """
 				print("Tile Pushed | tileCountX : " + str(tileCountX) + " | tileCountY : " + str(tileCountY)
 						+ " | [" + str(tempTileCoOrdX) + "," + str(tempTileCoOrdY) + "]"
-						+ " | socketDir : " + str(tempTileData.socketDir))
+						+ " | socketDir : " + str(tempTileData.socketDir)
+						+ " | tileMapVal : " + str((gridDimension.x * tempTileCoOrdX) + tempTileCoOrdY))
 				# """
 
 			tilePosYMult = tilePosYMult * -1
 			tilePosXMult = tilePosXMult * -1
 		tilePosYMult = 0
 		tilePosXMult = 1
+	print("=========> Setting Tile Data <=======\n")
+	
 
 # Set the next tile according to the adjacency list of the current assigned tile and the direction w.r.t. current tile
 # We set a loop and remove the tile indexes in the tilesAvailable list untill all non-compatible tiles are removed
@@ -191,9 +205,12 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 	#Compare Socket | "Positive Socket" can only be compared to "Negative Socket" without rotation
 	#Search down of the tile
 
+	"""
 	print("Checking | Index [" + str(selectedTileIndex) + "] | SocketDir [" + str(tileToCheck.socketDir) + "]"
 		+ " | currentTileIndex: " + str(tileMap[selectedTileIndex].currentTileIndex)
 		+ " | Dir : X[" + str(tileToCheck.tileCoOrdX) + "], Y[" + str(tileToCheck.tileCoOrdY) + "]")
+	"""
+
 	# =========================================>		Getting Adjacent List		<======================================
 
 	# We assume that the index will be set, as without index, this shouldnt be triggered
@@ -219,9 +236,10 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 				# adjList = tilesJsonData.tile_info[selectedTileValue].adjacency_list[UniversalConstants.SocketDirection.NEGATIVEY]
 	"""
 
-	# """
+	"""
 	print("Adjacency List : " + str(tilesJsonData.tile_info[tileMap[selectedTileIndex].currentTileIndex].adjacency_list[tileToCheck.socketDir]));
 	# """
+
 	# =========================================>		Getting Adjacent List		<======================================
 
 
@@ -348,7 +366,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 				
 			# Get the comaptible socket values in the respective "Adjacency List" of the "Current Selected Tile" 
 			# which is in the direction of the "Tile To Compare"
-			selectedTileAdjListSize = tilesJsonData.tile_info[i].adjacency_list.size()
+			selectedTileAdjListSize = tilesJsonData.tile_info[i].adjacency_list[tileToCheck.socketDir].size()
 			for j in selectedTileAdjListSize:
 
 				# Check from the "Available Tiles", which tile's socket value in the desired direction
@@ -356,7 +374,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 				for k in availableTilesSize:
 					if (tilesJsonData.tile_info[i].adjacency_list[tileToCheck.socketDir][j]
 						== tilesJsonData.tile_info[k].socket_values[compSocketDir]):
-						print("Found Socket | Socket [" + str(k) + "] : [" + str(compSocketDir) + "]")
+						# print("Found Socket | Socket [" + str(k) + "] : [" + str(compSocketDir) + "]")
 						tileMap[tileToCheckIndex1D].tilesAvailable[i] = i
 						break
 					# print("Adjacency Socket Val : " + str(tilesJsonData.tile_info[i].adjacency_list[j]))

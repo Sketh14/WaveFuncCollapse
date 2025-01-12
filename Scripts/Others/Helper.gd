@@ -10,3 +10,4 @@ class TransposedTileData:
 	var tileCoOrdX: int
 	var tileCoOrdY: int
 	var socketDir: UniversalConstants.SocketDirection
+	var parentTileID: int
