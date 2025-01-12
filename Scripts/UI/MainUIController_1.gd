@@ -9,6 +9,8 @@ var selectedTileIndexInMap = 0
 
 func _ready():
 	waveFunctionHandler = get_tree().get_root().get_node(UniversalConstants.waveFunctionScriptPath) as WaveFunctionCollapse2
+	waveFunctionHandler.UpdateTileData_sig.connect(SetCurrentAndShowAvailableTiles)
+
 	InitializeButtons()
 	DisableAllTiles()
 
@@ -31,21 +33,37 @@ func DisableAllTiles():
 
 func SetCurrentAndShowAvailableTiles(tileID: int):
 	# print("Tile ID to check : " + str(tileID))
+
 	# Offset by 1 for buttons ID
 	selectedTileIndexInMap = tileID
-	debugLabel.text = str(waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable)
+	debugLabel.text = ("Tile ID : " + str(tileID) + " | Tiles Avl: " + str(waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable)
+	+ "\n Collapsed: " + str(waveFunctionHandler.tileMap[selectedTileIndexInMap].collapsed))
 
-	var availableTilesIndex = 0
-	var btTilesIndex = 0
-	var btArrSize = selectedTilesBts.size()
-	var availableTilesCount = waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable.size()
-	# Array is sorted which is why, this below is possible
-	while btTilesIndex != btArrSize:
-		if (availableTilesIndex < availableTilesCount &&
-			waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable[availableTilesIndex] == btTilesIndex):
-			selectedTilesBts[btTilesIndex].visible = true
-			availableTilesIndex += 1
-			btTilesIndex += 1
+
+	var btArrSize = selectedTilesBts.size() - 1
+	"""
+		var availableTilesIndex = 0
+		var btTilesIndex = 0
+		var availableTilesCount = waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable.size()
+
+		# Array is sorted which is why, this below is possible		# This is Wrong
+		while btTilesIndex != btArrSize:
+			if (availableTilesIndex < availableTilesCount &&
+				waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable[availableTilesIndex] == btTilesIndex):
+				selectedTilesBts[btTilesIndex].visible = true
+				availableTilesIndex += 1
+				btTilesIndex += 1
+			else:
+				selectedTilesBts[btTilesIndex].visible = false
+				btTilesIndex += 1
+	"""
+
+	# As the tile has been collapsed, it should not have any available possible tiles to be placed on it
+	# if (waveFunctionHandler.tileMap[selectedTileIndexInMap].collapsed): return
+
+	for i in btArrSize:
+		if (waveFunctionHandler.tileMap[selectedTileIndexInMap].collapsed
+			|| waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable[i] == -1):
+			selectedTilesBts[i].visible = false
 		else:
-			selectedTilesBts[btTilesIndex].visible = false
-			btTilesIndex += 1
+			selectedTilesBts[i].visible = true

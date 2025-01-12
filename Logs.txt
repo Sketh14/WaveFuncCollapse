@@ -268,6 +268,22 @@ Project
 			<~> Renaming Variables
 			<~> Fixing Adjacency Logic
 				{+} Comapring Socket Values of the Available Tiles in the list of the Comparison Tile
+
+- Scripts
+	(-) MainUIController_1
+		[=] Changing Selection-Tiles deactivation/activation logic
+		[=] Connect signal from WaveFunctionCollapse to update tile
+	(-) UITileController_1
+		[=] Calling text update at first
+	(-) WaveFunctionCollapse2
+		[=] SetTileAdjacency
+			<~> Checking if the tile is collapsed at the end
+			<~> Using simple loop instead of getting values simultaneously
+				{+} Removing tilesAvailableIndexToCheck
+
+		[=] Changing UpdateTileData_sig
+			<~> Sending Tile-Id along with the signal
+		
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
 [DO] - Refactor UITileController_1 and add all buttons to MainUIController_1
