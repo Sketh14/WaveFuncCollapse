@@ -1,0 +1,240 @@
+[gd_scene load_steps=6 format=3 uid="uid://cewiy0d2bjpka"]
+
+[ext_resource type="PackedScene" uid="uid://bdeicjkvvfk7u" path="res://Prefab/UI/BtPrefab_1.tscn" id="1_op8q5"]
+[ext_resource type="PackedScene" uid="uid://bno6vf85fao5e" path="res://Prefab/UI/TileSelectionBtPrefab_1.tscn" id="2_4e3bt"]
+[ext_resource type="Theme" uid="uid://dw70fre4exfuq" path="res://Themes/MainTileTheme_2.tres" id="3_du6bc"]
+[ext_resource type="Script" path="res://Scripts/UI_Alt/WaveFunctionCollapse2.gd" id="4_143x1"]
+[ext_resource type="Script" path="res://Scripts/UI/MainUIController_1.gd" id="5_ixidq"]
+
+[node name="Main02" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -107.0
+offset_right = 107.0
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "WAVE FUNCTION COLLAPSE"
+
+[node name="MainUI_Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer_1" type="GridContainer" parent="MainUI_Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -166.0
+offset_right = 166.0
+offset_bottom = 166.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="Button_0" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+layout_mode = 2
+
+[node name="Button_1" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+layout_mode = 2
+text = "1"
+tileID = 1
+
+[node name="Button_2" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+layout_mode = 2
+text = "2"
+tileID = 2
+
+[node name="Button_3" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+layout_mode = 2
+text = "3"
+tileID = 3
+
+[node name="Button_4" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+layout_mode = 2
+text = "4"
+tileID = 4
+
+[node name="Button_5" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+layout_mode = 2
+text = "5"
+tileID = 5
+
+[node name="Button_6" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+layout_mode = 2
+text = "6"
+tileID = 6
+
+[node name="Button_7" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+layout_mode = 2
+text = "7"
+tileID = 7
+
+[node name="Button_8" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+layout_mode = 2
+text = "8"
+tileID = 8
+
+[node name="Debug_Panel" type="Panel" parent="MainUI_Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.25
+anchor_bottom = 0.02
+offset_bottom = 300.0
+
+[node name="DebugBanner" type="Label" parent="MainUI_Control/Debug_Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "--- DEBUG --"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="DebugLabel2" type="Label" parent="MainUI_Control/Debug_Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.09
+anchor_right = 0.99
+anchor_bottom = 0.99
+text = "-------------------"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="AvailableTiles_Panel" type="Panel" parent="MainUI_Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.85
+anchor_right = 0.97
+anchor_bottom = 0.95
+offset_right = 0.00012207
+offset_bottom = -6.10352e-05
+
+[node name="GridContainer" type="GridContainer" parent="MainUI_Control/AvailableTiles_Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.5
+anchor_right = 0.97
+anchor_bottom = 0.5
+offset_top = -16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 5
+columns = 18
+
+[node name="TileBt_0" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+
+[node name="TileBt_1" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "1"
+
+[node name="TileBt_2" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "2"
+
+[node name="TileBt_3" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "3"
+
+[node name="TileBt_4" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "4"
+
+[node name="TileBt_5" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "5"
+
+[node name="TileBt_6" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "6"
+
+[node name="TileBt_7" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "7"
+
+[node name="TileBt_8" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "8"
+
+[node name="TileBt_9" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "9"
+
+[node name="TileBt_10" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "10"
+
+[node name="TileBt_11" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "11"
+
+[node name="TileBt_12" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "12"
+
+[node name="TileBt_13" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "13"
+
+[node name="TileBt_14" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "14"
+
+[node name="TileBt_15" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "15"
+
+[node name="TileBt_16" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "16"
+
+[node name="TileBt_17" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+text = "17"
+
+[node name="AdjTestForUnCollapsed" type="Button" parent="MainUI_Control"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 0
+offset_left = 1050.0
+offset_top = 360.0
+offset_right = 1102.0
+offset_bottom = 412.0
+theme = ExtResource("3_du6bc")
+text = "AdjTest"
+
+[node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "testAdjForUnCollapsedBt")]
+script = ExtResource("4_143x1")
+debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
+gridDimension = 3
+testAdjForUnCollapsedBt = NodePath("../MainUI_Control/AdjTestForUnCollapsed")
+
+[node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "selectedTilesBts")]
+script = ExtResource("5_ixidq")
+debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
+selectedTilesBts = [NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_0"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_1"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_2"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_3"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_4"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_5"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_6"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_7"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_8"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_9"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_10"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_11"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_12"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_13"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_14"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_15"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_16"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_17")]

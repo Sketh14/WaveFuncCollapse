@@ -285,7 +285,7 @@ Project
 			<~> Sending Tile-Id along with the signal
 
 --------------------------------------------------------------------------------------
-									11 JANUARY 2024
+									12 JANUARY 2024
 --------------------------------------------------------------------------------------
 
 - Scripts
@@ -313,9 +313,545 @@ Project
 			<~> ParentTileID check
 			<~> Sending ParentTileID also
 
+--------------------------------------------------------------------------------------
+									13 JANUARY 2024
+--------------------------------------------------------------------------------------
+- Scripts
+	(-) WaveFunctionCollapse2
+		[=] Using Different Approach
+			<~> Pushing individual tile to the stack instead of the neighbours
+			<~> Bringing SetTilesToCheckData2 logic to while loop for direction checking
+			<~> Removing refTileMapIndex
+			<~> Changing gridDimension to int
+			<~> Changing SetTileAdjacency to return bool depending on if the tile is changed or not
+
 		
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
 [DO] - Refactor UITileController_1 and add all buttons to MainUIController_1
 [DO] - Short Down TransposedTileData | dont need explicit x/y Co-Ordinates
 [DO] - Replace TilesAvailable in SuperTileCell with bool or byte[Not possible in GDScript]
+
+
+---------------------------------------------------------------------------------------------
+
+Godot Engine v4.1.1.stable.official.bd6af8e0e - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 475.14 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce GT 730
+ 
+Json loaded successfully | tiles List count : 18
+=========> Setting Tile Data | refTileMapIndex : 4 | X[1], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [1,2] | socketDir : 3 | tileMapVal : 5
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [1,0] | socketDir : 2 | tileMapVal : 3
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [2,1] | socketDir : 0 | tileMapVal : 7
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [0,1] | socketDir : 1 | tileMapVal : 1
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 1 | X[0], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [0,2] | socketDir : 3 | tileMapVal : 2
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,0] | socketDir : 2 | tileMapVal : 0
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 0 | X[0], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [1,0] | socketDir : 0 | tileMapVal : 3
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 3 | X[1], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [2,0] | socketDir : 0 | tileMapVal : 6
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 6 | X[2], Y[0] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,1] | socketDir : 3 | tileMapVal : 7
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 7 | X[2], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,2] | socketDir : 3 | tileMapVal : 8
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 8 | X[2], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [1,2] | socketDir : 1 | tileMapVal : 5
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 5 | X[1], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [0,2] | socketDir : 1 | tileMapVal : 2
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 2 | X[0], Y[2] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,1] | socketDir : 2 | tileMapVal : 1
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 1 | X[0], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,0] | socketDir : 2 | tileMapVal : 0
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 0 | X[0], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [1,0] | socketDir : 0 | tileMapVal : 3
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 3 | X[1], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [2,0] | socketDir : 0 | tileMapVal : 6
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 6 | X[2], Y[0] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,1] | socketDir : 3 | tileMapVal : 7
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 7 | X[2], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,2] | socketDir : 3 | tileMapVal : 8
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 8 | X[2], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [1,2] | socketDir : 1 | tileMapVal : 5
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 5 | X[1], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [0,2] | socketDir : 1 | tileMapVal : 2
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 2 | X[0], Y[2] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,1] | socketDir : 2 | tileMapVal : 1
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 1 | X[0], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,0] | socketDir : 2 | tileMapVal : 0
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 0 | X[0], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [1,0] | socketDir : 0 | tileMapVal : 3
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 3 | X[1], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [2,0] | socketDir : 0 | tileMapVal : 6
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 6 | X[2], Y[0] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,1] | socketDir : 3 | tileMapVal : 7
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 7 | X[2], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,2] | socketDir : 3 | tileMapVal : 8
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 8 | X[2], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [1,2] | socketDir : 1 | tileMapVal : 5
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 5 | X[1], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [0,2] | socketDir : 1 | tileMapVal : 2
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 2 | X[0], Y[2] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,1] | socketDir : 2 | tileMapVal : 1
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 1 | X[0], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,0] | socketDir : 2 | tileMapVal : 0
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 0 | X[0], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [1,0] | socketDir : 0 | tileMapVal : 3
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 3 | X[1], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [2,0] | socketDir : 0 | tileMapVal : 6
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 6 | X[2], Y[0] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,1] | socketDir : 3 | tileMapVal : 7
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 7 | X[2], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,2] | socketDir : 3 | tileMapVal : 8
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 8 | X[2], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [1,2] | socketDir : 1 | tileMapVal : 5
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 5 | X[1], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [0,2] | socketDir : 1 | tileMapVal : 2
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 2 | X[0], Y[2] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,1] | socketDir : 2 | tileMapVal : 1
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 1 | X[0], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,0] | socketDir : 2 | tileMapVal : 0
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 0 | X[0], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [1,0] | socketDir : 0 | tileMapVal : 3
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 3 | X[1], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [2,0] | socketDir : 0 | tileMapVal : 6
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 6 | X[2], Y[0] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,1] | socketDir : 3 | tileMapVal : 7
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 7 | X[2], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,2] | socketDir : 3 | tileMapVal : 8
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 8 | X[2], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [1,2] | socketDir : 1 | tileMapVal : 5
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 5 | X[1], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [0,2] | socketDir : 1 | tileMapVal : 2
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 2 | X[0], Y[2] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,1] | socketDir : 2 | tileMapVal : 1
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 1 | X[0], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,0] | socketDir : 2 | tileMapVal : 0
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 0 | X[0], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [1,0] | socketDir : 0 | tileMapVal : 3
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 3 | X[1], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [2,0] | socketDir : 0 | tileMapVal : 6
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 6 | X[2], Y[0] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,1] | socketDir : 3 | tileMapVal : 7
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 7 | X[2], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,2] | socketDir : 3 | tileMapVal : 8
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 8 | X[2], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [1,2] | socketDir : 1 | tileMapVal : 5
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 5 | X[1], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [0,2] | socketDir : 1 | tileMapVal : 2
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 2 | X[0], Y[2] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,1] | socketDir : 2 | tileMapVal : 1
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 1 | X[0], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,0] | socketDir : 2 | tileMapVal : 0
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 0 | X[0], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [1,0] | socketDir : 0 | tileMapVal : 3
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 3 | X[1], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [2,0] | socketDir : 0 | tileMapVal : 6
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 6 | X[2], Y[0] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,1] | socketDir : 3 | tileMapVal : 7
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 7 | X[2], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,2] | socketDir : 3 | tileMapVal : 8
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 8 | X[2], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [1,2] | socketDir : 1 | tileMapVal : 5
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 5 | X[1], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [0,2] | socketDir : 1 | tileMapVal : 2
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 2 | X[0], Y[2] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,1] | socketDir : 2 | tileMapVal : 1
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 1 | X[0], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,0] | socketDir : 2 | tileMapVal : 0
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 0 | X[0], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [1,0] | socketDir : 0 | tileMapVal : 3
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 3 | X[1], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [2,0] | socketDir : 0 | tileMapVal : 6
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 6 | X[2], Y[0] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,1] | socketDir : 3 | tileMapVal : 7
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 7 | X[2], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,2] | socketDir : 3 | tileMapVal : 8
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 8 | X[2], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [1,2] | socketDir : 1 | tileMapVal : 5
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 5 | X[1], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [0,2] | socketDir : 1 | tileMapVal : 2
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 2 | X[0], Y[2] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,1] | socketDir : 2 | tileMapVal : 1
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 1 | X[0], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,0] | socketDir : 2 | tileMapVal : 0
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 0 | X[0], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [1,0] | socketDir : 0 | tileMapVal : 3
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 3 | X[1], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [2,0] | socketDir : 0 | tileMapVal : 6
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 6 | X[2], Y[0] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,1] | socketDir : 3 | tileMapVal : 7
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 7 | X[2], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,2] | socketDir : 3 | tileMapVal : 8
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 8 | X[2], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [1,2] | socketDir : 1 | tileMapVal : 5
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 5 | X[1], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [0,2] | socketDir : 1 | tileMapVal : 2
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 2 | X[0], Y[2] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,1] | socketDir : 2 | tileMapVal : 1
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 1 | X[0], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,0] | socketDir : 2 | tileMapVal : 0
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 0 | X[0], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [1,0] | socketDir : 0 | tileMapVal : 3
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 3 | X[1], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [2,0] | socketDir : 0 | tileMapVal : 6
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 6 | X[2], Y[0] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,1] | socketDir : 3 | tileMapVal : 7
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 7 | X[2], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,2] | socketDir : 3 | tileMapVal : 8
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 8 | X[2], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [1,2] | socketDir : 1 | tileMapVal : 5
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 5 | X[1], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [0,2] | socketDir : 1 | tileMapVal : 2
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 2 | X[0], Y[2] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,1] | socketDir : 2 | tileMapVal : 1
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 1 | X[0], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,0] | socketDir : 2 | tileMapVal : 0
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 0 | X[0], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [1,0] | socketDir : 0 | tileMapVal : 3
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 3 | X[1], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [2,0] | socketDir : 0 | tileMapVal : 6
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 6 | X[2], Y[0] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,1] | socketDir : 3 | tileMapVal : 7
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 7 | X[2], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,2] | socketDir : 3 | tileMapVal : 8
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 8 | X[2], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [1,2] | socketDir : 1 | tileMapVal : 5
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 5 | X[1], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [0,2] | socketDir : 1 | tileMapVal : 2
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 2 | X[0], Y[2] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,1] | socketDir : 2 | tileMapVal : 1
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 1 | X[0], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,0] | socketDir : 2 | tileMapVal : 0
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 0 | X[0], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [1,0] | socketDir : 0 | tileMapVal : 3
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 3 | X[1], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [2,0] | socketDir : 0 | tileMapVal : 6
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 6 | X[2], Y[0] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,1] | socketDir : 3 | tileMapVal : 7
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 7 | X[2], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,2] | socketDir : 3 | tileMapVal : 8
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 8 | X[2], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [1,2] | socketDir : 1 | tileMapVal : 5
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 5 | X[1], Y[2] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 1 | [0,2] | socketDir : 1 | tileMapVal : 2
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 2 | X[0], Y[2] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,1] | socketDir : 2 | tileMapVal : 1
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 1 | X[0], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 1 | [0,0] | socketDir : 2 | tileMapVal : 0
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 0 | X[0], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [1,0] | socketDir : 0 | tileMapVal : 3
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 3 | X[1], Y[0] <=======
+
+Tile Pushed | tileCountX : 1 | tileCountY : 0 | [2,0] | socketDir : 0 | tileMapVal : 6
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 6 | X[2], Y[0] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,1] | socketDir : 3 | tileMapVal : 7
+=========> Setting Tile Data <=======
+
+=========> Setting Tile Data | refTileMapIndex : 7 | X[2], Y[1] <=======
+
+Tile Pushed | tileCountX : 0 | tileCountY : 0 | [2,2] | socketDir : 3 | tileMapVal : 8
+=========> Setting Tile Data <=======
+
+Stack Count : 5
+--- Debugging process stopped ---
