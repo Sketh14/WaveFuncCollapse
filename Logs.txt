@@ -333,6 +333,13 @@ Project
 		[=] Tile Adjacency logic change
 			<~> Creating a super list to store all the adjacency lists of different available tiles in 1 place
 			<~> Casting adjacency value to int as they are being exported as float
+
+- Scripts
+	(-) WaveFunctionCollapse2
+		[=] Tile Adjacency logic change
+			<~> Replacing separate adj list check in for loop with superlist checks
+			<~> Fixing Super-Adj-List Addition | Using selectedTileIndex for current tile and not neighbour tile
+			<~> Fixing Adj-check | Using neighbour-tile and not current tile
 		
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability

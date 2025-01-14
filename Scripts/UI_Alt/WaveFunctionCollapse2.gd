@@ -406,7 +406,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 		for i in availableTilesSize:
 
 			# Skip not available tiles
-			if (tileMap[tileToCheckIndex1D].tilesAvailable[i] < 0):
+			if (tileMap[selectedTileIndex].tilesAvailable[i] < 0):
 				continue
 
 			sameAdjValFound = false
@@ -427,7 +427,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 					# print("j[" + str(j) + "] | Adj Val : " + str(tempAdjVal)
 					# 	+ " | type : " + str(typeof(tempAdjVal)) + " | Count : " + str(superAdjList.size()))
 					
-		# print("Super Adj List | Count : " + str(superAdjList.size()) + " | Val :" + str(superAdjList))
+		print("Super Adj List | Count : " + str(superAdjList.size()) + " | Val :" + str(superAdjList))
 		# return false						# FOR DEBUGGING
 
 		# TODO: REMOVEEEEEEEEE
@@ -450,11 +450,13 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 			UniversalConstants.SocketDirection.NEGATIVEY:
 				compSocketDir = UniversalConstants.SocketDirection.POSITIVEY
 
+		print("Available Tiles | Count : " + str(tileMap[tileToCheckIndex1D].tilesAvailable.size())
+				+ " | Val : " + str(tileMap[tileToCheckIndex1D].tilesAvailable))
 		# Get the "Available Tiles" list of the "Tile To Check"
 		for i in availableTilesSize:
 
 			# Skip if the tile at this index as it is not available
-			if (tileMap[selectedTileIndex].tilesAvailable[i] < 0):
+			if (tileMap[tileToCheckIndex1D].tilesAvailable[i] < 0):
 				# print("i is 0 | Reducing Total Count | availableTilesSize[" + str(availableTilesSize) + "]\n\n")
 				continue
 
@@ -465,33 +467,29 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 			# """
 
 			# var socketIndex = 0 # THis is for debugging only
-				
+			
+			sameAdjValFound = false
 			# Get the comaptible socket values in the respective "Adjacency List" of the "Current Selected Tile" 
 			# which is in the direction of the "Tile To Compare"
-			selectedTileAdjListSize = tilesJsonData.tile_info[i].adjacency_list[tileToCheck.socketDir].size()
+			selectedTileAdjListSize = superAdjList.size()
 			for j in selectedTileAdjListSize:
 
 				# Check from the "Available Tiles", which tile's socket value in the desired direction
 				# is equal to the adjacency socket value
-				for k in availableTilesSize:
-					if (tileMap[tileToCheckIndex1D].tilesAvailable[k] < 0):
-						continue
-
-					if (tilesJsonData.tile_info[i].adjacency_list[tileToCheck.socketDir][j]
-						== tilesJsonData.tile_info[k].socket_values[compSocketDir]):
-						# print("Found Socket | Socket [" + str(k) + "] : [" + str(compSocketDir) + "]")
-						tileMap[tileToCheckIndex1D].tilesAvailable[i] = i
-						break
-					# print("Adjacency Socket Val : " + str(tilesJsonData.tile_info[i].adjacency_list[j]))
-
+				if (superAdjList[j] == tilesJsonData.tile_info[i].socket_values[compSocketDir]):
+					print("Found Socket | Socket [" + str(i) + "] : [" + str(superAdjList[j]) + "] | [" + str(compSocketDir) + "]")
+					sameAdjValFound = true
+					break
+				# print("Adjacency Socket Val : " + str(tilesJsonData.tile_info[i].adjacency_list[j]))
 
 			#This causes a bit more problem, as in, if there are more than 1 value in the adjacency list, then the values assigned by a 
 			#previous match loop in the list, are removed by the very next match loop. And so everything turns to -1
-			# if (!foundTile):
-			# 	tileMap[tileToCheckIndex1D].tilesAvailable[i] = -1
-			"""
-			print("Removing Tile | Socket [" + str(tilesAvailableIndexToCheck) + "] : [" + str(i) + "] | tileValueRemoved : "
-					+ str(tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck]));
+			if (!sameAdjValFound):
+				tileMap[tileToCheckIndex1D].tilesAvailable[i] = -1
+				tileChanged = true
+			# """
+				print("Removing Tile | i[" + str(i) + "] | tileValueRemoved : "
+						+ str(tileMap[tileToCheckIndex1D].tilesAvailable[i]));
 			# """
 
 		UpdateTileData_sig.emit(tileToCheckIndex1D)
