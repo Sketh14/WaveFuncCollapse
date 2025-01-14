@@ -24,6 +24,9 @@ var tileMap: Array[Helper.SuperTileCell]
 #Stack that will contain all the tiles that ar to be checked in adjacency
 var tilesToCheckStack: Array[int]
 
+# List to store all the "Adjacency List" of the available tiles in the selected tile's list
+var superAdjList: Array[int]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 
@@ -35,6 +38,16 @@ func _ready():
 
 	LoadAdjacencyJson()
 	InitializeData()
+	# Test1()
+
+func Test1():
+	var test1 = 10.0
+	match (typeof(test1)):
+		TYPE_INT:
+			print("Integer : " + str(typeof(test1)))
+		TYPE_FLOAT:
+			print("Float : " + str(typeof(test1)))
+
 
 func SetCurrentAndShowAvailableTiles(tileID: int):
 	# print("Tile ID to check : " + str(tileID))
@@ -141,7 +154,7 @@ func SetTile(tileMapIndex: int, valToSet: int):
 				# print("Instantiating at Position : ", position)
 				tileToCheckData.tileCoOrdX = coOrdX + (1 * coOrdXMult)
 				tileToCheckData.tileCoOrdY = coOrdY + (1 * coOrdYMult)
-				print("Tile CoOrd : [" + str(tileToCheckData.tileCoOrdX) + "," + str(tileToCheckData.tileCoOrdY) + "]")
+				# print("Tile CoOrd : [" + str(tileToCheckData.tileCoOrdX) + "," + str(tileToCheckData.tileCoOrdY) + "]")
 
 				# Check if within bounds
 				if (tileToCheckData.tileCoOrdX < 0 || tileToCheckData.tileCoOrdX >= gridDimension
@@ -185,7 +198,7 @@ func SetTile(tileMapIndex: int, valToSet: int):
 
 		# For Debugging
 		stackPoppdCount += 1
-		if (stackPoppdCount > 5): break
+		if (stackPoppdCount > 1): break
 	# """
 	print("Stack Count : " + str(tilesToCheckStack.size()))
 
@@ -260,7 +273,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 	print("Checking | Index [" + str(selectedTileIndex) + "] | SocketDir [" + str(tileToCheck.socketDir) + "]"
 		+ " | currentTileIndex: " + str(tileMap[selectedTileIndex].currentTileIndex)
 		+ " | Dir : X[" + str(tileToCheck.tileCoOrdX) + "], Y[" + str(tileToCheck.tileCoOrdY) + "]")
-	"""
+	# """
 
 	# =========================================>		Getting Adjacent List		<======================================
 
@@ -385,11 +398,45 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 		# As the "Selected Tile" is not collapsed, there can be no way of only 1 possible solution existing for the "Tile Being Checked".
 		# If the Solution exists, then there are duplicates in the "TilesAvailable" list
 
-		tileChanged = true
-		# TODO: REMOVEEEEEEEEE
-		# Disable Everything in the "Available Tiles" list of the "Tile To Check"
+		# Creating a Super List for adjacency
+		superAdjList.clear()
+		var selectedTileAdjListSize = 0
+		var tempAdjVal = -1
+		var sameAdjValFound = false
 		for i in availableTilesSize:
-			tileMap[tileToCheckIndex1D].tilesAvailable[i] = -1
+
+			# Skip not available tiles
+			if (tileMap[tileToCheckIndex1D].tilesAvailable[i] < 0):
+				continue
+
+			sameAdjValFound = false
+			# selectedTileAdjListSize = tilesJsonData.tile_info[tileMap[tileToCheckIndex1D].tilesAvailable[i]].adjacency_list[tileToCheck.socketDir].size()
+			selectedTileAdjListSize = tilesJsonData.tile_info[i].adjacency_list[tileToCheck.socketDir].size()
+			# print("i["+str(i)+"] | Adj List : " + str(tilesJsonData.tile_info[i].adjacency_list[tileToCheck.socketDir]))
+			for j in selectedTileAdjListSize:
+				tempAdjVal = tilesJsonData.tile_info[i].adjacency_list[tileToCheck.socketDir][j] as int
+
+				#Check if the value is present in the Super List before adding to it
+				for tempArrVal in superAdjList:
+					if (tempArrVal == tempAdjVal):
+						sameAdjValFound = true
+						break
+				if (!sameAdjValFound):
+					# superAdjList.push_back(tilesJsonData.tile_info[tileMap[tileToCheckIndex1D].tilesAvailable[i]].adjacency_list[tileToCheck.socketDir][j])
+					superAdjList.push_back(tempAdjVal)
+					# print("j[" + str(j) + "] | Adj Val : " + str(tempAdjVal)
+					# 	+ " | type : " + str(typeof(tempAdjVal)) + " | Count : " + str(superAdjList.size()))
+					
+		# print("Super Adj List | Count : " + str(superAdjList.size()) + " | Val :" + str(superAdjList))
+		# return false						# FOR DEBUGGING
+
+		# TODO: REMOVEEEEEEEEE
+		# The below is wrong as we we are adding new tiles to the checking tile instead of removing as we have to reduce it,
+		# and not increase it.
+			# tileChanged = true
+			# Disable Everything in the "Available Tiles" list of the "Tile To Check"
+			# for i in availableTilesSize:
+			# 	tileMap[tileToCheckIndex1D].tilesAvailable[i] = -1
 
 		# Get the socket direction for the tile which is to be compared
 		var compSocketDir
@@ -403,7 +450,6 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 			UniversalConstants.SocketDirection.NEGATIVEY:
 				compSocketDir = UniversalConstants.SocketDirection.POSITIVEY
 
-		var selectedTileAdjListSize = 0
 		# Get the "Available Tiles" list of the "Tile To Check"
 		for i in availableTilesSize:
 
@@ -428,6 +474,9 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 				# Check from the "Available Tiles", which tile's socket value in the desired direction
 				# is equal to the adjacency socket value
 				for k in availableTilesSize:
+					if (tileMap[tileToCheckIndex1D].tilesAvailable[k] < 0):
+						continue
+
 					if (tilesJsonData.tile_info[i].adjacency_list[tileToCheck.socketDir][j]
 						== tilesJsonData.tile_info[k].socket_values[compSocketDir]):
 						# print("Found Socket | Socket [" + str(k) + "] : [" + str(compSocketDir) + "]")

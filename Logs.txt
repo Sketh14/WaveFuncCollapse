@@ -325,6 +325,14 @@ Project
 			<~> Changing gridDimension to int
 			<~> Changing SetTileAdjacency to return bool depending on if the tile is changed or not
 
+--------------------------------------------------------------------------------------
+									14 JANUARY 2024
+--------------------------------------------------------------------------------------
+- Scripts
+	(-) WaveFunctionCollapse2
+		[=] Tile Adjacency logic change
+			<~> Creating a super list to store all the adjacency lists of different available tiles in 1 place
+			<~> Casting adjacency value to int as they are being exported as float
 		
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
