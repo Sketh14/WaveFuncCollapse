@@ -3,6 +3,11 @@
 		{
 			"tile_index": 0,
 			"tile_name": "Big_Rock_0",
+			"atlas_texture_properties": [
+				1,
+				0,
+				452
+			],
 			"socket_values": [
 				47,
 				45,
@@ -54,6 +59,11 @@
 		{
 			"tile_index": 1,
 			"tile_name": "Big_Rock_1",
+			"atlas_texture_properties": [
+				1,
+				0,
+				420
+			],
 			"socket_values": [
 				51,
 				49,
@@ -105,6 +115,11 @@
 		{
 			"tile_index": 2,
 			"tile_name": "Big_Rock_2",
+			"atlas_texture_properties": [
+				1,
+				32,
+				452
+			],
 			"socket_values": [
 				55,
 				53,
@@ -156,6 +171,11 @@
 		{
 			"tile_index": 3,
 			"tile_name": "Big_Rock_3",
+			"atlas_texture_properties": [
+				1,
+				32,
+				452
+			],
 			"socket_values": [
 				59,
 				57,
@@ -207,6 +227,11 @@
 		{
 			"tile_index": 4,
 			"tile_name": "Grass_0",
+			"atlas_texture_properties": [
+				0,
+				40,
+				23
+			],
 			"socket_values": [
 				3,
 				1,
@@ -285,6 +310,11 @@
 		{
 			"tile_index": 5,
 			"tile_name": "Grass_1",
+			"atlas_texture_properties": [
+				0,
+				128,
+				31
+			],
 			"socket_values": [
 				7,
 				5,
@@ -363,6 +393,11 @@
 		{
 			"tile_index": 6,
 			"tile_name": "Grass_2",
+			"atlas_texture_properties": [
+				0,
+				192,
+				63
+			],
 			"socket_values": [
 				11,
 				9,
@@ -441,6 +476,11 @@
 		{
 			"tile_index": 7,
 			"tile_name": "Grass_3",
+			"atlas_texture_properties": [
+				0,
+				96,
+				87
+			],
 			"socket_values": [
 				15,
 				13,
@@ -519,6 +559,11 @@
 		{
 			"tile_index": 8,
 			"tile_name": "Object_0",
+			"atlas_texture_properties": [
+				1,
+				96,
+				160
+			],
 			"socket_values": [
 				27,
 				25,
@@ -597,6 +642,11 @@
 		{
 			"tile_index": 9,
 			"tile_name": "Object_1",
+			"atlas_texture_properties": [
+				1,
+				160,
+				287
+			],
 			"socket_values": [
 				31,
 				29,
@@ -675,6 +725,11 @@
 		{
 			"tile_index": 10,
 			"tile_name": "Path_0",
+			"atlas_texture_properties": [
+				0,
+				80,
+				127
+			],
 			"socket_values": [
 				23,
 				21,
@@ -753,6 +808,11 @@
 		{
 			"tile_index": 11,
 			"tile_name": "Path_1",
+			"atlas_texture_properties": [
+				0,
+				176,
+				191
+			],
 			"socket_values": [
 				19,
 				17,
@@ -831,6 +891,11 @@
 		{
 			"tile_index": 12,
 			"tile_name": "Rock_0",
+			"atlas_texture_properties": [
+				1,
+				64,
+				480
+			],
 			"socket_values": [
 				35,
 				33,
@@ -909,6 +974,11 @@
 		{
 			"tile_index": 13,
 			"tile_name": "Rock_1",
+			"atlas_texture_properties": [
+				1,
+				27,
+				474
+			],
 			"socket_values": [
 				39,
 				37,
@@ -987,6 +1057,11 @@
 		{
 			"tile_index": 14,
 			"tile_name": "Rock_2",
+			"atlas_texture_properties": [
+				1,
+				160,
+				480
+			],
 			"socket_values": [
 				43,
 				41,
@@ -1065,6 +1140,11 @@
 		{
 			"tile_index": 15,
 			"tile_name": "Tomb_0",
+			"atlas_texture_properties": [
+				1,
+				288,
+				186
+			],
 			"socket_values": [
 				67,
 				65,
@@ -1127,6 +1207,11 @@
 		{
 			"tile_index": 16,
 			"tile_name": "Tomb_1",
+			"atlas_texture_properties": [
+				1,
+				288,
+				154
+			],
 			"socket_values": [
 				63,
 				61,
@@ -1190,6 +1275,11 @@
 		{
 			"tile_index": 17,
 			"tile_name": "Empty_Tile",
+			"atlas_texture_properties": [
+				1,
+				0,
+				0
+			],
 			"adjacency_list": [
 				[
 					0

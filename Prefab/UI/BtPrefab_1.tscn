@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdeicjkvvfk7u"]
+[gd_scene load_steps=5 format=3 uid="uid://bdeicjkvvfk7u"]
 
 [ext_resource type="Theme" uid="uid://dw70fre4exfuq" path="res://Themes/MainTileTheme_2.tres" id="1_u8kkf"]
 [ext_resource type="Script" path="res://Scripts/UI/UITileController_1.gd" id="2_5g68f"]
 [ext_resource type="Theme" uid="uid://bvy3hpak27cl3" path="res://Themes/TextTheme_1.tres" id="3_boxi7"]
+[ext_resource type="Texture2D" uid="uid://cb2x8t3gf1k5a" path="res://Atlas Texture/Props_AT1.tres" id="4_r6bg3"]
 
 [node name="Button" type="Button" node_paths=PackedStringArray("btControl")]
 custom_minimum_size = Vector2(52, 52)
@@ -14,6 +15,7 @@ theme = ExtResource("1_u8kkf")
 text = "0"
 script = ExtResource("2_5g68f")
 btControl = NodePath(".")
+rectRegionPos = Vector2i(0, 420)
 
 [node name="TileId_Label" type="Label" parent="."]
 visible = false
@@ -30,5 +32,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1
 text_direction = 1
+
+[node name="TileImg" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_r6bg3")
+stretch_mode = 4
 
 [connection signal="pressed" from="." to="." method="_on_tile_bt_pressed"]

@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://crhrpsiyo6b0t"]
+
+[ext_resource type="Theme" uid="uid://dw70fre4exfuq" path="res://Themes/MainTileTheme_2.tres" id="1_lvtmw"]
+[ext_resource type="Theme" uid="uid://bvy3hpak27cl3" path="res://Themes/TextTheme_1.tres" id="3_hjsbm"]
+[ext_resource type="Texture2D" uid="uid://cb2x8t3gf1k5a" path="res://Atlas Texture/Props_AT1.tres" id="4_r4ets"]
+[ext_resource type="Script" path="res://Scripts/Test/UI_Test1.gd" id="5_kltb3"]
+
+[node name="Button" type="Button" node_paths=PackedStringArray("tileImg")]
+custom_minimum_size = Vector2(52, 52)
+offset_left = 13.0
+offset_top = 22.0
+offset_right = 65.0
+offset_bottom = 74.0
+theme = ExtResource("1_lvtmw")
+text = "0"
+script = ExtResource("5_kltb3")
+tileImg = NodePath("TileImg")
+
+[node name="TileId_Label" type="Label" parent="."]
+visible = false
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_hjsbm")
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+text_direction = 1
+
+[node name="TileImg" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_r4ets")
+stretch_mode = 4

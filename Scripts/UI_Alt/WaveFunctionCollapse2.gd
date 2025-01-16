@@ -4,6 +4,7 @@ class_name WaveFunctionCollapse2
 @export var debugLabel: Label
 # @export var gridDimension: Vector2i
 @export var gridDimension: int
+@export var tileAtlasTexture: AtlasTexture
 
 # """
 # FoR Testing
@@ -143,7 +144,7 @@ func SetTile(tileMapIndex: int, valToSet: int):
 		poppedTileIndex = tilesToCheckStack.pop_back()
 		coOrdX = (poppedTileIndex / gridDimension)
 		coOrdY = poppedTileIndex % gridDimension
-		print("\n\nGot Tile to check| index : X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "]")
+		# print("\n\nGot Tile to check| index : X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "]")
 		
 		coOrdXMult = 0
 		coOrdYMult = 1
@@ -168,7 +169,7 @@ func SetTile(tileMapIndex: int, valToSet: int):
 				else:
 					tileToCheckData.socketDir = tileCountY
 					
-				# """
+				"""
 				print("Checking Tile | tileCountX : " + str(tileCountX) + " | tileCountY : " + str(tileCountY)
 						+ " | [" + str(tileToCheckData.tileCoOrdX) + "," + str(tileToCheckData.tileCoOrdY) + "]"
 						+ " | socketDir : " + str(tileToCheckData.socketDir)
@@ -176,7 +177,7 @@ func SetTile(tileMapIndex: int, valToSet: int):
 				# """
 
 				if (SetTileAdjacency(poppedTileIndex, tileToCheckData)):
-					# """
+					"""
 					print("=========> Pushing Tile Data | refTileMapIndex : " + str((gridDimension * tileToCheckData.tileCoOrdX) + tileToCheckData.tileCoOrdY)
 						+ " | X[" + str(tileToCheckData.tileCoOrdX) + "], Y[" + str(tileToCheckData.tileCoOrdY) + "] <=======")
 					# """
@@ -197,8 +198,8 @@ func SetTile(tileMapIndex: int, valToSet: int):
 			coOrdXMult = 1
 
 		# For Debugging
-		stackPoppdCount += 1
-		if (stackPoppdCount > 1): break
+		# stackPoppdCount += 1
+		# if (stackPoppdCount > 1): break
 	# """
 	print("Stack Count : " + str(tilesToCheckStack.size()))
 
@@ -427,7 +428,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 					# print("j[" + str(j) + "] | Adj Val : " + str(tempAdjVal)
 					# 	+ " | type : " + str(typeof(tempAdjVal)) + " | Count : " + str(superAdjList.size()))
 					
-		print("Super Adj List | Count : " + str(superAdjList.size()) + " | Val :" + str(superAdjList))
+		# print("Super Adj List | Count : " + str(superAdjList.size()) + " | Val :" + str(superAdjList))
 		# return false						# FOR DEBUGGING
 
 		# TODO: REMOVEEEEEEEEE
@@ -450,8 +451,11 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 			UniversalConstants.SocketDirection.NEGATIVEY:
 				compSocketDir = UniversalConstants.SocketDirection.POSITIVEY
 
+		"""
 		print("Available Tiles | Count : " + str(tileMap[tileToCheckIndex1D].tilesAvailable.size())
 				+ " | Val : " + str(tileMap[tileToCheckIndex1D].tilesAvailable))
+		# """
+
 		# Get the "Available Tiles" list of the "Tile To Check"
 		for i in availableTilesSize:
 
@@ -477,7 +481,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 				# Check from the "Available Tiles", which tile's socket value in the desired direction
 				# is equal to the adjacency socket value
 				if (superAdjList[j] == tilesJsonData.tile_info[i].socket_values[compSocketDir]):
-					print("Found Socket | Socket [" + str(i) + "] : [" + str(superAdjList[j]) + "] | [" + str(compSocketDir) + "]")
+					# print("Found Socket | Socket [" + str(i) + "] : [" + str(superAdjList[j]) + "] | [" + str(compSocketDir) + "]")
 					sameAdjValFound = true
 					break
 				# print("Adjacency Socket Val : " + str(tilesJsonData.tile_info[i].adjacency_list[j]))
@@ -487,7 +491,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 			if (!sameAdjValFound):
 				tileMap[tileToCheckIndex1D].tilesAvailable[i] = -1
 				tileChanged = true
-			# """
+			"""
 				print("Removing Tile | i[" + str(i) + "] | tileValueRemoved : "
 						+ str(tileMap[tileToCheckIndex1D].tilesAvailable[i]));
 			# """

@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cb2x8t3gf1k5a"]
+
+[ext_resource type="Texture2D" uid="uid://on7xocak68ox" path="res://Sprites/Environment/TX Props.png" id="1_135el"]
+
+[resource]
+atlas = ExtResource("1_135el")
+region = Rect2(0, 452, 32, 32)

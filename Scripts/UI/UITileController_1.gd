@@ -5,6 +5,9 @@ class_name UITileController_1 extends Control
 
 @export var btControl: Control
 @export var tileID: int
+@export var rectRegionPos: Vector2i
+
+var tileTex: TextureRect
 # @export var tileEnabled: bool # export for debug
 # @export var tileID_Label: Label
 
@@ -26,6 +29,12 @@ func _ready():
 	waveFunctionHandler.UpdateTileData_sig.connect(UpdateButtonText)
 
 	mainUIController = get_tree().get_root().get_node(UniversalConstants.mainUIControllerScriptPath) as MainUiController_1
+
+	tileTex = get_child(1)
+	tileTex.texture = waveFunctionHandler.tileAtlasTexture.duplicate()
+	# https://www.reddit.com/r/godot/comments/aad39n/how_to_change_texturerect_atlas_texture_region_in/
+	tileTex.texture.region = Rect2(rectRegionPos.x, rectRegionPos.y, UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
+	# print("Atlas Texture Region : " + str(tileTex.texture.region))
 	
 	# await get_tree().create_timer(1.0).timeout
 	# _on_tile_updated()
