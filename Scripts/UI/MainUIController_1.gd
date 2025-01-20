@@ -18,7 +18,7 @@ func _ready():
 # https://docs.godotengine.org/en/stable/classes/class_callable.html
 func InitializeButtons():
 	var btArrSize = selectedTilesBts.size()
-	var tileTex: TextureRect
+	# var tileTex: TextureRect
 	for i in btArrSize:
 		selectedTilesBts[i].connect("pressed", func(): SetTileViaWaveFunctionHandler(i))
 		selectedTilesBts[i].text = str(i)

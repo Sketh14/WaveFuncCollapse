@@ -397,6 +397,9 @@ Project
 		[=] Getting currentTileValue from the tileMap to get the AtlasTexture coordiantes from jsonData on WaveFunctionCollapse
 - TODO: [FIX] Collapse Logic does not work for certain instances. Sometimes it works perfectly, sometimes it does not
 
+- Scripts
+	(-) WaveFunctionCollapse2
+		[=] Fixing OutOfBounds error | Changing X/Y mult before continuing
 
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability

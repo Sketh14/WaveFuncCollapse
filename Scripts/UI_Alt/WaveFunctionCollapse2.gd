@@ -142,7 +142,7 @@ func SetTile(tileMapIndex: int, valToSet: int):
 	var tileToCheckData = Helper.TransposedTileData.new()
 
 	# Set while loop here and keep repeating unless all the adjoining cells are collapsed 
-	var stackPoppdCount = 0 # For Debugging
+	# var stackPoppdCount = 0 # For Debugging
 	while (tilesToCheckStack.size() > 0):
 	# if (true):
 		poppedTileIndex = tilesToCheckStack.pop_back()
@@ -165,6 +165,10 @@ func SetTile(tileMapIndex: int, valToSet: int):
 				if (tileToCheckData.tileCoOrdX < 0 || tileToCheckData.tileCoOrdX >= gridDimension
 					|| tileToCheckData.tileCoOrdY < 0 || tileToCheckData.tileCoOrdY >= gridDimension
 					|| tileMap[(gridDimension * tileToCheckData.tileCoOrdX) + tileToCheckData.tileCoOrdY].collapsed):
+						# print("Outside of Bounds | X[" + str(tileToCheckData.tileCoOrdX) + "], "Y[" + str(tileToCheckData.tileCoOrdY) + "]")
+							
+						coOrdYMult = coOrdYMult * -1
+						coOrdXMult = coOrdXMult * -1
 						continue # Continue if outside bounds
 
 				if (tileCountX == 0):
