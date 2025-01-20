@@ -30,8 +30,9 @@ func UpdateSelectionTilesTexture():
 	var btArrSize = selectedTilesBts.size()
 	var tileTex: TextureRect
 	var randomBgIndex: int
+	var tileTexIndex: int
 	for i in btArrSize:
-		var tileTexIndex = waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[0]
+		tileTexIndex = waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[0]
 
 		# Setting the Bg first
 		tileTex = selectedTilesBts[i].get_child(0)

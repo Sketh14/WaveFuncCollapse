@@ -57,7 +57,28 @@ func _on_tile_bt_pressed():
 
 func UpdateButtonText(tileMapTileID: int):
 	if (tileMapTileID == tileID && waveFunctionHandler.tileMap[tileMapTileID].collapsed):
-		btControl.text = "> " + str(waveFunctionHandler.tileMap[tileMapTileID].currentTileIndex) + " <"
+		var tempTileIndex = waveFunctionHandler.tileMap[tileMapTileID].currentTileIndex
+		btControl.text = "> " + str(tempTileIndex) + " <"
+		var randomBgIndex: int
+		var tileTexIndex = waveFunctionHandler.tilesJsonData.tile_info[tempTileIndex].atlas_texture_properties[0]
+
+		# Setting BG
+		# If defined, then get Index of the BG
+		if (tileTexIndex == 0):
+			(get_child(1) as TextureRect).texture.region = Rect2(waveFunctionHandler.tilesJsonData.tile_info[tempTileIndex].atlas_texture_properties[1],
+						waveFunctionHandler.tilesJsonData.tile_info[tempTileIndex].atlas_texture_properties[2],
+						UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
+		# If not, then get a random BG Index
+		else:
+			randomBgIndex = randi_range(4, 7)
+			(get_child(1) as TextureRect).texture.region = Rect2(waveFunctionHandler.tilesJsonData.tile_info[randomBgIndex].atlas_texture_properties[1],
+						waveFunctionHandler.tilesJsonData.tile_info[randomBgIndex].atlas_texture_properties[2],
+						UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
+
+		# Setting FG
+		(get_child(2) as TextureRect).texture.region = Rect2(waveFunctionHandler.tilesJsonData.tile_info[tempTileIndex].atlas_texture_properties[1],
+					waveFunctionHandler.tilesJsonData.tile_info[tempTileIndex].atlas_texture_properties[2],
+					UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
 
 	# btControl.text = str(tileID) + " | " + str(mainUIController.selectedTilesBts.size()) # Offset by 1
 

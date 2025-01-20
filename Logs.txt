@@ -391,6 +391,12 @@ Project
 	(-) Adding another TextureRect for BG for both "Tile Selection" and "Main Tile" buttons
 	(-) Changing color of button themes
 
+- Scripts
+	(-) UITileController_1
+		[=] Setting BG/FG of the Tile
+		[=] Getting currentTileValue from the tileMap to get the AtlasTexture coordiantes from jsonData on WaveFunctionCollapse
+- TODO: [FIX] Collapse Logic does not work for certain instances. Sometimes it works perfectly, sometimes it does not
+
 
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
