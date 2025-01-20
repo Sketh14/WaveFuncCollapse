@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6ywmav81o028"]
+[gd_scene load_steps=7 format=3 uid="uid://c6ywmav81o028"]
 
-[ext_resource type="PackedScene" uid="uid://bdeicjkvvfk7u" path="res://Prefab/UI/BtPrefab_1.tscn" id="1_w1yuo"]
+[ext_resource type="PackedScene" uid="uid://bdeicjkvvfk7u" path="res://Prefab/UI/MainTileBtPrefab_1.tscn" id="1_w1yuo"]
 [ext_resource type="Script" path="res://Scripts/UI_Alt/WaveFunctionCollapse2.gd" id="2_f0agi"]
 [ext_resource type="PackedScene" uid="uid://bno6vf85fao5e" path="res://Prefab/UI/TileSelectionBtPrefab_1.tscn" id="3_j4nbv"]
 [ext_resource type="Theme" uid="uid://dw70fre4exfuq" path="res://Themes/MainTileTheme_2.tres" id="3_vvpfg"]
-[ext_resource type="Texture2D" uid="uid://besoup70f48j2" path="res://Atlas Texture/Environment_AT1.tres" id="5_0h0vu"]
 [ext_resource type="Script" path="res://Scripts/UI/MainUIController_1.gd" id="5_f6myn"]
-[ext_resource type="Texture2D" uid="uid://cb2x8t3gf1k5a" path="res://Atlas Texture/Props_AT1.tres" id="6_bnon1"]
+[ext_resource type="Texture2D" uid="uid://bkc316tu3ls0" path="res://Atlas Texture/PropEnv_AT1.tres" id="5_xi7s6"]
 
 [node name="Main02" type="Control"]
 layout_mode = 3
@@ -365,7 +364,7 @@ text = "AdjTest"
 script = ExtResource("2_f0agi")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
 gridDimension = 6
-tileAtlasTextures = Array[AtlasTexture]([ExtResource("5_0h0vu"), ExtResource("6_bnon1")])
+tileAtlasTexture = ExtResource("5_xi7s6")
 testAdjForUnCollapsedBt = NodePath("../MainUI_Control/AdjTestForUnCollapsed")
 
 [node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "selectedTilesBts")]

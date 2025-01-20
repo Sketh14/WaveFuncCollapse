@@ -4,7 +4,7 @@ class_name WaveFunctionCollapse2
 @export var debugLabel: Label
 # @export var gridDimension: Vector2i
 @export var gridDimension: int
-@export var tileAtlasTextures: Array[AtlasTexture]
+@export var tileAtlasTexture: AtlasTexture
 
 # """
 # FoR Testing

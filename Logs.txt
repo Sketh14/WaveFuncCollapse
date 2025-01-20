@@ -378,6 +378,18 @@ Project
 	(-) TileAdjacencyList
 		[=] Fixing "AtlasTexture" coordiantes for tiles
 
+- Combining both Prop/Environment sprite to a single sprite and making separate "AtlasTexture"
+- Scripts
+	(-) MainUIController_1
+		[=] Changing according to single "AtlasTexture"
+		[=] Changing texture of "Tile Selection" bg
+			<~> Getting a random BG index for tiles that only have the foreground info
+- Others
+	(-) TileAdjacencyList
+		[=] Changing "AtlasTexture" coordiantes for grass tiles
+- Scene
+	(-) Adding another TextureRect for BG for both "Tile Selection" and "Main Tile" buttons
+	(-) Changing color of button themes
 
 
 ---------------------------------------------------------------------------------------------

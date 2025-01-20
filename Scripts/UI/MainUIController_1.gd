@@ -13,7 +13,7 @@ func _ready():
 	waveFunctionHandler.JsonLoaded_sig.connect(UpdateSelectionTilesTexture)
 
 	InitializeButtons()
-	# DisableAllSelecttionTiles()
+	DisableAllSelecttionTiles()
 
 # https://docs.godotengine.org/en/stable/classes/class_callable.html
 func InitializeButtons():
@@ -29,10 +29,30 @@ func UpdateSelectionTilesTexture():
 	# print("Setting Tile Textures")
 	var btArrSize = selectedTilesBts.size()
 	var tileTex: TextureRect
+	var randomBgIndex: int
 	for i in btArrSize:
+		var tileTexIndex = waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[0]
+
+		# Setting the Bg first
 		tileTex = selectedTilesBts[i].get_child(0)
+		tileTex.texture = waveFunctionHandler.tileAtlasTexture.duplicate()
+		# If defined, then get Index of the BG
+		if (tileTexIndex == 0):
+			tileTex.texture.region = Rect2(waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[1],
+						waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[2],
+						UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
+		# If not, then get a random BG Index
+		else:
+			randomBgIndex = randi_range(4, 7)
+			tileTex.texture.region = Rect2(waveFunctionHandler.tilesJsonData.tile_info[randomBgIndex].atlas_texture_properties[1],
+						waveFunctionHandler.tilesJsonData.tile_info[randomBgIndex].atlas_texture_properties[2],
+						UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
+
+		# Setting foreground
+		tileTex = selectedTilesBts[i].get_child(1)
+		# tileTex.texture = waveFunctionHandler.tileAtlasTextures[waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[0]].duplicate()
 		# Getting Index of the proper atlas to use
-		tileTex.texture = waveFunctionHandler.tileAtlasTextures[waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[0]].duplicate()
+		tileTex.texture = waveFunctionHandler.tileAtlasTexture.duplicate()
 		tileTex.texture.region = Rect2(waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[1],
 					waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[2],
 					UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
@@ -55,7 +75,7 @@ func SetCurrentAndShowAvailableTiles(tileID: int):
 	debugLabel.text = ("Tile ID : " + str(tileID) + " | Tiles Avl: " + str(waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable)
 	+ "\n Collapsed: " + str(waveFunctionHandler.tileMap[selectedTileIndexInMap].collapsed))
 
-	var btArrSize = selectedTilesBts.size() - 1
+	var btArrSize = selectedTilesBts.size()
 	"""
 		var availableTilesIndex = 0
 		var btTilesIndex = 0

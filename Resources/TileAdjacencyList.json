@@ -229,8 +229,8 @@
 			"tile_name": "Grass_0",
 			"atlas_texture_properties": [
 				0,
-				40,
-				23
+				552,
+				24
 			],
 			"socket_values": [
 				3,
@@ -312,8 +312,8 @@
 			"tile_name": "Grass_1",
 			"atlas_texture_properties": [
 				0,
-				128,
-				31
+				640,
+				32
 			],
 			"socket_values": [
 				7,
@@ -395,8 +395,8 @@
 			"tile_name": "Grass_2",
 			"atlas_texture_properties": [
 				0,
-				192,
-				63
+				704,
+				64
 			],
 			"socket_values": [
 				11,
@@ -478,8 +478,8 @@
 			"tile_name": "Grass_3",
 			"atlas_texture_properties": [
 				0,
-				96,
-				87
+				544,
+				64
 			],
 			"socket_values": [
 				15,
@@ -727,8 +727,8 @@
 			"tile_name": "Path_0",
 			"atlas_texture_properties": [
 				0,
-				80,
-				127
+				592,
+				128
 			],
 			"socket_values": [
 				23,
@@ -810,8 +810,8 @@
 			"tile_name": "Path_1",
 			"atlas_texture_properties": [
 				0,
-				176,
-				191
+				688,
+				192
 			],
 			"socket_values": [
 				19,

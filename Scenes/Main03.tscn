@@ -1,14 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://cewiy0d2bjpka"]
+[gd_scene load_steps=9 format=3 uid="uid://cewiy0d2bjpka"]
 
-[ext_resource type="PackedScene" uid="uid://bdeicjkvvfk7u" path="res://Prefab/UI/BtPrefab_1.tscn" id="1_op8q5"]
+[ext_resource type="PackedScene" uid="uid://bdeicjkvvfk7u" path="res://Prefab/UI/MainTileBtPrefab_1.tscn" id="1_op8q5"]
 [ext_resource type="PackedScene" uid="uid://bno6vf85fao5e" path="res://Prefab/UI/TileSelectionBtPrefab_1.tscn" id="2_4e3bt"]
 [ext_resource type="Texture2D" uid="uid://cjqtjfk3yxeka" path="res://Atlas Texture/Props_AT2.tres" id="2_x0nfk"]
 [ext_resource type="Theme" uid="uid://dw70fre4exfuq" path="res://Themes/MainTileTheme_2.tres" id="3_du6bc"]
 [ext_resource type="Script" path="res://Scripts/UI_Alt/WaveFunctionCollapse2.gd" id="4_143x1"]
 [ext_resource type="Script" path="res://Scripts/UI/MainUIController_1.gd" id="5_ixidq"]
-[ext_resource type="Texture2D" uid="uid://cb2x8t3gf1k5a" path="res://Atlas Texture/Props_AT1.tres" id="6_4div7"]
+[ext_resource type="Texture2D" uid="uid://bkc316tu3ls0" path="res://Atlas Texture/PropEnv_AT1.tres" id="6_syxu6"]
 [ext_resource type="Script" path="res://Scripts/Test/UI_Test1.gd" id="7_aajsh"]
-[ext_resource type="Texture2D" uid="uid://besoup70f48j2" path="res://Atlas Texture/Environment_AT1.tres" id="7_b0ndj"]
 
 [node name="Main02" type="Control"]
 layout_mode = 3
@@ -52,46 +51,46 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 3
 
-[node name="Button_0" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+[node name="MainTileBt_0" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
 layout_mode = 2
 
-[node name="Button_1" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+[node name="MainTileBt_1" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
 layout_mode = 2
 text = "1"
 tileID = 1
 rectRegionPos = Vector2i(32, 420)
 
-[node name="Button_2" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+[node name="MainTileBt_2" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
 layout_mode = 2
 text = "2"
 tileID = 2
 
-[node name="Button_3" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+[node name="MainTileBt_3" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
 layout_mode = 2
 text = "3"
 tileID = 3
 
-[node name="Button_4" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+[node name="MainTileBt_4" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
 layout_mode = 2
 text = "4"
 tileID = 4
 
-[node name="Button_5" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+[node name="MainTileBt_5" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
 layout_mode = 2
 text = "5"
 tileID = 5
 
-[node name="Button_6" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+[node name="MainTileBt_6" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
 layout_mode = 2
 text = "6"
 tileID = 6
 
-[node name="Button_7" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+[node name="MainTileBt_7" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
 layout_mode = 2
 text = "7"
 tileID = 7
 
-[node name="Button_8" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
+[node name="MainTileBt_8" parent="MainUI_Control/GridContainer_1" instance=ExtResource("1_op8q5")]
 layout_mode = 2
 text = "8"
 tileID = 8
@@ -252,7 +251,7 @@ text = "AdjTest"
 script = ExtResource("4_143x1")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
 gridDimension = 3
-tileAtlasTextures = Array[AtlasTexture]([ExtResource("7_b0ndj"), ExtResource("6_4div7")])
+tileAtlasTexture = ExtResource("6_syxu6")
 testAdjForUnCollapsedBt = NodePath("../MainUI_Control/AdjTestForUnCollapsed")
 
 [node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "selectedTilesBts")]
