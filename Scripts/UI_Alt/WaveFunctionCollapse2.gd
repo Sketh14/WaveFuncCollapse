@@ -5,10 +5,12 @@ class_name WaveFunctionCollapse2
 # @export var gridDimension: Vector2i
 @export var gridDimension: int
 @export var tileAtlasTexture: AtlasTexture
+# @export var mainTileBtPrefab: Node
+@export var mainTileGridContainer: GridContainer
 
 # """
 # FoR Testing
-@export var testAdjForUnCollapsedBt: Button
+# @export var testAdjForUnCollapsedBt: Button
 # """
 
 # https://www.reddit.com/r/godot/comments/11g91c8/how_to_create_events/
@@ -35,12 +37,25 @@ func _ready():
 	# """
 	# TESTING
 	# var superTileToUse = Helper.SuperTileCell.new()
-	testAdjForUnCollapsedBt.connect("pressed", TestSetTileAdjacencyForUnCollapsedTile)
+	# testAdjForUnCollapsedBt.connect("pressed", TestSetTileAdjacencyForUnCollapsedTile)
 	# """
+
+	mainTileGridContainer.columns = gridDimension
+	InstantiateMainTiles()
 
 	LoadAdjacencyJson()
 	InitializeData()
 	# Test1()
+
+func InstantiateMainTiles():
+	var totalTiles = gridDimension * gridDimension
+	var mainTilePrefab = load(UniversalConstants.mainTilePrefabPath)
+	var tileToInstantiate
+	for i in totalTiles:
+		tileToInstantiate = mainTilePrefab.instantiate()
+		(tileToInstantiate as Button).text = str(i)
+		(tileToInstantiate as UITileController_1).tileID = i
+		mainTileGridContainer.add_child(tileToInstantiate)
 
 func Test1():
 	var test1 = 10.0

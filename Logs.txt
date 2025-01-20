@@ -401,6 +401,19 @@ Project
 	(-) WaveFunctionCollapse2
 		[=] Fixing OutOfBounds error | Changing X/Y mult before continuing
 
+- Scene
+	(-) Testing with more tiles
+		[=] Works Good
+- Scripts
+	(-) UITileController_1
+		[=] Replacing btControl with self
+	(-) WaveFunctionCollapse2
+		[=] Making changes to instantiate tiles from here instead of placing tiles in the scene
+			<~> Field to store Main Tile Prefab
+	(-) UniversalConstants
+		[=] Constant for storing MainTilePrefabPath
+- TODO: [FIX] TileAdjacencyList might be missing values for certain tiles
+	(-) Tomb is problematic for the lower part
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
 [DO] - Refactor UITileController_1 and add all buttons to MainUIController_1

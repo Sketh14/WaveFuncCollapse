@@ -3,10 +3,11 @@
 
 class_name UITileController_1 extends Control
 
-@export var btControl: Control
+# @export var btControl: Control
 @export var tileID: int
-@export var rectRegionPos: Vector2i
+# @export var rectRegionPos: Vector2i			# Taking directly from jsonData
 
+# var bt: Button
 var tileTex: TextureRect
 # @export var tileEnabled: bool # export for debug
 # @export var tileID_Label: Label
@@ -16,15 +17,16 @@ var mainUIController: MainUiController_1
 
 func _ready():
 	"""
-		# print(btControl.theme.has_stylebox("StyleBoxFlat", "StyleBoxFlat"))
-		# print(btControl.theme.has_stylebox("Disabled_Stylebox_2", "StyleBoxFlat"))
-		# print(btControl.theme.has_stylebox("BtPrefab_1", "Button"))
-		# print(btControl.theme.has_stylebox("StyleBoxFlat", "Button"))
-		# print(btControl.theme.has_stylebox("BtTheme_2", "Button"))
+		# print(self.theme.has_stylebox("StyleBoxFlat", "StyleBoxFlat"))
+		# print(self.theme.has_stylebox("Disabled_Stylebox_2", "StyleBoxFlat"))
+		# print(self.theme.has_stylebox("BtPrefab_1", "Button"))
+		# print(self.theme.has_stylebox("StyleBoxFlat", "Button"))
+		# print(self.theme.has_stylebox("BtTheme_2", "Button"))
 
-		# print(btControl.theme.has_stylebox("normal", "Button"))				# Somehow this is true, how????????
+		# print(self.theme.has_stylebox("normal", "Button"))				# Somehow this is true, how????????
 		pass
 	"""
+
 	waveFunctionHandler = get_tree().get_root().get_node(UniversalConstants.waveFunctionScriptPath) as WaveFunctionCollapse2
 	waveFunctionHandler.UpdateTileData_sig.connect(UpdateButtonText)
 
@@ -35,6 +37,8 @@ func _ready():
 	tileTex.texture = waveFunctionHandler.tileAtlasTexture.duplicate()
 	tileTex = get_child(2) # For Foreground
 	tileTex.texture = waveFunctionHandler.tileAtlasTexture.duplicate()
+
+	# self.text = "> This <" # This is Crazy
 
 	# Testing # https://www.reddit.com/r/godot/comments/aad39n/how_to_change_texturerect_atlas_texture_region_in/
 	# tileTex.texture.region = Rect2(rectRegionPos.x, rectRegionPos.y, UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
@@ -51,14 +55,14 @@ func _on_tile_bt_pressed():
 	if global_position.distance_to(get_global_mouse_position()) < 5:
 	if tileEnabled:
 		print("Tile Enabled : " + str(tileID))
-		btControl.theme.get_stylebox("normal", "Button").bg_color = UniversalConstants.pressedColor		# no need to change the color
+		self.theme.get_stylebox("normal", "Button").bg_color = UniversalConstants.pressedColor		# no need to change the color
 		tileID_Label.text = str(tileID)
 	"""
 
 func UpdateButtonText(tileMapTileID: int):
 	if (tileMapTileID == tileID && waveFunctionHandler.tileMap[tileMapTileID].collapsed):
 		var tempTileIndex = waveFunctionHandler.tileMap[tileMapTileID].currentTileIndex
-		btControl.text = "> " + str(tempTileIndex) + " <"
+		self.text = "> " + str(tempTileIndex) + " <"
 		var randomBgIndex: int
 		var tileTexIndex = waveFunctionHandler.tilesJsonData.tile_info[tempTileIndex].atlas_texture_properties[0]
 
@@ -80,7 +84,7 @@ func UpdateButtonText(tileMapTileID: int):
 					waveFunctionHandler.tilesJsonData.tile_info[tempTileIndex].atlas_texture_properties[2],
 					UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
 
-	# btControl.text = str(tileID) + " | " + str(mainUIController.selectedTilesBts.size()) # Offset by 1
+	# self.text = str(tileID) + " | " + str(mainUIController.selectedTilesBts.size()) # Offset by 1
 
 """
 func _on_mouse_entered_tile():

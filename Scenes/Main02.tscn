@@ -360,12 +360,11 @@ offset_bottom = 412.0
 theme = ExtResource("3_vvpfg")
 text = "AdjTest"
 
-[node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "testAdjForUnCollapsedBt")]
+[node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel")]
 script = ExtResource("2_f0agi")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
 gridDimension = 6
 tileAtlasTexture = ExtResource("5_xi7s6")
-testAdjForUnCollapsedBt = NodePath("../MainUI_Control/AdjTestForUnCollapsed")
 
 [node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "selectedTilesBts")]
 script = ExtResource("5_f6myn")

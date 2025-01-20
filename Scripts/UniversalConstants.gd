@@ -9,3 +9,4 @@ const rectRegionScaleXY = 32
 const waveFunctionScriptPath = "Main02/WaveFunctionCollapse2"
 const mainUIControllerScriptPath = "Main02/MainUiController_1"
 const adjacencyJsonPath = "res://Resources/TileAdjacencyList.json"
+const mainTilePrefabPath = "res://Prefab/UI/MainTileBtPrefab_1.tscn"
