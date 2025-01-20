@@ -10,22 +10,38 @@ var selectedTileIndexInMap = 0
 func _ready():
 	waveFunctionHandler = get_tree().get_root().get_node(UniversalConstants.waveFunctionScriptPath) as WaveFunctionCollapse2
 	waveFunctionHandler.UpdateTileData_sig.connect(SetCurrentAndShowAvailableTiles)
+	waveFunctionHandler.JsonLoaded_sig.connect(UpdateSelectionTilesTexture)
 
 	InitializeButtons()
-	DisableAllTiles()
+	# DisableAllSelecttionTiles()
 
 # https://docs.godotengine.org/en/stable/classes/class_callable.html
 func InitializeButtons():
 	var btArrSize = selectedTilesBts.size()
+	var tileTex: TextureRect
 	for i in btArrSize:
 		selectedTilesBts[i].connect("pressed", func(): SetTileViaWaveFunctionHandler(i))
 		selectedTilesBts[i].text = str(i)
 		# selectedTilesBts[i].connect("pressed", func(): print("Button Pressed : " + str(i)))
 
+# Setting AtlasTexture of the tile
+func UpdateSelectionTilesTexture():
+	# print("Setting Tile Textures")
+	var btArrSize = selectedTilesBts.size()
+	var tileTex: TextureRect
+	for i in btArrSize:
+		tileTex = selectedTilesBts[i].get_child(0)
+		# Getting Index of the proper atlas to use
+		tileTex.texture = waveFunctionHandler.tileAtlasTextures[waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[0]].duplicate()
+		tileTex.texture.region = Rect2(waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[1],
+					waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[2],
+					UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
+
+
 func SetTileViaWaveFunctionHandler(btIndex: int):
 	waveFunctionHandler.SetTile(selectedTileIndexInMap, btIndex)
 
-func DisableAllTiles():
+func DisableAllSelecttionTiles():
 	var btArrSize = selectedTilesBts.size()
 	for i in btArrSize:
 		# print("Disabling Tile : " + str(i))

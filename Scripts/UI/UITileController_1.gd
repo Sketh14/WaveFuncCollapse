@@ -31,7 +31,7 @@ func _ready():
 	mainUIController = get_tree().get_root().get_node(UniversalConstants.mainUIControllerScriptPath) as MainUiController_1
 
 	tileTex = get_child(1)
-	tileTex.texture = waveFunctionHandler.tileAtlasTexture.duplicate()
+	tileTex.texture = waveFunctionHandler.tileAtlasTextures[1].duplicate()
 	# https://www.reddit.com/r/godot/comments/aad39n/how_to_change_texturerect_atlas_texture_region_in/
 	tileTex.texture.region = Rect2(rectRegionPos.x, rectRegionPos.y, UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
 	# print("Atlas Texture Region : " + str(tileTex.texture.region))

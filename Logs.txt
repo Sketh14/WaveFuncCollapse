@@ -360,6 +360,25 @@ Project
 			<~> First element is the index of the "Atlas Texture" to use, as we have 2 tileSets
 
 
+--------------------------------------------------------------------------------------
+									20 JANUARY 2024
+--------------------------------------------------------------------------------------
+- Scene
+	(-) Adding TextureRect to "Tile Selection" buttons for identification
+		[=] Setting images using AtlasTexture
+	(-) Remove "Empty Tile [17]" from "Tile Selection" list
+- Scripts
+	(-) MainUIController_1
+		[=] Changing AtlasTexture of "Tile Selection" buttons when initialising
+		[=] Connecting to JsonLoading signal and updating "Tile Selection" buttons using Json
+		[=] Selecting proper AtlasTexture for the image of "Tile Selection" buttons
+	(-) WaveFunctionCollapse2
+		[=] Adding another signal for JsonLoading
+- Others
+	(-) TileAdjacencyList
+		[=] Fixing "AtlasTexture" coordiantes for tiles
+
+
 
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability

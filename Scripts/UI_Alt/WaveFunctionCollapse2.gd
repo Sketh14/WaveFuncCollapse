@@ -4,7 +4,7 @@ class_name WaveFunctionCollapse2
 @export var debugLabel: Label
 # @export var gridDimension: Vector2i
 @export var gridDimension: int
-@export var tileAtlasTexture: AtlasTexture
+@export var tileAtlasTextures: Array[AtlasTexture]
 
 # """
 # FoR Testing
@@ -13,6 +13,7 @@ class_name WaveFunctionCollapse2
 
 # https://www.reddit.com/r/godot/comments/11g91c8/how_to_create_events/
 signal UpdateTileData_sig(tileID: int)
+signal JsonLoaded_sig()
 
 # To store the tiles data from Json upon loading
 var tilesJsonData
@@ -63,6 +64,9 @@ func LoadAdjacencyJson():
 	var data = JSON.parse_string(file.get_as_text())
 	tilesJsonData = data
 	print("Json loaded successfully | tiles List count : " + str(tilesJsonData.tile_info.size()))
+
+	await get_tree().create_timer(1.0).timeout # Waiting for other systems to load | TODO:  Should be a better solution than this
+	JsonLoaded_sig.emit()
 	# print("Json Read | Name : " + str(tilesJsonData.tile_info[5].tile_name) + " | Socket Pos X : " + str(tilesJsonData.tile_info[5].socket_values[UniversalConstants.SocketDirection.POSITIVEX]))
 
 # Initialize tiles as well as fill the tilesAvailable list at the start so that the tiles are in a super-position state 

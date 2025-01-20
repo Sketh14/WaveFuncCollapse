@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6ywmav81o028"]
+[gd_scene load_steps=8 format=3 uid="uid://c6ywmav81o028"]
 
 [ext_resource type="PackedScene" uid="uid://bdeicjkvvfk7u" path="res://Prefab/UI/BtPrefab_1.tscn" id="1_w1yuo"]
 [ext_resource type="Script" path="res://Scripts/UI_Alt/WaveFunctionCollapse2.gd" id="2_f0agi"]
 [ext_resource type="PackedScene" uid="uid://bno6vf85fao5e" path="res://Prefab/UI/TileSelectionBtPrefab_1.tscn" id="3_j4nbv"]
 [ext_resource type="Theme" uid="uid://dw70fre4exfuq" path="res://Themes/MainTileTheme_2.tres" id="3_vvpfg"]
+[ext_resource type="Texture2D" uid="uid://besoup70f48j2" path="res://Atlas Texture/Environment_AT1.tres" id="5_0h0vu"]
 [ext_resource type="Script" path="res://Scripts/UI/MainUIController_1.gd" id="5_f6myn"]
+[ext_resource type="Texture2D" uid="uid://cb2x8t3gf1k5a" path="res://Atlas Texture/Props_AT1.tres" id="6_bnon1"]
 
 [node name="Main02" type="Control"]
 layout_mode = 3
@@ -349,10 +351,6 @@ text = "15"
 layout_mode = 2
 text = "16"
 
-[node name="TileBt_17" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("3_j4nbv")]
-layout_mode = 2
-text = "17"
-
 [node name="AdjTestForUnCollapsed" type="Button" parent="MainUI_Control"]
 custom_minimum_size = Vector2(52, 52)
 layout_mode = 0
@@ -366,9 +364,11 @@ text = "AdjTest"
 [node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "testAdjForUnCollapsedBt")]
 script = ExtResource("2_f0agi")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
+gridDimension = 6
+tileAtlasTextures = Array[AtlasTexture]([ExtResource("5_0h0vu"), ExtResource("6_bnon1")])
 testAdjForUnCollapsedBt = NodePath("../MainUI_Control/AdjTestForUnCollapsed")
 
 [node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "selectedTilesBts")]
 script = ExtResource("5_f6myn")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
-selectedTilesBts = [NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_0"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_1"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_2"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_3"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_4"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_5"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_6"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_7"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_8"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_9"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_10"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_11"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_12"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_13"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_14"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_15"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_16"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_17")]
+selectedTilesBts = [NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_0"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_1"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_2"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_3"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_4"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_5"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_6"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_7"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_8"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_9"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_10"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_11"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_12"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_13"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_14"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_15"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_16")]

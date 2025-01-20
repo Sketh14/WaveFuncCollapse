@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cewiy0d2bjpka"]
+[gd_scene load_steps=10 format=3 uid="uid://cewiy0d2bjpka"]
 
 [ext_resource type="PackedScene" uid="uid://bdeicjkvvfk7u" path="res://Prefab/UI/BtPrefab_1.tscn" id="1_op8q5"]
 [ext_resource type="PackedScene" uid="uid://bno6vf85fao5e" path="res://Prefab/UI/TileSelectionBtPrefab_1.tscn" id="2_4e3bt"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/MainUIController_1.gd" id="5_ixidq"]
 [ext_resource type="Texture2D" uid="uid://cb2x8t3gf1k5a" path="res://Atlas Texture/Props_AT1.tres" id="6_4div7"]
 [ext_resource type="Script" path="res://Scripts/Test/UI_Test1.gd" id="7_aajsh"]
+[ext_resource type="Texture2D" uid="uid://besoup70f48j2" path="res://Atlas Texture/Environment_AT1.tres" id="7_b0ndj"]
 
 [node name="Main02" type="Control"]
 layout_mode = 3
@@ -237,10 +238,6 @@ text = "15"
 layout_mode = 2
 text = "16"
 
-[node name="TileBt_17" parent="MainUI_Control/AvailableTiles_Panel/GridContainer" instance=ExtResource("2_4e3bt")]
-layout_mode = 2
-text = "17"
-
 [node name="AdjTestForUnCollapsed" type="Button" parent="MainUI_Control"]
 custom_minimum_size = Vector2(52, 52)
 layout_mode = 0
@@ -255,13 +252,13 @@ text = "AdjTest"
 script = ExtResource("4_143x1")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
 gridDimension = 3
-tileAtlasTexture = ExtResource("6_4div7")
+tileAtlasTextures = Array[AtlasTexture]([ExtResource("7_b0ndj"), ExtResource("6_4div7")])
 testAdjForUnCollapsedBt = NodePath("../MainUI_Control/AdjTestForUnCollapsed")
 
 [node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "selectedTilesBts")]
 script = ExtResource("5_ixidq")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
-selectedTilesBts = [NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_0"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_1"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_2"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_3"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_4"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_5"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_6"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_7"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_8"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_9"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_10"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_11"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_12"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_13"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_14"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_15"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_16"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_17")]
+selectedTilesBts = [NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_0"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_1"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_2"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_3"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_4"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_5"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_6"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_7"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_8"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_9"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_10"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_11"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_12"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_13"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_14"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_15"), NodePath("../MainUI_Control/AvailableTiles_Panel/GridContainer/TileBt_16")]
 
 [node name="UI_Test1" type="Node" parent="." node_paths=PackedStringArray("tileTexRect_Og", "tileTexturesContainer", "tileTexArr")]
 script = ExtResource("7_aajsh")
