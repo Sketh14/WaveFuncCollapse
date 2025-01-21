@@ -63,6 +63,19 @@ func UpdateButtonText(tileMapTileID: int):
 	if (tileMapTileID == tileID && waveFunctionHandler.tileMap[tileMapTileID].collapsed):
 		var tempTileIndex = waveFunctionHandler.tileMap[tileMapTileID].currentTileIndex
 		self.text = "> " + str(tempTileIndex) + " <"
+
+		# Setting new position
+		var tempVec = self.size
+		tempVec.x += UniversalConstants.tileSizeAdd
+		tempVec.y += UniversalConstants.tileSizeAdd
+		self.size = tempVec
+
+		# Setting new position
+		tempVec = self.position
+		tempVec.x -= (UniversalConstants.tileSizeAdd / 2)
+		tempVec.y -= (UniversalConstants.tileSizeAdd / 2)
+		self.position = tempVec
+
 		var randomBgIndex: int
 		var tileTexIndex = waveFunctionHandler.tilesJsonData.tile_info[tempTileIndex].atlas_texture_properties[0]
 

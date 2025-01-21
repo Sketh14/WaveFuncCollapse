@@ -202,12 +202,11 @@ offset_bottom = 412.0
 theme = ExtResource("3_du6bc")
 text = "AdjTest"
 
-[node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "mainTileGridContainer")]
+[node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel")]
 script = ExtResource("4_143x1")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
 gridDimension = 5
 tileAtlasTexture = ExtResource("6_syxu6")
-mainTileGridContainer = NodePath("../MainUI_Control/MainTile_GridContainer")
 
 [node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "selectedTilesBts")]
 script = ExtResource("5_ixidq")

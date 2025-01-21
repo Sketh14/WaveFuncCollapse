@@ -6,7 +6,8 @@ class_name WaveFunctionCollapse2
 @export var gridDimension: int
 @export var tileAtlasTexture: AtlasTexture
 # @export var mainTileBtPrefab: Node
-@export var mainTileGridContainer: GridContainer
+# @export var mainTileGridContainer: GridContainer
+@export var mainTileContainer: Node
 
 # """
 # FoR Testing
@@ -40,7 +41,7 @@ func _ready():
 	# testAdjForUnCollapsedBt.connect("pressed", TestSetTileAdjacencyForUnCollapsedTile)
 	# """
 
-	mainTileGridContainer.columns = gridDimension
+	# mainTileGridContainer.columns = gridDimension
 	InstantiateMainTiles()
 
 	LoadAdjacencyJson()
@@ -51,11 +52,17 @@ func InstantiateMainTiles():
 	var totalTiles = gridDimension * gridDimension
 	var mainTilePrefab = load(UniversalConstants.mainTilePrefabPath)
 	var tileToInstantiate
+	var tilePos = UniversalConstants.tileStartingPos
 	for i in totalTiles:
 		tileToInstantiate = mainTilePrefab.instantiate()
 		(tileToInstantiate as Button).text = str(i)
 		(tileToInstantiate as UITileController_1).tileID = i
-		mainTileGridContainer.add_child(tileToInstantiate)
+		# mainTileGridContainer.add_child(tileToInstantiate)
+
+		tilePos.x = UniversalConstants.tileStartingPos.x + (UniversalConstants.tileDistance * ((i % gridDimension) + 1))
+		tilePos.y = UniversalConstants.tileStartingPos.y + (UniversalConstants.tileDistance * ((i / gridDimension) + 1))
+		tileToInstantiate.position = tilePos
+		mainTileContainer.add_child(tileToInstantiate)
 
 func Test1():
 	var test1 = 10.0
@@ -224,64 +231,7 @@ func SetTile(tileMapIndex: int, valToSet: int):
 		# stackPoppdCount += 1
 		# if (stackPoppdCount > 1): break
 	# """
-	print("Stack Count : " + str(tilesToCheckStack.size()))
-
-
-## Helper function to set the Stack which checks the neighbouring tiles of the current selected tile.
-## It adds the right/left/bottom/top tiles to the Stack
-func SetTilesToCheckData2(parentTileID: int, refTileMapIndex: int):
-	# var currentIndex1D = (gridDimension.x * coOrdX) + coOrdY
-	var coOrdX = (refTileMapIndex / gridDimension)
-	var coOrdY = refTileMapIndex - (coOrdX * gridDimension)
-	print("=========> Setting Tile Data | refTileMapIndex : " + str(refTileMapIndex) + " | X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "] <=======\n")
-	
-	var tempTileData
-
-	# Create SuperTiles along with Adjacecny Tile check in each possible direction
-	var tilePosXMult = 0
-	var tilePosYMult = 1
-	var tempTileCoOrdX = -1
-	var tempTileCoOrdY = -1
-	for tileCountX in 2:
-		for tileCountY in 2:
-			# print("Instantiating at Position : ", position)
-			tempTileCoOrdX = coOrdX + (1 * tilePosXMult)
-			tempTileCoOrdY = coOrdY + (1 * tilePosYMult)
-
-			if (tempTileCoOrdX >= 0 && tempTileCoOrdX < gridDimension # Check if within bounds
-				&& tempTileCoOrdY >= 0 && tempTileCoOrdY < gridDimension
-				&& !tileMap[(gridDimension * tempTileCoOrdX) + tempTileCoOrdY].collapsed # Check if the tile is collapsed or not
-				&& ((gridDimension * tempTileCoOrdX) + tempTileCoOrdY) != parentTileID): # Check if we are not adding the Calling Tile
-				
-				# CreateSuperTile(tempTileCoOrdX, tempTileCoOrdY)
-				tempTileData = Helper.TransposedTileData.new()
-				tempTileData.tileCoOrdX = tempTileCoOrdX
-				tempTileData.tileCoOrdY = tempTileCoOrdY
-
-				# Wrong Below
-				# tempTileData.socketDir = ((tileCountY - tileCountX) * tilePosXMult) + ((2 + tileCountY) * tilePosYMult)
-				if (tileCountX == 0):
-					# Correcting according to Godot
-					tempTileData.socketDir = 3 - tileCountY # Up is Negative for Godot
-				else:
-					tempTileData.socketDir = tileCountY
-
-				tempTileData.parentTileID = refTileMapIndex
-
-				tilesToCheckStack.push_back(tempTileData)
-				# """
-				print("Tile Pushed | tileCountX : " + str(tileCountX) + " | tileCountY : " + str(tileCountY)
-						+ " | [" + str(tempTileCoOrdX) + "," + str(tempTileCoOrdY) + "]"
-						+ " | socketDir : " + str(tempTileData.socketDir)
-						+ " | tileMapVal : " + str((gridDimension * tempTileCoOrdX) + tempTileCoOrdY))
-				# """
-
-			tilePosYMult = tilePosYMult * -1
-			tilePosXMult = tilePosXMult * -1
-		tilePosYMult = 0
-		tilePosXMult = 1
-	print("=========> Setting Tile Data <=======\n")
-	
+	# print("Stack Count : " + str(tilesToCheckStack.size()))
 
 # Set the next tile according to the adjacency list of the current assigned tile and the direction w.r.t. current tile
 # We set a loop and remove the tile indexes in the tilesAvailable list untill all non-compatible tiles are removed
