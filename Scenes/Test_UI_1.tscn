@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0o2q63312b6g"]
+
+[ext_resource type="Texture2D" uid="uid://cr4vmeraqpd1d" path="res://Sprites/Environment/TX Tileset Grass.png" id="1_0bj1f"]
+
+[node name="Test_UI_1" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 2
+offset_right = 256.0
+offset_bottom = 256.0
+texture = ExtResource("1_0bj1f")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ScrollContainer"]
+custom_minimum_size = Vector2(1500, 1500)
+layout_mode = 2
+color = Color(0.709804, 0.0588235, 0.0588235, 1)

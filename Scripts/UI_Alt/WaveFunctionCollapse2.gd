@@ -225,7 +225,7 @@ func SetTile(tileMapIndex: int, valToSet: int):
 				coOrdYMult = coOrdYMult * -1
 				coOrdXMult = coOrdXMult * -1
 			coOrdYMult = 0
-			coOrdXMult = 1
+			coOrdXMult = -1
 
 		# For Debugging
 		# stackPoppdCount += 1

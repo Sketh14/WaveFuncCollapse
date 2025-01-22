@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dw70fre4exfuq"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dw70fre4exfuq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8i32a"]
 bg_color = Color(0.360784, 0.756863, 1, 0.529412)
@@ -15,6 +15,9 @@ bg_color = Color(0.196078, 0.694118, 1, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kcfva"]
 bg_color = Color(0, 0.521569, 0.839216, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r388f"]
+content_margin_top = 5.0
+
 [resource]
 Button/font_sizes/font_size = 13
 Button/styles/disabled = SubResource("StyleBoxFlat_8i32a")
@@ -22,3 +25,4 @@ Button/styles/focus = SubResource("StyleBoxFlat_ehf5o")
 Button/styles/hover = SubResource("StyleBoxFlat_omqnp")
 Button/styles/normal = SubResource("StyleBoxFlat_mq8f7")
 Button/styles/pressed = SubResource("StyleBoxFlat_kcfva")
+HScrollBar/styles/scroll = SubResource("StyleBoxEmpty_r388f")

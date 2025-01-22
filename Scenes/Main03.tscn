@@ -35,7 +35,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="MainTile_Container" type="Control" parent="MainUI_Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="MainTile_GridContainer" type="GridContainer" parent="MainUI_Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -111,84 +120,87 @@ anchor_bottom = 0.95
 offset_right = 0.00012207
 offset_bottom = -6.10352e-05
 
-[node name="SelectionTiles_GridContainer" type="GridContainer" parent="MainUI_Control/SelectionTiles_Panel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainUI_Control/SelectionTiles_Panel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.03
-anchor_top = 0.5
-anchor_right = 0.97
-anchor_bottom = 0.5
-offset_top = -16.0
-offset_bottom = 16.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 6.0
+offset_right = -15.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/h_separation = 5
-columns = 18
+theme = ExtResource("3_du6bc")
+vertical_scroll_mode = 0
 
-[node name="TileBt_0" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="SelectionTiles_HContainer" type="HBoxContainer" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer"]
 layout_mode = 2
 
-[node name="TileBt_1" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_0" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
+layout_mode = 2
+
+[node name="TileBt_1" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "1"
 
-[node name="TileBt_2" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_2" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "2"
 
-[node name="TileBt_3" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_3" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "3"
 
-[node name="TileBt_4" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_4" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "4"
 
-[node name="TileBt_5" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_5" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "5"
 
-[node name="TileBt_6" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_6" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "6"
 
-[node name="TileBt_7" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_7" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "7"
 
-[node name="TileBt_8" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_8" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "8"
 
-[node name="TileBt_9" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_9" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "9"
 
-[node name="TileBt_10" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_10" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "10"
 
-[node name="TileBt_11" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_11" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "11"
 
-[node name="TileBt_12" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_12" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "12"
 
-[node name="TileBt_13" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_13" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "13"
 
-[node name="TileBt_14" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_14" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "14"
 
-[node name="TileBt_15" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_15" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "15"
 
-[node name="TileBt_16" parent="MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer" instance=ExtResource("2_4e3bt")]
+[node name="TileBt_16" parent="MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer" instance=ExtResource("2_4e3bt")]
 layout_mode = 2
 text = "16"
 
@@ -202,16 +214,17 @@ offset_bottom = 412.0
 theme = ExtResource("3_du6bc")
 text = "AdjTest"
 
-[node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel")]
+[node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "mainTileContainer")]
 script = ExtResource("4_143x1")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
-gridDimension = 5
+gridDimension = 3
 tileAtlasTexture = ExtResource("6_syxu6")
+mainTileContainer = NodePath("../MainUI_Control/MainTile_Container")
 
 [node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "selectedTilesBts")]
 script = ExtResource("5_ixidq")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
-selectedTilesBts = [NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_0"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_1"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_2"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_3"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_4"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_5"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_6"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_7"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_8"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_9"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_10"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_11"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_12"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_13"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_14"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_15"), NodePath("../MainUI_Control/SelectionTiles_Panel/SelectionTiles_GridContainer/TileBt_16")]
+selectedTilesBts = [NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_0"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_1"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_2"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_3"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_4"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_5"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_6"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_7"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_8"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_9"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_10"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_11"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_12"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_13"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_14"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_15"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer/TileBt_16")]
 
 [node name="UI_Test1" type="Node" parent="." node_paths=PackedStringArray("tileTexRect_Og", "tileTexturesContainer", "tileTexArr")]
 process_mode = 4
