@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6ywmav81o028"]
+[gd_scene load_steps=7 format=3 uid="uid://c6ywmav81o028"]
 
 [ext_resource type="Theme" uid="uid://dw70fre4exfuq" path="res://Themes/MainTileTheme_2.tres" id="1_ui58s"]
 [ext_resource type="Script" path="res://Scripts/UI_Alt/WaveFunctionCollapse2.gd" id="2_f0agi"]
 [ext_resource type="PackedScene" uid="uid://bno6vf85fao5e" path="res://Prefab/UI/TileSelectionBtPrefab_1.tscn" id="3_j4nbv"]
+[ext_resource type="Theme" uid="uid://cnttk8ddpcuuw" path="res://Themes/BtTheme_2.tres" id="3_k3itw"]
 [ext_resource type="Script" path="res://Scripts/UI/MainUIController_1.gd" id="5_f6myn"]
 [ext_resource type="Texture2D" uid="uid://bkc316tu3ls0" path="res://Atlas Texture/PropEnv_AT1.tres" id="5_xi7s6"]
 
@@ -184,6 +185,23 @@ text = "15"
 layout_mode = 2
 text = "16"
 
+[node name="SolveTileMap_Bt" type="Button" parent="MainUI_Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -118.0
+offset_top = -152.0
+offset_right = -33.9999
+offset_bottom = -104.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_k3itw")
+theme_override_font_sizes/font_size = 20
+text = "SOLVE"
+
 [node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "mainTileContainer")]
 script = ExtResource("2_f0agi")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
@@ -191,7 +209,8 @@ gridDimension = 9
 tileAtlasTexture = ExtResource("5_xi7s6")
 mainTileContainer = NodePath("../MainUI_Control/MainTile_Container")
 
-[node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "selectedTilesBts")]
+[node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "selectedTilesBts", "solveTileMap")]
 script = ExtResource("5_f6myn")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
 selectedTilesBts = [NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_0"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_1"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_2"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_3"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_4"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_5"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_6"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_7"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_8"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_9"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_10"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_11"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_12"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_13"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_14"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_15"), NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_GridContainer/TileBt_16")]
+solveTileMap = NodePath("../MainUI_Control/SolveTileMap_Bt")

@@ -2,6 +2,7 @@ class_name MainUiController_1 extends Node
 
 @export var debugLabel: Label
 @export var selectedTilesBts: Array[Button]
+@export var solveTileMap: Button
 
 var waveFunctionHandler: WaveFunctionCollapse2
 var selectedTileIndexInMap = 0
@@ -11,6 +12,11 @@ func _ready():
 	waveFunctionHandler = get_tree().get_root().get_node(UniversalConstants.waveFunctionScriptPath) as WaveFunctionCollapse2
 	waveFunctionHandler.UpdateTileData_sig.connect(SetCurrentAndShowAvailableTiles)
 	waveFunctionHandler.JsonLoaded_sig.connect(UpdateSelectionTilesTexture)
+
+	solveTileMap.connect("pressed",
+	func():
+		solveTileMap.disabled = true
+		waveFunctionHandler.SolveModel())
 
 	InitializeButtons()
 	DisableAllSelecttionTiles()
@@ -74,7 +80,8 @@ func SetCurrentAndShowAvailableTiles(tileID: int):
 	# Offset by 1 for buttons ID
 	selectedTileIndexInMap = tileID
 	debugLabel.text = ("Tile ID : " + str(tileID) + " | Tiles Avl: " + str(waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable)
-	+ "\n Collapsed: " + str(waveFunctionHandler.tileMap[selectedTileIndexInMap].collapsed))
+	+ "\n Collapsed: " + str(waveFunctionHandler.tileMap[selectedTileIndexInMap].collapsed)
+	+ "\n TilesCount: " + str(waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesCount))
 
 	var btArrSize = selectedTilesBts.size()
 	"""

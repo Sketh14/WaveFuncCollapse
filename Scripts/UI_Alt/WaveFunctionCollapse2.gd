@@ -32,6 +32,8 @@ var tilesToCheckStack: Array[int]
 # List to store all the "Adjacency List" of the available tiles in the selected tile's list
 var superAdjList: Array[int]
 
+var totalCollapsibleTiles: int
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 
@@ -40,20 +42,36 @@ func _ready():
 	# var superTileToUse = Helper.SuperTileCell.new()
 	# testAdjForUnCollapsedBt.connect("pressed", TestSetTileAdjacencyForUnCollapsedTile)
 	# """
+	totalCollapsibleTiles = gridDimension * gridDimension
 
 	# mainTileGridContainer.columns = gridDimension
 	InstantiateMainTiles()
 
 	LoadAdjacencyJson()
 	InitializeData()
+
+	# await get_tree().create_timer(0.5).timeout # Waiting for other systems to load | TODO:  Should be a better solution than this
+	# SolveModel()
 	# Test1()
 
+func LoadAdjacencyJson():
+	if not FileAccess.file_exists(UniversalConstants.adjacencyJsonPath):
+		printerr("File Does not Exists" + str(UniversalConstants.adjacencyJsonPath))
+		return
+	var file = FileAccess.open(UniversalConstants.adjacencyJsonPath, FileAccess.READ)
+	var data = JSON.parse_string(file.get_as_text())
+	tilesJsonData = data
+	print("Json loaded successfully | tiles List count : " + str(tilesJsonData.tile_info.size()))
+
+	await get_tree().create_timer(0.5).timeout # Waiting for other systems to load | TODO:  Should be a better solution than this
+	JsonLoaded_sig.emit()
+	# print("Json Read | Name : " + str(tilesJsonData.tile_info[5].tile_name) + " | Socket Pos X : " + str(tilesJsonData.tile_info[5].socket_values[UniversalConstants.SocketDirection.POSITIVEX]))
+
 func InstantiateMainTiles():
-	var totalTiles = gridDimension * gridDimension
 	var mainTilePrefab = load(UniversalConstants.mainTilePrefabPath)
 	var tileToInstantiate
 	var tilePos = UniversalConstants.tileStartingPos
-	for i in totalTiles:
+	for i in totalCollapsibleTiles:
 		tileToInstantiate = mainTilePrefab.instantiate()
 		(tileToInstantiate as Button).text = str(i)
 		(tileToInstantiate as UITileController_1).tileID = i
@@ -72,24 +90,63 @@ func Test1():
 		TYPE_FLOAT:
 			print("Float : " + str(typeof(test1)))
 
+func SolveModel():
+	var totalTiles = gridDimension * gridDimension
+	var tilesListSize = tilesJsonData.tile_info.size() - 1
+
+	# Choose a random index
+	# Taking into account that some of the tiles may be collapsed, need to find a random tile which is not collapsed
+	var minCountIndex = -1
+	while (true):
+		minCountIndex = randi_range(0, totalCollapsibleTiles - 1)
+		if (tileMap[minCountIndex].collapsed):
+			continue
+		else:
+			break
+
+	var randTileIndex = randi_range(0, tilesListSize)
+	var randAdjTiles: Array[int]
+
+	# For Debugging
+	# var loopDebugCount = 0
+
+	# Keep repeating untill all the tiles are collapsed
+	while (totalCollapsibleTiles > 0):
+		# print("Collapsing Index : " + str(minCountIndex) + " | Total Tiles : " + str(totalCollapsibleTiles))
+
+		# Collapse the tile with random value for the first iteration
+		# Set Neighbouring tiles adjacency
+		SetTile(minCountIndex, randTileIndex)
+
+		#TODO: If Possible optimize
+		# Check thorugh the tileMap which tile has the least tileCount, ignoring collapsed tiles
+		minCountIndex = -1
+		for i in totalTiles:
+			if (tileMap[i].collapsed || tileMap[i].tilesCount == tilesListSize):
+				continue
+
+			if (minCountIndex == -1):
+				minCountIndex = i
+			elif (tileMap[i].tilesCount < tileMap[minCountIndex].tilesCount):
+				minCountIndex = i
+
+		# Collapse the "least tileCount" tile on the tileMap with a random tile from the adjacency list
+		for i in tilesListSize:
+			if (tileMap[minCountIndex].tilesAvailable[i] == -1): continue
+			randAdjTiles.append(tileMap[minCountIndex].tilesAvailable[i])
+		
+		randTileIndex = tileMap[minCountIndex].tilesAvailable[randAdjTiles[randi_range(0, randAdjTiles.size() - 1)]]
+		randAdjTiles.clear()
+
+		# For Debugging
+		# print("After Total Tiles : " + str(totalCollapsibleTiles))
+		# if (loopDebugCount >= 2): break
+		# loopDebugCount += 1
 
 func SetCurrentAndShowAvailableTiles(tileID: int):
 	# print("Tile ID to check : " + str(tileID))
 	# Offset by 1 for buttons ID
 	debugLabel.text = str(tileMap[tileID].tilesAvailable)
-
-func LoadAdjacencyJson():
-	if not FileAccess.file_exists(UniversalConstants.adjacencyJsonPath):
-		printerr("File Does not Exists" + str(UniversalConstants.adjacencyJsonPath))
-		return
-	var file = FileAccess.open(UniversalConstants.adjacencyJsonPath, FileAccess.READ)
-	var data = JSON.parse_string(file.get_as_text())
-	tilesJsonData = data
-	print("Json loaded successfully | tiles List count : " + str(tilesJsonData.tile_info.size()))
-
-	await get_tree().create_timer(1.0).timeout # Waiting for other systems to load | TODO:  Should be a better solution than this
-	JsonLoaded_sig.emit()
-	# print("Json Read | Name : " + str(tilesJsonData.tile_info[5].tile_name) + " | Socket Pos X : " + str(tilesJsonData.tile_info[5].socket_values[UniversalConstants.SocketDirection.POSITIVEX]))
 
 # Initialize tiles as well as fill the tilesAvailable list at the start so that the tiles are in a super-position state 
 func InitializeData():
@@ -98,6 +155,7 @@ func InitializeData():
 	var tilesListSize = tilesJsonData.tile_info.size() - 1
 	for valX in totalSize:
 		var tileCell = Helper.SuperTileCell.new()
+		tileCell.tilesCount = tilesListSize
 		tileMap.append(tileCell)
 		# Really don't want to do this here
 		for valY in tilesListSize:
@@ -123,7 +181,7 @@ func InitializeData():
 
 # TODO: REFACTOR BELOW
 
-# """
+"""
 # For Testing
 func TestSetTileAdjacencyForUnCollapsedTile():
 	var testTileData
@@ -142,9 +200,12 @@ func SetTile(tileMapIndex: int, valToSet: int):
 	if (tileMap.size() <= tileMapIndex || tileMapIndex < 0):
 		print("TileMap Size : " + str(tileMap.size()) + " | CurrentIndex : " + str(tileMapIndex))
 		return
+	# print("Setting Tile | Index : " + str(tileMapIndex) + " | Val : " + str(valToSet))
 
 	tileMap[tileMapIndex].currentTileIndex = valToSet
 	tileMap[tileMapIndex].collapsed = true
+	tileMap[tileMapIndex].tilesCount = 1
+	totalCollapsibleTiles -= 1
 	UpdateTileData_sig.emit(tileMapIndex)
 	
 	#Set the first 4 adjacent tiles in the immediate vicinity of the current set tile
@@ -169,7 +230,7 @@ func SetTile(tileMapIndex: int, valToSet: int):
 	# if (true):
 		poppedTileIndex = tilesToCheckStack.pop_back()
 		coOrdX = (poppedTileIndex / gridDimension)
-		coOrdY = poppedTileIndex % gridDimension
+		coOrdY = poppedTileIndex% gridDimension
 		# print("\n\nGot Tile to check| index : X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "]")
 		
 		coOrdXMult = 0
@@ -303,6 +364,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 		var totalAvailableTiles = availableTilesSize
 		var currentAdjTileVal = -1
 
+		tileMap[tileToCheckIndex1D].tilesCount = 0
 		# Get the "Available Tiles" list of the "Tile To Check"
 		for i in availableTilesSize:
 
@@ -345,6 +407,8 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 					# print("Found Socket | Socket [" + str(tilesAvailableIndexToCheck) + "] : [" + str(compSocketVal) + "]")
 					foundTile = true
 					tileChanged = true
+
+					tileMap[tileToCheckIndex1D].tilesCount += 1
 					break
 
 				# print("[" + str(socketIndex) + "] : " + str(tileMap[tileToCheckIndex1D].tilesAvailable[tilesAvailableIndexToCheck]) + "_" + str(adjSocketVal) + " | ")
@@ -365,8 +429,10 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 			tileMap[tileToCheckIndex1D].collapsed = true
 			tileMap[tileToCheckIndex1D].currentTileIndex = currentAdjTileVal
 			UpdateTileData_sig.emit(tileToCheckIndex1D)
+			totalCollapsibleTiles -= 1
 			# return 1
-	# TODO: FIXXXX THISSSS
+
+	# TODO: FIXXXX THISSSS | FIXED FOR NOW (< 22 Jan)
 	else:
 		# This tile will not be collapsed by the following operations as the tile from which it is being called is not collapsed
 		# As the "Selected Tile" is not collapsed, there can be no way of only 1 possible solution existing for the "Tile Being Checked".
@@ -429,6 +495,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 				+ " | Val : " + str(tileMap[tileToCheckIndex1D].tilesAvailable))
 		# """
 
+		tileMap[tileToCheckIndex1D].tilesCount = 0
 		# Get the "Available Tiles" list of the "Tile To Check"
 		for i in availableTilesSize:
 
@@ -456,6 +523,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 				if (superAdjList[j] == tilesJsonData.tile_info[i].socket_values[compSocketDir]):
 					# print("Found Socket | Socket [" + str(i) + "] : [" + str(superAdjList[j]) + "] | [" + str(compSocketDir) + "]")
 					sameAdjValFound = true
+					tileMap[tileToCheckIndex1D].tilesCount += 1
 					break
 				# print("Adjacency Socket Val : " + str(tilesJsonData.tile_info[i].adjacency_list[j]))
 

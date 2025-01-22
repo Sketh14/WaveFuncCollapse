@@ -446,6 +446,19 @@ Project
 	(-) Fixing TileAdjacencyList maaybe for the last time
 		<~> Setting values according to godot's orientation
 			[=] Flipping back X-Socket values
+
+- Scripts
+	(-) WaveFunctionCollapse2
+		<~> Logic for automatically running model
+		<~> Keeping track of tileCount for all tiles while setting TileAdjacency
+		<~> TotalCollapsibleTiles for all the available tiles
+		<~> Adding functionality for solving the remaining tiles in the tileMap
+	(-) MainUIController_1
+		<~> Solving button field + logic
+	(-) Helper
+		<~> Added field to store the count of available tiles
+- Scene
+	(-) Adding button for solving tileMap
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
 [DO] - Refactor UITileController_1 and add all buttons to MainUIController_1
