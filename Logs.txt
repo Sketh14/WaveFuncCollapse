@@ -459,6 +459,18 @@ Project
 		<~> Added field to store the count of available tiles
 - Scene
 	(-) Adding button for solving tileMap
+
+--------------------------------------------------------------------------------------
+									23 JANUARY 2024
+--------------------------------------------------------------------------------------
+- Scripts
+	(-) MainUIController_1
+		<~> Loading Selection-Tile buttons from path
+		<~> Combining InitializeButtons and UpdateSelectionTilesTexture
+		<~> Calling InitializeButtons when the WaveFunctionCollapse has loaded JsonData
+- Scene
+	(-) Removing "Tile Selection" buttons
+
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
 [DO] - Refactor UITileController_1 and add all buttons to MainUIController_1

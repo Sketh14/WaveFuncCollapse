@@ -1,9 +1,10 @@
 class_name MainUiController_1 extends Node
 
 @export var debugLabel: Label
-@export var selectedTilesBts: Array[Button]
 @export var solveTileMap: Button
+@export var selectionTilesContainer: Control
 
+var selectedTilesBts2: Array[Button]
 var waveFunctionHandler: WaveFunctionCollapse2
 var selectedTileIndexInMap = 0
 # var mainTileSelected = false
@@ -11,37 +12,47 @@ var selectedTileIndexInMap = 0
 func _ready():
 	waveFunctionHandler = get_tree().get_root().get_node(UniversalConstants.waveFunctionScriptPath) as WaveFunctionCollapse2
 	waveFunctionHandler.UpdateTileData_sig.connect(SetCurrentAndShowAvailableTiles)
-	waveFunctionHandler.JsonLoaded_sig.connect(UpdateSelectionTilesTexture)
+	waveFunctionHandler.JsonLoaded_sig.connect(InitializeButtons)
 
 	solveTileMap.connect("pressed",
 	func():
 		solveTileMap.disabled = true
 		waveFunctionHandler.SolveModel())
 
-	InitializeButtons()
-	DisableAllSelecttionTiles()
+	# InitializeButtons()
+	# DisableAllSelecttionTiles()
 
 # https://docs.godotengine.org/en/stable/classes/class_callable.html
 func InitializeButtons():
-	var btArrSize = selectedTilesBts.size()
-	# var tileTex: TextureRect
-	for i in btArrSize:
-		selectedTilesBts[i].connect("pressed", func(): SetTileViaWaveFunctionHandler(i))
-		selectedTilesBts[i].text = str(i)
-		# selectedTilesBts[i].connect("pressed", func(): print("Button Pressed : " + str(i)))
-
-# Setting AtlasTexture of the tile
-func UpdateSelectionTilesTexture():
-	# print("Setting Tile Textures")
-	var btArrSize = selectedTilesBts.size()
+	var selectionTileBtPrefab = load(UniversalConstants.selectionTileBtPrefabPath)
+	var btToInstantiate
+	var tilesListSize = waveFunctionHandler.tilesJsonData.tile_info.size() - 1
 	var tileTex: TextureRect
 	var randomBgIndex: int
 	var tileTexIndex: int
-	for i in btArrSize:
+	for i in tilesListSize:
+		btToInstantiate = selectionTileBtPrefab.instantiate()
+		selectionTilesContainer.add_child(btToInstantiate)
+		selectedTilesBts2.append(btToInstantiate)
+		btToInstantiate.connect("pressed", func(): SetTileViaWaveFunctionHandler(i))
+		btToInstantiate.text = str(i)
+
+		"""
+		var btArrSize = selectedTilesBts.size()
+		# var tileTex: TextureRect
+		for i in btArrSize:
+			selectedTilesBts[i].connect("pressed", func(): SetTileViaWaveFunctionHandler(i))
+			selectedTilesBts[i].text = str(i)
+			# selectedTilesBts[i].connect("pressed", func(): print("Button Pressed : " + str(i)))
+		"""
+
+		# Setting AtlasTexture of the tile
+		# print("Setting Tile Textures")
+	# for i in btArrSize:
 		tileTexIndex = waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[0]
 
 		# Setting the Bg first
-		tileTex = selectedTilesBts[i].get_child(0)
+		tileTex = btToInstantiate.get_child(0)
 		tileTex.texture = waveFunctionHandler.tileAtlasTexture.duplicate()
 		# If defined, then get Index of the BG
 		if (tileTexIndex == 0):
@@ -56,23 +67,25 @@ func UpdateSelectionTilesTexture():
 						UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
 
 		# Setting foreground
-		tileTex = selectedTilesBts[i].get_child(1)
+		tileTex = btToInstantiate.get_child(1)
 		# tileTex.texture = waveFunctionHandler.tileAtlasTextures[waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[0]].duplicate()
 		# Getting Index of the proper atlas to use
 		tileTex.texture = waveFunctionHandler.tileAtlasTexture.duplicate()
 		tileTex.texture.region = Rect2(waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[1],
 					waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[2],
 					UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
+	
+	DisableAllSelecttionTiles()
 
 
 func SetTileViaWaveFunctionHandler(btIndex: int):
 	waveFunctionHandler.SetTile(selectedTileIndexInMap, btIndex)
 
 func DisableAllSelecttionTiles():
-	var btArrSize = selectedTilesBts.size()
+	var btArrSize = selectedTilesBts2.size()
 	for i in btArrSize:
 		# print("Disabling Tile : " + str(i))
-		selectedTilesBts[i].visible = false
+		selectedTilesBts2[i].visible = false
 
 func SetCurrentAndShowAvailableTiles(tileID: int):
 	# print("Tile ID to check : " + str(tileID))
@@ -83,7 +96,7 @@ func SetCurrentAndShowAvailableTiles(tileID: int):
 	+ "\n Collapsed: " + str(waveFunctionHandler.tileMap[selectedTileIndexInMap].collapsed)
 	+ "\n TilesCount: " + str(waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesCount))
 
-	var btArrSize = selectedTilesBts.size()
+	var btArrSize = selectedTilesBts2.size()
 	"""
 		var availableTilesIndex = 0
 		var btTilesIndex = 0
@@ -107,6 +120,6 @@ func SetCurrentAndShowAvailableTiles(tileID: int):
 	for i in btArrSize:
 		if (waveFunctionHandler.tileMap[selectedTileIndexInMap].collapsed
 			|| waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable[i] == -1):
-			selectedTilesBts[i].visible = false
+			selectedTilesBts2[i].visible = false
 		else:
-			selectedTilesBts[i].visible = true
+			selectedTilesBts2[i].visible = true
