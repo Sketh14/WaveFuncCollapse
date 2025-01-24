@@ -471,6 +471,23 @@ Project
 - Scene
 	(-) Removing "Tile Selection" buttons
 
+--------------------------------------------------------------------------------------
+									24 JANUARY 2024
+--------------------------------------------------------------------------------------
+- Start Tile Rotation logic
+- Scripts
+	(-) UI_Test1
+		<~> Testing Direction logic
+	(-) WaveFunctionCollapse2
+		<~> Changing logic for direction setting so as to make tile rotation easier
+	(-) UniversalConstants
+		<~> Changing SocketDirection order to go clockwise in direction
+- Others
+	(-) TileAdjacencyList
+		<~> Changing list according to Socket-Direction change
+			[=] Re-arranging Socket-values and adjacency-list
+
+
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
 [DO] - Refactor UITileController_1 and add all buttons to MainUIController_1

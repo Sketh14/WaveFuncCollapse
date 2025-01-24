@@ -231,62 +231,51 @@ func SetTile(tileMapIndex: int, valToSet: int):
 		poppedTileIndex = tilesToCheckStack.pop_back()
 		coOrdX = (poppedTileIndex / gridDimension)
 		coOrdY = poppedTileIndex% gridDimension
-		# print("\n\nGot Tile to check| index : X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "]")
+		print("\n\nGot Tile to check| index : X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "]")
 		
 		coOrdXMult = 0
 		coOrdYMult = 1
+		
+		var tempRotation = 180
 
 		# Create SuperTiles along with Adjacecny Tile check in each possible direction
-		for tileCountX in 2:
-			for tileCountY in 2:
-				# print("Instantiating at Position : ", position)
-				tileToCheckData.tileCoOrdX = coOrdX + (1 * coOrdXMult)
-				tileToCheckData.tileCoOrdY = coOrdY + (1 * coOrdYMult)
-				# print("Tile CoOrd : [" + str(tileToCheckData.tileCoOrdX) + "," + str(tileToCheckData.tileCoOrdY) + "]")
+		for i in 4:
+			# print("Instantiating at Position : ", position)
+			tileToCheckData.tileCoOrdX = coOrdX + cos(deg_to_rad(tempRotation))
+			tileToCheckData.tileCoOrdY = coOrdY + sin(deg_to_rad(tempRotation))
+			# print("Tile CoOrd : [" + str(tileToCheckData.tileCoOrdX) + "," + str(tileToCheckData.tileCoOrdY) + "]")
 
-				# Check if within bounds
-				if (tileToCheckData.tileCoOrdX < 0 || tileToCheckData.tileCoOrdX >= gridDimension
-					|| tileToCheckData.tileCoOrdY < 0 || tileToCheckData.tileCoOrdY >= gridDimension
-					|| tileMap[(gridDimension * tileToCheckData.tileCoOrdX) + tileToCheckData.tileCoOrdY].collapsed):
-						# print("Outside of Bounds | X[" + str(tileToCheckData.tileCoOrdX) + "], "Y[" + str(tileToCheckData.tileCoOrdY) + "]")
-							
-						coOrdYMult = coOrdYMult * -1
-						coOrdXMult = coOrdXMult * -1
-						continue # Continue if outside bounds
+			# Check if within bounds
+			if (tileToCheckData.tileCoOrdX < 0 || tileToCheckData.tileCoOrdX >= gridDimension
+				|| tileToCheckData.tileCoOrdY < 0 || tileToCheckData.tileCoOrdY >= gridDimension
+				|| tileMap[(gridDimension * tileToCheckData.tileCoOrdX) + tileToCheckData.tileCoOrdY].collapsed):
+					# print("Outside of Bounds | X[" + str(tileToCheckData.tileCoOrdX) + "], "Y[" + str(tileToCheckData.tileCoOrdY) + "]")
+						
+				tempRotation -= 90
+				continue # Continue if outside bounds
 
-				if (tileCountX == 0):
-					# Correcting according to Godot
-					tileToCheckData.socketDir = 3 - tileCountY # Up is Negative for Godot
-				else:
-					tileToCheckData.socketDir = tileCountY
-					
-				"""
-				print("Checking Tile | tileCountX : " + str(tileCountX) + " | tileCountY : " + str(tileCountY)
-						+ " | [" + str(tileToCheckData.tileCoOrdX) + "," + str(tileToCheckData.tileCoOrdY) + "]"
-						+ " | socketDir : " + str(tileToCheckData.socketDir)
-						+ " | tileMapVal : " + str((gridDimension * tileToCheckData.tileCoOrdX) + tileToCheckData.tileCoOrdY))
-				# """
+			# if (i == 0):
+			# 	# Correcting according to Godot
+			# 	tileToCheckData.socketDir = 3 - tileCountY # Up is Negative for Godot
+			# else:
+				# tileToCheckData.socketDir = tileCountY
 
-				if (SetTileAdjacency(poppedTileIndex, tileToCheckData)):
-					"""
-					print("=========> Pushing Tile Data | refTileMapIndex : " + str((gridDimension * tileToCheckData.tileCoOrdX) + tileToCheckData.tileCoOrdY)
-						+ " | X[" + str(tileToCheckData.tileCoOrdX) + "], Y[" + str(tileToCheckData.tileCoOrdY) + "] <=======")
-					# """
-					tilesToCheckStack.push_back((gridDimension * tileToCheckData.tileCoOrdX) + tileToCheckData.tileCoOrdY) # Add Current tile to the top
-
-				# Again Set the first 4 adjacent tiles in the immediate vicinity of the popped tile
-				# SetTilesToCheckData2(refTileMapIndex, (gridDimension * poppedTileIndex.tileCoOrdX) + poppedTileIndex.tileCoOrdY)
-
-
-				#tileMapIndex error | not being set for the neighbours when it is neighbours turn
-				# var tempTransposedIndex = tileToCheck.tileCoOrdX + (tileToCheck.tileCoOrdY * gridDimension.y)
-				# if(!tileMap[tempTransposedIndex].collapsed):
-				# 	SetTilesToCheckData(tileToCheck.tileCoOrdX, tileToCheck.tileCoOrdY)	
+			tileToCheckData.socketDir = i
 				
-				coOrdYMult = coOrdYMult * -1
-				coOrdXMult = coOrdXMult * -1
-			coOrdYMult = 0
-			coOrdXMult = -1
+			# """
+			print("Checking Tile"+ " | [" + str(tileToCheckData.tileCoOrdX) + "," + str(tileToCheckData.tileCoOrdY) + "]"
+					+ " | Rotation : " + str(tempRotation) + " | socketDir : " + str(tileToCheckData.socketDir)
+					+ " | tileMapVal : " + str((gridDimension * tileToCheckData.tileCoOrdX) + tileToCheckData.tileCoOrdY))
+			# """
+
+			if (SetTileAdjacency(poppedTileIndex, tileToCheckData)):
+				"""
+				print("=========> Pushing Tile Data | refTileMapIndex : " + str((gridDimension * tileToCheckData.tileCoOrdX) + tileToCheckData.tileCoOrdY)
+					+ " | X[" + str(tileToCheckData.tileCoOrdX) + "], Y[" + str(tileToCheckData.tileCoOrdY) + "] <=======")
+				# """
+				tilesToCheckStack.push_back((gridDimension * tileToCheckData.tileCoOrdX) + tileToCheckData.tileCoOrdY) # Add Current tile to the top
+			
+			tempRotation -= 90
 
 		# For Debugging
 		# stackPoppdCount += 1
