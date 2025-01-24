@@ -89,7 +89,7 @@ func DisableAllSelecttionTiles():
 
 func SetCurrentAndShowAvailableTiles(tileID: int):
 	# print("Tile ID to check : " + str(tileID))
-
+	if (waveFunctionHandler.solveModelCalled): return
 	# Offset by 1 for buttons ID
 	selectedTileIndexInMap = tileID
 	debugLabel.text = ("Tile ID : " + str(tileID) + " | Tiles Avl: " + str(waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable)

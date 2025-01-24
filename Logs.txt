@@ -487,6 +487,14 @@ Project
 		<~> Changing list according to Socket-Direction change
 			[=] Re-arranging Socket-values and adjacency-list
 
+- Scripts
+	(-) Adding await to SolveModel and not showing Selection Tiles when SolveModel is called
+- Scenes
+	(-) Adding a scroll container for bigger dimensions
+- Others
+	(-) TileAdjacencyList
+		<~> Defining more tiles
+		<~> Adding more paths
 
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability

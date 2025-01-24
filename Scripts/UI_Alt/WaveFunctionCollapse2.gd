@@ -33,6 +33,7 @@ var tilesToCheckStack: Array[int]
 var superAdjList: Array[int]
 
 var totalCollapsibleTiles: int
+var solveModelCalled: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -91,6 +92,8 @@ func Test1():
 			print("Float : " + str(typeof(test1)))
 
 func SolveModel():
+	solveModelCalled = true
+	
 	var totalTiles = gridDimension * gridDimension
 	var tilesListSize = tilesJsonData.tile_info.size() - 1
 
@@ -137,6 +140,9 @@ func SolveModel():
 		
 		randTileIndex = tileMap[minCountIndex].tilesAvailable[randAdjTiles[randi_range(0, randAdjTiles.size() - 1)]]
 		randAdjTiles.clear()
+
+		# await Engine.get_main_loop().process_frame
+		await get_tree().create_timer(0.1).timeout # Waiting for Tile Update
 
 		# For Debugging
 		# print("After Total Tiles : " + str(totalCollapsibleTiles))
@@ -217,11 +223,6 @@ func SetTile(tileMapIndex: int, valToSet: int):
 	var coOrdX = -1
 	var coOrdY = -1
 
-	var coOrdXMult = 0
-	var coOrdYMult = 1
-	# var tempTileCoOrdX = -1
-	# var tempTileCoOrdY = -1
-
 	var tileToCheckData = Helper.TransposedTileData.new()
 
 	# Set while loop here and keep repeating unless all the adjoining cells are collapsed 
@@ -231,10 +232,7 @@ func SetTile(tileMapIndex: int, valToSet: int):
 		poppedTileIndex = tilesToCheckStack.pop_back()
 		coOrdX = (poppedTileIndex / gridDimension)
 		coOrdY = poppedTileIndex% gridDimension
-		print("\n\nGot Tile to check| index : X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "]")
-		
-		coOrdXMult = 0
-		coOrdYMult = 1
+		# print("\n\nGot Tile to check| index : X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "]")
 		
 		var tempRotation = 180
 
@@ -254,16 +252,10 @@ func SetTile(tileMapIndex: int, valToSet: int):
 				tempRotation -= 90
 				continue # Continue if outside bounds
 
-			# if (i == 0):
-			# 	# Correcting according to Godot
-			# 	tileToCheckData.socketDir = 3 - tileCountY # Up is Negative for Godot
-			# else:
-				# tileToCheckData.socketDir = tileCountY
-
 			tileToCheckData.socketDir = i
 				
-			# """
-			print("Checking Tile"+ " | [" + str(tileToCheckData.tileCoOrdX) + "," + str(tileToCheckData.tileCoOrdY) + "]"
+			"""
+			print("Checking Tile" + " | [" + str(tileToCheckData.tileCoOrdX) + "," + str(tileToCheckData.tileCoOrdY) + "]"
 					+ " | Rotation : " + str(tempRotation) + " | socketDir : " + str(tileToCheckData.socketDir)
 					+ " | tileMapVal : " + str((gridDimension * tileToCheckData.tileCoOrdX) + tileToCheckData.tileCoOrdY))
 			# """
@@ -298,38 +290,6 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 		+ " | currentTileIndex: " + str(tileMap[selectedTileIndex].currentTileIndex)
 		+ " | Dir : X[" + str(tileToCheck.tileCoOrdX) + "], Y[" + str(tileToCheck.tileCoOrdY) + "]")
 	# """
-
-	# =========================================>		Getting Adjacent List		<======================================
-
-	# We assume that the index will be set, as without index, this shouldnt be triggered
-	# var selectedTileValue = tileMap[selectedTileIndex].currentTileIndex
-
-	"""
-	# No Need as we are directly checking for Socket Direction
-		# var adjList # Cache List to compare with
-		var socketDirectionToCheck
-
-		match tileToCheck.socketDir:
-			UniversalConstants.SocketDirection.POSITIVEX:
-				socketDirectionToCheck = UniversalConstants.SocketDirection.POSITIVEX
-				# adjList = tilesJsonData.tile_info[selectedTileValue].adjacency_list[UniversalConstants.SocketDirection.POSITIVEX]
-			UniversalConstants.SocketDirection.NEGATIVEX:
-				socketDirectionToCheck = UniversalConstants.SocketDirection.NEGATIVEX
-				# adjList = tilesJsonData.tile_info[selectedTileValue].adjacency_list[UniversalConstants.SocketDirection.NEGATIVEX]
-			UniversalConstants.SocketDirection.POSITIVEY:
-				socketDirectionToCheck = UniversalConstants.SocketDirection.POSITIVEY
-				# adjList = tilesJsonData.tile_info[selectedTileValue].adjacency_list[UniversalConstants.SocketDirection.POSITIVEY]
-			UniversalConstants.SocketDirection.NEGATIVEY:
-				socketDirectionToCheck = UniversalConstants.SocketDirection.NEGATIVEY
-				# adjList = tilesJsonData.tile_info[selectedTileValue].adjacency_list[UniversalConstants.SocketDirection.NEGATIVEY]
-	"""
-
-	"""
-	print("Adjacency List : " + str(tilesJsonData.tile_info[tileMap[selectedTileIndex].currentTileIndex].adjacency_list[tileToCheck.socketDir]));
-	# """
-
-	# =========================================>		Getting Adjacent List		<======================================
-
 
 	# tilesAvailable should be sorted (in ascending order)
 	# Below is to check which tile from the Prefab List can be added above the current tile
@@ -427,7 +387,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 		# As the "Selected Tile" is not collapsed, there can be no way of only 1 possible solution existing for the "Tile Being Checked".
 		# If the Solution exists, then there are duplicates in the "TilesAvailable" list
 
-		# Creating a Super List for adjacency
+		# ==================================> Super Adjacency List <==================================
 		superAdjList.clear()
 		var selectedTileAdjListSize = 0
 		var tempAdjVal = -1
@@ -458,6 +418,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 					
 		# print("Super Adj List | Count : " + str(superAdjList.size()) + " | Val :" + str(superAdjList))
 		# return false						# FOR DEBUGGING
+		# ==================================> Super Adjacency List <==================================
 
 		# TODO: REMOVEEEEEEEEE
 		# The below is wrong as we we are adding new tiles to the checking tile instead of removing as we have to reduce it,
@@ -501,6 +462,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 
 			# var socketIndex = 0 # THis is for debugging only
 			
+			# TODO: Would be better to sort the Super Ajacency list and do a binary search as it being used to compare multiple times
 			sameAdjValFound = false
 			# Get the comaptible socket values in the respective "Adjacency List" of the "Current Selected Tile" 
 			# which is in the direction of the "Tile To Compare"

@@ -49,13 +49,18 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 9
 
-[node name="MainTile_Container" type="Control" parent="MainUI_Control"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainUI_Control"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 28.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MainTile_Container" type="Control" parent="MainUI_Control/ScrollContainer"]
+custom_minimum_size = Vector2(2200, 2200)
+layout_mode = 2
 
 [node name="Debug_Panel" type="Panel" parent="MainUI_Control"]
 visible = false
@@ -138,9 +143,9 @@ text = "SOLVE"
 [node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "mainTileContainer")]
 script = ExtResource("2_f0agi")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
-gridDimension = 9
+gridDimension = 30
 tileAtlasTexture = ExtResource("5_xi7s6")
-mainTileContainer = NodePath("../MainUI_Control/MainTile_Container")
+mainTileContainer = NodePath("../MainUI_Control/ScrollContainer/MainTile_Container")
 
 [node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "solveTileMap", "selectionTilesContainer")]
 script = ExtResource("5_f6myn")
