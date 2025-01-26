@@ -496,6 +496,32 @@ Project
 		<~> Defining more tiles
 		<~> Adding more paths
 
+- Others
+	(-) TileAdjacencyList
+		<~> Adding more stone objects
+
+--------------------------------------------------------------------------------------
+									26 JANUARY 2024
+--------------------------------------------------------------------------------------
+-Script
+	(-) MainUIController_1
+		<~> Enabling Solve button if reset called
+		<~> Added Slider to control tile-map solve speed
+	(-) WaveFunctionCollapse
+		<~> Reset logic
+			[=] Resetting all tiles with adjacency list
+			[=] Resetting TotalCollapsibleTiles | all other flags
+	(-) UITileController_1
+		<~> Reset Tile Logic
+			[=] Resetting position, scale, textures
+		<~> Adding flag to check if the tile was changed
+	(-) UniversalConstants
+		<~> Constant for default tile-atlas texture position value
+		<~> Enum for checking tile-map status
+- Scene
+	(-) Changing BtTheme_2 colors
+	(-) Adding Reset Button | Solve Speed Slider
+
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
 [DO] - Refactor UITileController_1 and add all buttons to MainUIController_1

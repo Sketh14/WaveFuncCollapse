@@ -2,7 +2,9 @@ class_name MainUiController_1 extends Node
 
 @export var debugLabel: Label
 @export var solveTileMap: Button
+@export var resetTileMap: Button
 @export var selectionTilesContainer: Control
+@export var solveSpeedSlider: Slider
 
 var selectedTilesBts2: Array[Button]
 var waveFunctionHandler: WaveFunctionCollapse2
@@ -13,11 +15,21 @@ func _ready():
 	waveFunctionHandler = get_tree().get_root().get_node(UniversalConstants.waveFunctionScriptPath) as WaveFunctionCollapse2
 	waveFunctionHandler.UpdateTileData_sig.connect(SetCurrentAndShowAvailableTiles)
 	waveFunctionHandler.JsonLoaded_sig.connect(InitializeButtons)
+	resetTileMap.connect("pressed",
+	func():
+		solveTileMap.disabled = false
+		DisableAllSelectionTiles(0)
+		waveFunctionHandler.ResetTileMap())
 
 	solveTileMap.connect("pressed",
 	func():
 		solveTileMap.disabled = true
+		DisableAllSelectionTiles(0)
 		waveFunctionHandler.SolveModel())
+
+	solveSpeedSlider.value_changed.connect(func(val):
+		print("Solve Speed : " + str(val))
+		waveFunctionHandler.solveSpeed = val)
 
 	# InitializeButtons()
 	# DisableAllSelecttionTiles()
@@ -75,16 +87,16 @@ func InitializeButtons():
 					waveFunctionHandler.tilesJsonData.tile_info[i].atlas_texture_properties[2],
 					UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
 	
-	DisableAllSelecttionTiles()
+	DisableAllSelectionTiles(0)
 
 
 func SetTileViaWaveFunctionHandler(btIndex: int):
 	waveFunctionHandler.SetTile(selectedTileIndexInMap, btIndex)
 
-func DisableAllSelecttionTiles():
+func DisableAllSelectionTiles(_tileMapStatus: int):
+	print("Disabling All Tile")
 	var btArrSize = selectedTilesBts2.size()
 	for i in btArrSize:
-		# print("Disabling Tile : " + str(i))
 		selectedTilesBts2[i].visible = false
 
 func SetCurrentAndShowAvailableTiles(tileID: int):

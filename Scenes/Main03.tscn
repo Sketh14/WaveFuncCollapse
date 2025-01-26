@@ -151,8 +151,27 @@ offset_bottom = -104.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("4_iuwko")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "SOLVE"
+
+[node name="ResetTileMap_Bt" type="Button" parent="MainUI_Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -118.0
+offset_top = -209.54
+offset_right = -33.9999
+offset_bottom = -161.54
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("4_iuwko")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "RESET"
 
 [node name="AdjTestForUnCollapsed" type="Button" parent="MainUI_Control"]
 custom_minimum_size = Vector2(52, 52)
@@ -171,10 +190,11 @@ gridDimension = 3
 tileAtlasTexture = ExtResource("6_syxu6")
 mainTileContainer = NodePath("../MainUI_Control/MainTile_Container")
 
-[node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "solveTileMap", "selectionTilesContainer")]
+[node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "solveTileMap", "resetTileMap", "selectionTilesContainer")]
 script = ExtResource("5_ixidq")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
 solveTileMap = NodePath("../MainUI_Control/SolveTileMap_Bt")
+resetTileMap = NodePath("../MainUI_Control/ResetTileMap_Bt")
 selectionTilesContainer = NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer")
 
 [node name="UI_Test1" type="Node" parent="." node_paths=PackedStringArray("tileTexRect_Og", "tileTexturesContainer", "tileTexArr")]

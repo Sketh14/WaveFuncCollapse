@@ -17,6 +17,7 @@ class_name WaveFunctionCollapse2
 # https://www.reddit.com/r/godot/comments/11g91c8/how_to_create_events/
 signal UpdateTileData_sig(tileID: int)
 signal JsonLoaded_sig()
+signal TileMapStatus_sig(status: int)
 
 # To store the tiles data from Json upon loading
 var tilesJsonData
@@ -34,6 +35,8 @@ var superAdjList: Array[int]
 
 var totalCollapsibleTiles: int
 var solveModelCalled: bool
+var resetModelCalled: bool
+var solveSpeed: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -44,6 +47,7 @@ func _ready():
 	# testAdjForUnCollapsedBt.connect("pressed", TestSetTileAdjacencyForUnCollapsedTile)
 	# """
 	totalCollapsibleTiles = gridDimension * gridDimension
+	solveSpeed = 0.1
 
 	# mainTileGridContainer.columns = gridDimension
 	InstantiateMainTiles()
@@ -142,12 +146,31 @@ func SolveModel():
 		randAdjTiles.clear()
 
 		# await Engine.get_main_loop().process_frame
-		await get_tree().create_timer(0.1).timeout # Waiting for Tile Update
+		await get_tree().create_timer(solveSpeed).timeout # Waiting for Tile Update
 
 		# For Debugging
 		# print("After Total Tiles : " + str(totalCollapsibleTiles))
 		# if (loopDebugCount >= 2): break
 		# loopDebugCount += 1
+
+func ResetTileMap():
+	# print("Resetting Tile Map")
+	# Only invoke if any tile has been collapsed
+	if (totalCollapsibleTiles == gridDimension * gridDimension): return
+
+	totalCollapsibleTiles = gridDimension * gridDimension
+	solveModelCalled = false
+	TileMapStatus_sig.emit(UniversalConstants.TileMapStatus.RESET)
+	
+	var totalSize = gridDimension * gridDimension
+	var tilesListSize = tilesJsonData.tile_info.size() - 1
+	for i in totalSize:
+		tileMap[i].collapsed = false
+		tileMap[i].tilesCount = tilesListSize
+		tileMap[i].currentTileIndex = -1
+		for j in tilesListSize:
+			tileMap[i].tilesAvailable[j] = j
+
 
 func SetCurrentAndShowAvailableTiles(tileID: int):
 	# print("Tile ID to check : " + str(tileID))
@@ -228,7 +251,7 @@ func SetTile(tileMapIndex: int, valToSet: int):
 	# Set while loop here and keep repeating unless all the adjoining cells are collapsed 
 	# var stackPoppdCount = 0 # For Debugging
 	while (tilesToCheckStack.size() > 0):
-	# if (true):
+	# if (true):			# For Debugging
 		poppedTileIndex = tilesToCheckStack.pop_back()
 		coOrdX = (poppedTileIndex / gridDimension)
 		coOrdY = poppedTileIndex% gridDimension

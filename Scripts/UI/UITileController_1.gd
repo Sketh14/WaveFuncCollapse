@@ -9,6 +9,7 @@ class_name UITileController_1 extends Control
 
 # var bt: Button
 var tileTex: TextureRect
+var tileChanged: bool
 # @export var tileEnabled: bool # export for debug
 # @export var tileID_Label: Label
 
@@ -29,6 +30,7 @@ func _ready():
 
 	waveFunctionHandler = get_tree().get_root().get_node(UniversalConstants.waveFunctionScriptPath) as WaveFunctionCollapse2
 	waveFunctionHandler.UpdateTileData_sig.connect(UpdateButtonText)
+	waveFunctionHandler.TileMapStatus_sig.connect(ResetTile)
 
 	mainUIController = get_tree().get_root().get_node(UniversalConstants.mainUIControllerScriptPath) as MainUiController_1
 
@@ -61,6 +63,7 @@ func _on_tile_bt_pressed():
 
 func UpdateButtonText(tileMapTileID: int):
 	if (tileMapTileID == tileID && waveFunctionHandler.tileMap[tileMapTileID].collapsed):
+		tileChanged = true
 		var tempTileIndex = waveFunctionHandler.tileMap[tileMapTileID].currentTileIndex
 		self.text = "> " + str(tempTileIndex) + " <"
 
@@ -98,6 +101,32 @@ func UpdateButtonText(tileMapTileID: int):
 					UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
 
 	# self.text = str(tileID) + " | " + str(mainUIController.selectedTilesBts.size()) # Offset by 1
+
+func ResetTile(tileMapStatus: int):
+	if (tileMapStatus != (UniversalConstants.TileMapStatus.RESET as int) || !tileChanged): return
+	tileChanged = false
+
+	self.text = str(tileID)
+
+	# Setting new position
+	var tempVec = self.size
+	tempVec.x -= UniversalConstants.tileSizeAdd
+	tempVec.y -= UniversalConstants.tileSizeAdd
+	self.size = tempVec
+
+	# Setting new position
+	tempVec = self.position
+	tempVec.x += (UniversalConstants.tileSizeAdd / 2)
+	tempVec.y += (UniversalConstants.tileSizeAdd / 2)
+	self.position = tempVec
+
+	(get_child(1) as TextureRect).texture.region = Rect2(UniversalConstants.defaultTileMapPos.x, UniversalConstants.defaultTileMapPos.y,
+				UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
+
+	# Setting FG
+	(get_child(2) as TextureRect).texture.region = Rect2(UniversalConstants.defaultTileMapPos.x, UniversalConstants.defaultTileMapPos.y,
+				UniversalConstants.rectRegionScaleXY, UniversalConstants.rectRegionScaleXY)
+
 
 """
 func _on_mouse_entered_tile():

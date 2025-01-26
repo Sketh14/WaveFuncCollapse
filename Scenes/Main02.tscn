@@ -103,8 +103,9 @@ anchor_left = 0.03
 anchor_top = 0.85
 anchor_right = 0.97
 anchor_bottom = 0.95
+offset_top = 21.2
 offset_right = 0.00012207
-offset_bottom = -6.10352e-05
+offset_bottom = 21.2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainUI_Control/SelectionTiles_Panel"]
 layout_mode = 1
@@ -131,14 +132,51 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -118.0
-offset_top = -152.0
-offset_right = -33.9999
-offset_bottom = -104.0
+offset_top = -116.0
+offset_right = -34.0
+offset_bottom = -80.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("3_k3itw")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "SOLVE"
+
+[node name="ResetTileMap_Bt" type="Button" parent="MainUI_Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -210.0
+offset_top = -116.0
+offset_right = -126.0
+offset_bottom = -80.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_k3itw")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "RESET"
+
+[node name="SolveSpeed_HSlider" type="HSlider" parent="MainUI_Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -118.0
+offset_top = -134.0
+offset_right = -34.0
+offset_bottom = -118.0
+grow_horizontal = 0
+grow_vertical = 0
+min_value = 0.02
+max_value = 0.5
+step = 0.01
+value = 0.1
 
 [node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "mainTileContainer")]
 script = ExtResource("2_f0agi")
@@ -147,8 +185,10 @@ gridDimension = 30
 tileAtlasTexture = ExtResource("5_xi7s6")
 mainTileContainer = NodePath("../MainUI_Control/ScrollContainer/MainTile_Container")
 
-[node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "solveTileMap", "selectionTilesContainer")]
+[node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "solveTileMap", "resetTileMap", "selectionTilesContainer", "solveSpeedSlider")]
 script = ExtResource("5_f6myn")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
 solveTileMap = NodePath("../MainUI_Control/SolveTileMap_Bt")
+resetTileMap = NodePath("../MainUI_Control/ResetTileMap_Bt")
 selectionTilesContainer = NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer")
+solveSpeedSlider = NodePath("../MainUI_Control/SolveSpeed_HSlider")

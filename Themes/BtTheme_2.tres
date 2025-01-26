@@ -1,35 +1,35 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://cnttk8ddpcuuw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_atf2l"]
-bg_color = Color(0, 0.662745, 0.988235, 0.490196)
+bg_color = Color(0.858824, 0.858824, 0.858824, 0.490196)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njufq"]
-bg_color = Color(0, 0.482353, 0.776471, 1)
+bg_color = Color(0.301961, 0.301961, 0.301961, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkgvx"]
-bg_color = Color(0.180392, 0.694118, 1, 1)
+bg_color = Color(0.858824, 0.858824, 0.858824, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nh75e"]
-bg_color = Color(0, 0.623529, 0.933333, 1)
+bg_color = Color(0.952941, 0.952941, 0.952941, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llr7u"]
-bg_color = Color(0, 0.482353, 0.776471, 1)
+bg_color = Color(0.301961, 0.301961, 0.301961, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
