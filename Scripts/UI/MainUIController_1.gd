@@ -1,6 +1,7 @@
 class_name MainUiController_1 extends Node
 
 @export var debugLabel: Label
+@export var tileMapAdjStatusLabel: Label
 @export var solveTileMap: Button
 @export var resetTileMap: Button
 @export var selectionTilesContainer: Control
@@ -15,6 +16,8 @@ func _ready():
 	waveFunctionHandler = get_tree().get_root().get_node(UniversalConstants.waveFunctionScriptPath) as WaveFunctionCollapse2
 	waveFunctionHandler.UpdateTileData_sig.connect(SetCurrentAndShowAvailableTiles)
 	waveFunctionHandler.JsonLoaded_sig.connect(InitializeButtons)
+	waveFunctionHandler.TileMapStatus_sig.connect(DisableAllSelectionTiles)
+	waveFunctionHandler.TileMapAdjStatus_sig.connect(func(val): tileMapAdjStatusLabel.text = "TILES LEFT : " + str(val))
 	resetTileMap.connect("pressed",
 	func():
 		solveTileMap.disabled = false
@@ -28,7 +31,7 @@ func _ready():
 		waveFunctionHandler.SolveModel())
 
 	solveSpeedSlider.value_changed.connect(func(val):
-		print("Solve Speed : " + str(val))
+		# print("Solve Speed : " + str(val))
 		waveFunctionHandler.solveSpeed = val)
 
 	# InitializeButtons()
@@ -94,14 +97,15 @@ func SetTileViaWaveFunctionHandler(btIndex: int):
 	waveFunctionHandler.SetTile(selectedTileIndexInMap, btIndex)
 
 func DisableAllSelectionTiles(_tileMapStatus: int):
-	print("Disabling All Tile")
+	# print("Disabling All Tile")
+	tileMapAdjStatusLabel.text = ""
 	var btArrSize = selectedTilesBts2.size()
 	for i in btArrSize:
 		selectedTilesBts2[i].visible = false
 
 func SetCurrentAndShowAvailableTiles(tileID: int):
 	# print("Tile ID to check : " + str(tileID))
-	if (waveFunctionHandler.solveModelCalled): return
+	if (waveFunctionHandler.solveModelCalled || waveFunctionHandler.settingAdjacency): return
 	# Offset by 1 for buttons ID
 	selectedTileIndexInMap = tileID
 	debugLabel.text = ("Tile ID : " + str(tileID) + " | Tiles Avl: " + str(waveFunctionHandler.tileMap[selectedTileIndexInMap].tilesAvailable)

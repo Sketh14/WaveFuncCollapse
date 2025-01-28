@@ -18,6 +18,7 @@ class_name WaveFunctionCollapse2
 signal UpdateTileData_sig(tileID: int)
 signal JsonLoaded_sig()
 signal TileMapStatus_sig(status: int)
+signal TileMapAdjStatus_sig(status: int)
 
 # To store the tiles data from Json upon loading
 var tilesJsonData
@@ -36,6 +37,7 @@ var superAdjList: Array[int]
 var totalCollapsibleTiles: int
 var solveModelCalled: bool
 var resetModelCalled: bool
+var settingAdjacency: bool
 var solveSpeed: float
 
 # Called when the node enters the scene tree for the first time.
@@ -231,6 +233,8 @@ func SetTile(tileMapIndex: int, valToSet: int):
 		return
 	# print("Setting Tile | Index : " + str(tileMapIndex) + " | Val : " + str(valToSet))
 
+	TileMapStatus_sig.emit(UniversalConstants.TileMapStatus.SET)
+	settingAdjacency = true
 	tileMap[tileMapIndex].currentTileIndex = valToSet
 	tileMap[tileMapIndex].collapsed = true
 	tileMap[tileMapIndex].tilesCount = 1
@@ -249,13 +253,16 @@ func SetTile(tileMapIndex: int, valToSet: int):
 	var tileToCheckData = Helper.TransposedTileData.new()
 
 	# Set while loop here and keep repeating unless all the adjoining cells are collapsed 
-	# var stackPoppdCount = 0 # For Debugging
+	var stackPoppdCount = 0 # For Debugging
 	while (tilesToCheckStack.size() > 0):
 	# if (true):			# For Debugging
 		poppedTileIndex = tilesToCheckStack.pop_back()
 		coOrdX = (poppedTileIndex / gridDimension)
 		coOrdY = poppedTileIndex% gridDimension
-		# print("\n\nGot Tile to check| index : X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "]")
+		"""
+		print("\n\nGot Tile to check| index : X[" + str(coOrdX) + "], Y[" + str(coOrdY) + "]"
+		+ " | tileMapVal : " + str((gridDimension * coOrdX) + coOrdY))
+		# """
 		
 		var tempRotation = 180
 
@@ -270,8 +277,10 @@ func SetTile(tileMapIndex: int, valToSet: int):
 			if (tileToCheckData.tileCoOrdX < 0 || tileToCheckData.tileCoOrdX >= gridDimension
 				|| tileToCheckData.tileCoOrdY < 0 || tileToCheckData.tileCoOrdY >= gridDimension
 				|| tileMap[(gridDimension * tileToCheckData.tileCoOrdX) + tileToCheckData.tileCoOrdY].collapsed):
-					# print("Outside of Bounds | X[" + str(tileToCheckData.tileCoOrdX) + "], "Y[" + str(tileToCheckData.tileCoOrdY) + "]")
-						
+				"""
+				print("Outside of Bounds | X[" + str(tileToCheckData.tileCoOrdX) + "], Y[" + str(tileToCheckData.tileCoOrdY) + "]"
+				+ " | tileMapVal : " + str((gridDimension * tileToCheckData.tileCoOrdX) + tileToCheckData.tileCoOrdY))
+				# """
 				tempRotation -= 90
 				continue # Continue if outside bounds
 
@@ -292,10 +301,17 @@ func SetTile(tileMapIndex: int, valToSet: int):
 			
 			tempRotation -= 90
 
+		# print("Stack Count : " + str(tilesToCheckStack.size()))			#Only use if necessary | Too much output
+		TileMapAdjStatus_sig.emit(tilesToCheckStack.size())
+		await get_tree().create_timer(solveSpeed).timeout # Waiting for Tile Update
+
 		# For Debugging
 		# stackPoppdCount += 1
-		# if (stackPoppdCount > 1): break
+		# if (stackPoppdCount > 10): break
 	# """
+
+	TileMapStatus_sig.emit(UniversalConstants.TileMapStatus.ADJ_SET)
+	settingAdjacency = false
 	# print("Stack Count : " + str(tilesToCheckStack.size()))
 
 # Set the next tile according to the adjacency list of the current assigned tile and the direction w.r.t. current tile
@@ -402,6 +418,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 			tileMap[tileToCheckIndex1D].currentTileIndex = currentAdjTileVal
 			UpdateTileData_sig.emit(tileToCheckIndex1D)
 			totalCollapsibleTiles -= 1
+			print("Tile Collapsed : " + str(tileToCheckIndex1D))
 			# return 1
 
 	# TODO: FIXXXX THISSSS | FIXED FOR NOW (< 22 Jan)

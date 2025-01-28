@@ -2,7 +2,7 @@ class_name UniversalConstants
 
 # X is Vertical | Y is Horizontal
 enum SocketDirection {POSITIVEX, NEGATIVEY, NEGATIVEX, POSITIVEY}
-enum TileMapStatus {DEFAULT, SET, RESET, SOLVE}
+enum TileMapStatus {DEFAULT, SET, RESET, SOLVE, ADJ_SET}
 
 const pressedColor = Color(0, 0.55, 0, 1)
 const textSize = 20

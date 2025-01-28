@@ -27,6 +27,16 @@ offset_bottom = 26.0
 grow_horizontal = 2
 text = "WAVE FUNCTION COLLAPSE"
 
+[node name="CollapseStatus" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 264.0
+offset_right = 478.0
+offset_bottom = 26.0
+grow_horizontal = 2
+
 [node name="MainUI_Control" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -162,10 +172,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -118.0
-offset_top = -209.54
-offset_right = -33.9999
-offset_bottom = -161.54
+offset_left = -208.0
+offset_top = -151.0
+offset_right = -124.0
+offset_bottom = -103.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("4_iuwko")
@@ -183,6 +193,24 @@ offset_bottom = 412.0
 theme = ExtResource("3_du6bc")
 text = "AdjTest"
 
+[node name="SolveSpeed_HSlider" type="HSlider" parent="MainUI_Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -115.0
+offset_top = -172.0
+offset_right = -31.0
+offset_bottom = -156.0
+grow_horizontal = 0
+grow_vertical = 0
+min_value = 0.02
+max_value = 0.5
+step = 0.01
+value = 0.1
+
 [node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "mainTileContainer")]
 script = ExtResource("4_143x1")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
@@ -190,12 +218,14 @@ gridDimension = 3
 tileAtlasTexture = ExtResource("6_syxu6")
 mainTileContainer = NodePath("../MainUI_Control/MainTile_Container")
 
-[node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "solveTileMap", "resetTileMap", "selectionTilesContainer")]
+[node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "tileMapAdjStatusLabel", "solveTileMap", "resetTileMap", "selectionTilesContainer", "solveSpeedSlider")]
 script = ExtResource("5_ixidq")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
+tileMapAdjStatusLabel = NodePath("../CollapseStatus")
 solveTileMap = NodePath("../MainUI_Control/SolveTileMap_Bt")
 resetTileMap = NodePath("../MainUI_Control/ResetTileMap_Bt")
 selectionTilesContainer = NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer")
+solveSpeedSlider = NodePath("../MainUI_Control/SolveSpeed_HSlider")
 
 [node name="UI_Test1" type="Node" parent="." node_paths=PackedStringArray("tileTexRect_Og", "tileTexturesContainer", "tileTexArr")]
 process_mode = 4

@@ -522,6 +522,22 @@ Project
 	(-) Changing BtTheme_2 colors
 	(-) Adding Reset Button | Solve Speed Slider
 
+--------------------------------------------------------------------------------------
+									27 JANUARY 2024
+--------------------------------------------------------------------------------------
+- Scripts
+	(-) WaveFunctionCollapse2
+		<~> Adding a delay to solving if a tile is selected to not freeze
+	(-) MainUIController_1
+		<~> Disable "Tile Selection" list when solcing for a collapsed tile
+- Others
+	(-) TileAdjacencyList
+		<~> Adding Water tiles
+		<~> TODO: FIX POND BUG
+	(-) Adding Pond tileset
+
+
+
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability
 [DO] - Refactor UITileController_1 and add all buttons to MainUIController_1

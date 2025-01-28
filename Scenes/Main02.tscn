@@ -25,6 +25,16 @@ offset_bottom = 26.0
 grow_horizontal = 2
 text = "WAVE FUNCTION COLLAPSE"
 
+[node name="CollapseStatus" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 264.0
+offset_right = 478.0
+offset_bottom = 26.0
+grow_horizontal = 2
+
 [node name="MainUI_Control" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -181,13 +191,14 @@ value = 0.1
 [node name="WaveFunctionCollapse2" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "mainTileContainer")]
 script = ExtResource("2_f0agi")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
-gridDimension = 30
+gridDimension = 10
 tileAtlasTexture = ExtResource("5_xi7s6")
 mainTileContainer = NodePath("../MainUI_Control/ScrollContainer/MainTile_Container")
 
-[node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "solveTileMap", "resetTileMap", "selectionTilesContainer", "solveSpeedSlider")]
+[node name="MainUiController_1" type="Node" parent="." node_paths=PackedStringArray("debugLabel", "tileMapAdjStatusLabel", "solveTileMap", "resetTileMap", "selectionTilesContainer", "solveSpeedSlider")]
 script = ExtResource("5_f6myn")
 debugLabel = NodePath("../MainUI_Control/Debug_Panel/DebugLabel2")
+tileMapAdjStatusLabel = NodePath("../CollapseStatus")
 solveTileMap = NodePath("../MainUI_Control/SolveTileMap_Bt")
 resetTileMap = NodePath("../MainUI_Control/ResetTileMap_Bt")
 selectionTilesContainer = NodePath("../MainUI_Control/SelectionTiles_Panel/ScrollContainer/SelectionTiles_HContainer")
