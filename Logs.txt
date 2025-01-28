@@ -536,7 +536,14 @@ Project
 		<~> TODO: FIX POND BUG
 	(-) Adding Pond tileset
 
-
+--------------------------------------------------------------------------------------
+									28 JANUARY 2024
+--------------------------------------------------------------------------------------
+- Script
+	(-) WaveFunctionCollapse2
+		<~> While Solving Model, when selecting a random tile, take into consideration the available tiles 
+		instead of choosing a random tile
+		<~> Setting sameAdjValFound to false while making super adjacency-list
 
 ---------------------------------------------------------------------------------------------
 [DO] - Use adjaceny list for better readability

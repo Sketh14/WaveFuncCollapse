@@ -116,6 +116,15 @@ func SolveModel():
 	var randTileIndex = randi_range(0, tilesListSize)
 	var randAdjTiles: Array[int]
 
+	# Would have inlined this if possible
+	# Collapse the "least tileCount" tile on the tileMap with a random tile from the adjacency list
+	for i in tilesListSize:
+		if (tileMap[minCountIndex].tilesAvailable[i] == -1): continue
+		randAdjTiles.append(tileMap[minCountIndex].tilesAvailable[i])
+
+	randTileIndex = tileMap[minCountIndex].tilesAvailable[randAdjTiles[randi_range(0, randAdjTiles.size() - 1)]]
+	randAdjTiles.clear()
+
 	# For Debugging
 	# var loopDebugCount = 0
 
@@ -125,7 +134,7 @@ func SolveModel():
 
 		# Collapse the tile with random value for the first iteration
 		# Set Neighbouring tiles adjacency
-		SetTile(minCountIndex, randTileIndex)
+		await SetTile(minCountIndex, randTileIndex)
 
 		#TODO: If Possible optimize
 		# Check thorugh the tileMap which tile has the least tileCount, ignoring collapsed tiles
@@ -148,12 +157,13 @@ func SolveModel():
 		randAdjTiles.clear()
 
 		# await Engine.get_main_loop().process_frame
-		await get_tree().create_timer(solveSpeed).timeout # Waiting for Tile Update
+		# await get_tree().create_timer(solveSpeed).timeout # Waiting for Tile Update
 
 		# For Debugging
 		# print("After Total Tiles : " + str(totalCollapsibleTiles))
 		# if (loopDebugCount >= 2): break
 		# loopDebugCount += 1
+
 
 func ResetTileMap():
 	# print("Resetting Tile Map")
@@ -253,7 +263,7 @@ func SetTile(tileMapIndex: int, valToSet: int):
 	var tileToCheckData = Helper.TransposedTileData.new()
 
 	# Set while loop here and keep repeating unless all the adjoining cells are collapsed 
-	var stackPoppdCount = 0 # For Debugging
+	# var stackPoppdCount = 0 # For Debugging
 	while (tilesToCheckStack.size() > 0):
 	# if (true):			# For Debugging
 		poppedTileIndex = tilesToCheckStack.pop_back()
@@ -307,7 +317,7 @@ func SetTile(tileMapIndex: int, valToSet: int):
 
 		# For Debugging
 		# stackPoppdCount += 1
-		# if (stackPoppdCount > 10): break
+		# if (stackPoppdCount > 2): break
 	# """
 
 	TileMapStatus_sig.emit(UniversalConstants.TileMapStatus.ADJ_SET)
@@ -418,7 +428,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 			tileMap[tileToCheckIndex1D].currentTileIndex = currentAdjTileVal
 			UpdateTileData_sig.emit(tileToCheckIndex1D)
 			totalCollapsibleTiles -= 1
-			print("Tile Collapsed : " + str(tileToCheckIndex1D))
+			# print("Tile Collapsed : " + str(tileToCheckIndex1D))
 			# return 1
 
 	# TODO: FIXXXX THISSSS | FIXED FOR NOW (< 22 Jan)
@@ -455,6 +465,7 @@ func SetTileAdjacency(selectedTileIndex: int, tileToCheck: Helper.TransposedTile
 					superAdjList.push_back(tempAdjVal)
 					# print("j[" + str(j) + "] | Adj Val : " + str(tempAdjVal)
 					# 	+ " | type : " + str(typeof(tempAdjVal)) + " | Count : " + str(superAdjList.size()))
+				sameAdjValFound = false
 					
 		# print("Super Adj List | Count : " + str(superAdjList.size()) + " | Val :" + str(superAdjList))
 		# return false						# FOR DEBUGGING
